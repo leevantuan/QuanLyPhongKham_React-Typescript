@@ -1,0 +1,55 @@
+.bd-cap-so {
+  width: 226px;
+  height: 160px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: -3px -3px 11px -4px rgba(0, 0, 0, 0.62);
+  -webkit-box-shadow: -3px -3px 11px -4px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -3px -3px 11px -4px rgba(0, 0, 0, 0.62);
+  > div:nth-child(1) {
+    > .icons-bd-cap-so {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 16px;
+      > svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 28px;
+      }
+    }
+    > h5 {
+      width: 100px;
+    }
+  }
+  > div:nth-child(2) {
+    position: relative;
+    > h1 {
+      font-weight: bold;
+    }
+    > p {
+      position: absolute;
+      right: 0;
+      line-height: 40px;
+    }
+  }
+}
+.activeColor-1 {
+  background-color: #cbdbff;
+  color: #6493f9;
+}
+.activeColor-2 {
+  background-color: #c1ffd0;
+  color: #35c75a;
+}
+.activeColor-3 {
+  background-color: #fde3ce;
+  color: #ffac6a;
+}
+.activeColor-4 {
+  background-color: #ffd9d9;
+  color: #f86d6d;
+}

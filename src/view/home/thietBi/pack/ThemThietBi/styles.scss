@@ -1,0 +1,96 @@
+.content-add-device {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .form-add-device {
+    width: 1530px;
+    height: 650px;
+    background-color: #fff;
+    margin: 24px;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    > h5 {
+      font-weight: bold;
+      color: #ff7506;
+    }
+    > form {
+      padding-top: 12px;
+      > .row {
+        > div {
+          margin-top: 16px;
+          > select {
+            width: 709px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1.5px solid #d4d4d7;
+          }
+          > label {
+            font-weight: 600;
+            &::after {
+              content: ' *';
+              color: #ff7506;
+            }
+          }
+          > input {
+            border-radius: 8px;
+            border: 1.5px solid #d4d4d7;
+            &::placeholder {
+              color: #a9a9b0;
+            }
+            &:focus-visible {
+              outline: 1.5px solid #ff7506;
+              border: none;
+            }
+            &:focus {
+              box-shadow: none;
+            }
+          }
+          > P {
+            margin: 24px 12px;
+            color: #a9a9b0;
+            &::before {
+              content: ' *';
+              color: #ff7506;
+              margin-right: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+  > div {
+    > button:nth-child(1) {
+      width: 160px;
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #fff2e7;
+      box-shadow: 0px 0px 6px 0px #fff2e7;
+      padding: 10px 32px;
+      color: #ff9138;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffecdd;
+      }
+    }
+    > button:nth-child(2) {
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #ff9138;
+      box-shadow: 0px 0px 6px 0px #e7e9f2;
+      padding: 10px 32px;
+      color: white;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffb070;
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+//custom date picket
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  color: #fff;
+  background: #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: 1px solid #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-radio-button-wrapper-checked:not(
+    .ant-radio-button-wrapper-disabled
+  ) {
+  z-index: 1;
+  color: #ff7506 !important;
+  background: #ffffff;
+  border-color: #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-radio-button-wrapper-checked:not(
+    .ant-radio-button-wrapper-disabled
+  ):first-child {
+  border-color: #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar
+  .ant-picker-date-panel
+  .ant-picker-content
+  th {
+  width: 36px;
+  font-weight: bold;
+  color: #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-radio-button-wrapper:hover {
+  position: relative;
+  color: #ff7506 !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-radio-button-wrapper-checked:not(
+    .ant-radio-button-wrapper-disabled
+  ):hover {
+  color: #ff7506 !important;
+  border-color: #ff7506 !important;
+}

@@ -1,0 +1,9 @@
+.custom-select {
+  border: 1px solid #d4d4d7;
+  border-radius: 8px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  &:focus-visible {
+    outline: 1px solid #ffac6a;
+  }
+}

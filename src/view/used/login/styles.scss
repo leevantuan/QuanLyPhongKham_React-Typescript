@@ -1,0 +1,33 @@
+.left-login {
+  background-color: #f6f6f6;
+  height: 100vh;
+  > .logo-login {
+    margin: 102px 0 0 228px;
+    width: 190px;
+    height: 156px;
+  }
+  > .form-login {
+    margin-top: 75px;
+    margin-left: 114px;
+    > div > div > svg {
+      margin-top: 0;
+      font-size: 20px;
+    }
+  }
+}
+.right-login {
+  > img {
+    height: 100vh;
+  }
+}
+.btn-custom {
+  gap: 8px;
+  border-radius: 8px;
+  background-color: #ff9138;
+  box-shadow: 0px 0px 6px 0px #e7e9f2;
+  padding: 10px 24px;
+  color: white;
+}
+.active-input {
+  border: 1px solid red;
+}

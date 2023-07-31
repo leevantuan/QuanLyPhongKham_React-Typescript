@@ -1,0 +1,53 @@
+.content-DS-thietBi {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .navbar-DS-thietBi {
+    > div:nth-child(1),
+    > div:nth-child(2) {
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+    }
+    > div:nth-child(3) {
+      margin-left: 350px;
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+    }
+  }
+  > .list-DS-thietBi {
+    width: 1470px;
+  }
+}
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #ff7506;
+  outline: 0;
+  box-shadow: none;
+}
+.button-add-device {
+  top: 250px;
+  right: 0;
+  width: 80px;
+  height: 120px;
+  border-radius: 8px;
+  background-color: #fcecde;
+  color: #ff7506;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    background-color: #f8e3d1;
+  }
+  > svg {
+    font-size: 38px;
+  }
+}

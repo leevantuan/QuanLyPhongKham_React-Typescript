@@ -1,0 +1,44 @@
+.left-dashboard {
+  height: 100vh;
+  background-color: #fff;
+  > .logo-view-index {
+    cursor: pointer;
+    margin: 62px 100px;
+  }
+  > div {
+    bottom: 40px;
+    left: 16px;
+    > .btn-logout {
+      font-weight: bold;
+      background-color: #fff2e7;
+      border: none;
+      border-radius: 8px;
+      color: #ff7506;
+      width: 276px;
+      padding: 12px;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+}
+//custom menu
+.custom-menu {
+  background-color: #fff !important;
+  border: none !important;
+  padding-left: 0 !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu .ant-menu-item-selected {
+  background-color: #ff7506;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+}
+li.ant-menu-item ant-menu-item-selected {
+  margin: 0 !important;
+}

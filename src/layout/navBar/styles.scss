@@ -1,0 +1,48 @@
+.nav-bar {
+  height: 88px;
+  width: 100%;
+  > div {
+    > div {
+      > h4:nth-child(1),
+      > h4:nth-child(2) {
+        margin-left: 16px;
+        color: #7e7d88;
+        line-height: 88px;
+      }
+      > h4:nth-child(3) {
+        margin-left: 16px;
+        font-weight: 600;
+        color: #ff9138;
+        line-height: 88px;
+      }
+    }
+  }
+}
+.profile-user {
+  margin-right: 40px;
+  > .bell {
+    position: relative;
+    margin-right: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff2e7;
+    > svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffac6a;
+      font-size: 22px;
+    }
+  }
+  > .name-user {
+    > p {
+      padding: 0;
+      margin: 0;
+    }
+    > h3 {
+      font-weight: bold;
+    }
+  }
+}

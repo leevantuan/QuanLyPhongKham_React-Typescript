@@ -1,0 +1,54 @@
+//center
+.center-dashboard {
+  height: 100vh;
+  background-color: #f6f6f6;
+  > h3 {
+    margin: 100px 0 0 24px;
+    color: #ff9138;
+  }
+}
+.bottom-center-dashboard {
+  width: 1000px;
+  height: 550px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -webkit-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  margin: 0 30px;
+  > div {
+    > .filter-BTK {
+      > h5 {
+        line-height: 80px;
+      }
+      > div {
+        > .custom-select-dashboard {
+          margin-top: 24px;
+          margin-left: 20px;
+          width: 150px;
+        }
+      }
+    }
+  }
+}
+//custom select
+.ant-select-item-option-active {
+  background-color: #ffe1c9 !important;
+}
+.ant-select-item-option-selected {
+  background-color: #ffe1c9 !important;
+}
+//custom chart
+.chart-line {
+  margin-left: 40px;
+  height: 440px;
+}
+//right
+.right-dashboard {
+  height: 100vh;
+  background-color: #fff;
+  > h3 {
+    margin: 100px 0 0 24px;
+    color: #ff9138;
+  }
+}

@@ -1,0 +1,166 @@
+/* table */
+.ant-table-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-spin-nested-loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ant-spin-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* main table */
+.ant-table {
+  flex: 1;
+}
+
+/* main row  */
+.ant-table-thead {
+  height: 46px !important;
+}
+
+.ant-table-thead .ant-table-cell {
+  font-size: 1.2rem;
+  font-weight: 600 !important;
+  line-height: 26px;
+  color: #1e0d03 !important;
+  padding: 0rem 1.2rem !important;
+}
+
+/* row */
+.ant-table-row {
+  height: 46px !important;
+}
+
+.ant-table-row:nth-child(even) {
+  background-color: #fff2e7;
+}
+
+/* cell */
+.ant-table-row .ant-table-cell {
+  padding: 0 1.2rem !important;
+  font-size: 1rem;
+  line-height: 22px;
+  color: #1e0d03 !important;
+}
+
+/* main pagination */
+.ant-table-wrapper ul {
+  height: 2rem;
+  margin: 1rem 0 0 !important;
+}
+
+.ant-table-wrapper ul li {
+  height: 2rem !important;
+  min-width: 2rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-table-wrapper ul .ant-pagination-item-active {
+  border-color: #ff993c;
+  background-color: #ff993c;
+}
+
+.ant-table-wrapper ul .ant-pagination-item-active:hover {
+  border-color: #ff993c;
+}
+
+.ant-table-wrapper ul .ant-pagination-item-active a {
+  color: #fff !important;
+}
+
+.ant-table-wrapper ul li a {
+  font-size: 1.4rem;
+  line-height: 1.7rem;
+}
+
+.ant-table-wrapper ul .ant-pagination-item-active a {
+  color: #ff993c;
+}
+
+.ant-pagination-disabled .ant-pagination-item-link {
+  color: #a5a8b1 !important;
+}
+
+.ant-pagination-item-link {
+  color: #ff993c !important;
+}
+//custom table
+:where(.css-dev-only-do-not-override-txh9fw).ant-table-wrapper .ant-table-thead > tr > th,
+:where(.css-dev-only-do-not-override-txh9fw).ant-table-wrapper .ant-table-thead > tr > td {
+  background: #ff9138;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+    [colspan]
+  )::before,
+:where(.css-dev-only-do-not-override-txh9fw).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+    [colspan]
+  )::before,
+:where(.css-dev-only-do-not-override-txh9fw).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not(
+    [colspan]
+  )::before {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 0;
+  width: 1px;
+  height: 2.6em;
+  background-color: #ffe3cd;
+  transform: translateY(-50%);
+  transition: background-color 0.2s;
+  content: '';
+}
+//
+.status-online {
+  margin: 0;
+  > svg {
+    margin-top: 4px;
+  }
+  > p {
+    margin: 0;
+    color: #535261;
+  }
+}
+.active-green {
+  color: #34cd26;
+}
+.active-red {
+  color: #e73f3f;
+}
+//cútom ... xem them
+tbody.ant-table-tbody {
+  > tr {
+    > td:nth-child(6) {
+      // white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      max-width: 300px; /* chiều rộng tối đa của ô */
+    }
+  }
+}
+p {
+  margin: 0;
+}
+.text-link {
+  cursor: pointer;
+  color: #4277ff;
+  text-decoration: underline;
+}

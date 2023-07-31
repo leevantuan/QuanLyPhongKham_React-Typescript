@@ -1,0 +1,57 @@
+.container-forget-password {
+  > .logo-login {
+    margin: 102px 0 0 228px;
+    width: 190px;
+    height: 156px;
+  }
+  > div > .form-text {
+    margin-left: 120px;
+    > svg {
+      font-size: 20px;
+    }
+  }
+  > .container-button {
+    > div {
+      > .btn-custom {
+        gap: 8px;
+        border-radius: 8px;
+        background-color: #ff9138;
+        box-shadow: 0px 0px 6px 0px #e7e9f2;
+        padding: 10px 32px;
+        color: white;
+        border: 1px solid #ff9138;
+        &:hover {
+          background-color: #ffb070;
+        }
+      }
+    }
+  }
+}
+.container-button {
+  width: 360px;
+  margin: 40px auto 0;
+  > div > button:nth-child(1) {
+    gap: 8px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 0px 6px 0px #e7e9f2;
+    padding: 10px 32px;
+    color: #ff9138;
+    border: 1px solid #ff9138;
+    &:hover {
+      background-color: rgb(228, 228, 228);
+    }
+  }
+  > div > button:nth-child(2) {
+    gap: 8px;
+    border-radius: 8px;
+    background-color: #ff9138;
+    box-shadow: 0px 0px 6px 0px #e7e9f2;
+    padding: 10px 32px;
+    color: white;
+    border: 1px solid #ff9138;
+    &:hover {
+      background-color: #ffb070;
+    }
+  }
+}
