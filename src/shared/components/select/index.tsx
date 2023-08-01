@@ -6,14 +6,11 @@ export default function CustomSelect(props: CustomSelectType) {
   const height = props.height;
   const data = props.data;
 
-  const handleChange = (value: string) => {
-    console.log(value);
-  };
   return (
     <select
       className="custom-select"
       style={{ width: `${width}px`, height: `${height}px` }}
-      onChange={e => handleChange(e.target.value)}
+      onChange={e => props.HandleChooseSelect(e.target.value)}
     >
       {data.map(data => {
         return (

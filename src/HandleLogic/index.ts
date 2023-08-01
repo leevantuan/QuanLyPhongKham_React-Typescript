@@ -13,3 +13,19 @@ export const HandleCheckLogin = (userName: string, password: string, data: Accou
     return false;
   }
 };
+export const HandleDates = (dateTimes: Date): string => {
+  const day: string = dateTimes.getDate().toString();
+  const month: string = (dateTimes.getMonth() + 1).toString();
+  const year = dateTimes.getFullYear();
+
+  if (day.length < 2) {
+    if (month.length < 2) {
+      return `0${day}/0${month}/${year}`;
+    }
+    return `0${day}/${month}/${year}`;
+  } else if (month.length < 2) {
+    return `${day}/0${month}/${year}`;
+  } else {
+    return `${day}/${month}/${year}`;
+  }
+};

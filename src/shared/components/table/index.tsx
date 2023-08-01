@@ -1,8 +1,7 @@
 import './styles.scss';
 import { Table } from 'antd';
-import { DataTableInterface } from '../../../@types';
 
-export default function CustomTable(props: DataTableInterface) {
+export default function CustomTable(props: any) {
   const data = props.data;
   const columns = props.columns;
   return (

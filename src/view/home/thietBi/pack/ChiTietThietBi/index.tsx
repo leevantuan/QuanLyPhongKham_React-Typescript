@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import './styles.scss';
 import { GetDataDevices } from '../../../../../core/redux';
 import { MdEditSquare } from 'react-icons/md';
+import { RiArrowGoBackFill } from 'react-icons/ri';
 
 export default function ChiTietThietBi(props: DescriptionDeviceInterface) {
   const dispatch = useAppDispatch();
@@ -77,6 +78,13 @@ export default function ChiTietThietBi(props: DescriptionDeviceInterface) {
       >
         <MdEditSquare />
         <p> Cập nhập thiết bị</p>
+      </div>
+      <div
+        className="button-goback-device position-absolute"
+        onClick={() => props.HandleClickGoBackDevice()}
+      >
+        <RiArrowGoBackFill />
+        <p>Quay lại</p>
       </div>
     </div>
   );

@@ -11,6 +11,7 @@ import { TbSettings2 } from 'react-icons/tb';
 import { HiOutlineDocumentReport } from 'react-icons/hi';
 import Dashboard from '../dashboard';
 import ViewThietBi from '../thietBi/viewThietBi';
+import ViewDichVu from '../dichVu/viewDichVu';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -68,13 +69,16 @@ export default function ViewIndex() {
       </div>
 
       {/* Router here */}
-      {/* <div hidden={handlePage === '0' ? false : true}> */}
-      {/* <Dashboard /> */}
-      {/* </div> */}
-      {/* <span hidden={handlePage === '1' ? false : true}>
+
+      {handlePage === '0' ? (
+        <Dashboard />
+      ) : handlePage === '1' ? (
         <ViewThietBi />
-      </span> */}
-      {handlePage === '0' ? <Dashboard /> : handlePage === '1' ? <ViewThietBi /> : ''}
+      ) : handlePage === '2' ? (
+        <ViewDichVu />
+      ) : (
+        ''
+      )}
 
       {/* Router here */}
     </div>

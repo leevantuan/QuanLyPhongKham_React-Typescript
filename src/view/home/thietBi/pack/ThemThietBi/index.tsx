@@ -1,8 +1,16 @@
-import { CancelAddDeviceInterface } from '../../../../../@types';
+import { useState } from 'react';
+import { AddDeviceInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import './styles.scss';
 
-export default function ThemThietBi(props: CancelAddDeviceInterface) {
+export default function ThemThietBi(props: AddDeviceInterface) {
+  const [deviceId, setDeviceId] = useState<string>('');
+  const [deviceType, setDeviceType] = useState<string>('');
+  const [deviceName, setDeviceName] = useState<string>('');
+  const [userName, setUserName] = useState<string>('');
+  const [addressIP, setAddressIP] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [userDevice, setUserDevice] = useState<string>('');
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar textLv1="Thiết bị >" textLv2="Danh sách thiết bị >" textLv3="Thêm thiết bị" />
@@ -14,12 +22,17 @@ export default function ThemThietBi(props: CancelAddDeviceInterface) {
             <div className="row col-12">
               <div className="col-6 mb-3">
                 <label className="form-label">Mã thiết bị</label>
-                <input type="text" className="form-control" placeholder="Nhập mã thiết bị" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập mã thiết bị"
+                  onChange={e => setDeviceId(e.target.value)}
+                />
               </div>
               <div className="col-6 mb-3">
                 <label className="form-label">Loại thiết bị</label>
                 <br />
-                <select>
+                <select onChange={e => setDeviceType(e.target.value)}>
                   <option value="Kiosk">Kiosk</option>
                   <option value="Display counter">Display counter</option>
                 </select>
@@ -28,27 +41,52 @@ export default function ThemThietBi(props: CancelAddDeviceInterface) {
             <div className="row col-12">
               <div className="col-6 mb-3">
                 <label className="form-label">Tên thiết bị</label>
-                <input type="text" className="form-control" placeholder="Nhập tên thiết bị" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập tên thiết bị"
+                  onChange={e => setDeviceName(e.target.value)}
+                />
               </div>
               <div className="col-6 mb-3">
                 <label className="form-label">Tên đăng nhập</label>
-                <input type="text" className="form-control" placeholder="Nhập tài khoản" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập tài khoản"
+                  onChange={e => setUserName(e.target.value)}
+                />
               </div>
             </div>
             <div className="row col-12">
               <div className="col-6 mb-3">
                 <label className="form-label">Địa chỉ IP</label>
-                <input type="text" className="form-control" placeholder="Nhập địa chỉ IP" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập địa chỉ IP"
+                  onChange={e => setAddressIP(e.target.value)}
+                />
               </div>
               <div className="col-6 mb-3">
                 <label className="form-label">Mật khẩu</label>
-                <input type="text" className="form-control" placeholder="Nhập mật khẩu" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập mật khẩu"
+                  onChange={e => setPassword(e.target.value)}
+                />
               </div>
             </div>
             <div className="row col-12">
               <div className="col-12 mb-3">
                 <label className="form-label">Dịch vụ sử dụng</label>
-                <input type="text" className="form-control" placeholder="Nhập dịch vụ sử dụng" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập dịch vụ sử dụng"
+                  onChange={e => setUserDevice(e.target.value)}
+                />
                 <p>Là trường hợp thông tin bắt buộc</p>
               </div>
             </div>
@@ -56,7 +94,21 @@ export default function ThemThietBi(props: CancelAddDeviceInterface) {
         </div>
         <div className="d-flex justify-content-center">
           <button onClick={() => props.HandleClickCancelAddDevice()}>Hủy bỏ</button>
-          <button onClick={() => props.HandleClickOkAddDevice()}>Thêm thiết bị</button>
+          <button
+            onClick={() =>
+              props.HandleClickOkAddDevice(
+                deviceId,
+                deviceType,
+                deviceName,
+                userName,
+                addressIP,
+                password,
+                userDevice,
+              )
+            }
+          >
+            Thêm thiết bị
+          </button>
         </div>
       </div>
     </div>

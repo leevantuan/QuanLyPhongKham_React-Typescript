@@ -1,4 +1,4 @@
-import { ColumnsType } from 'antd/es/table';
+import { ColumnType } from 'antd/es/table';
 
 export interface InputTypeInterface {
   width: number;
@@ -24,6 +24,8 @@ export interface AccountInferface {
 export interface ListAccountInterface {
   Account: AccountInferface[];
   Device: DeviceInterface[];
+  Service: ServiceInterface[];
+  ServiceDetail: DataServiceDetailInterface[];
 }
 export interface AccountLoginInterface {
   userName: string;
@@ -51,26 +53,37 @@ export interface CustomSelectType {
   width: number;
   height: number;
   data: string[];
+  HandleChooseSelect: (select: string) => void;
 }
 //Device
 export interface DeviceInterface {
   key: string;
   addressIP: string;
-  connect: boolean;
+  connect?: boolean;
   deviceId: string;
   deviceName: string;
   deviceType: string;
-  online: boolean;
+  online?: boolean;
+  password: string;
+  userName: string;
+  userService: string;
+}
+//add
+export interface AddDeviceModalInterface {
+  addressIP: string;
+  deviceId: string;
+  deviceName: string;
+  deviceType: string;
   password: string;
   userName: string;
   userService: string;
 }
 
 //data table
-export interface DataTableInterface {
-  columns: ColumnsType<DeviceInterface>;
-  data: DeviceInterface[];
-}
+// export interface DataTableInterface {
+//   columns: ColumnType<DeviceInterface | ServiceInterface>;
+//   data: DeviceInterface[];
+// }
 
 //Type DS thiet bi
 export interface ListDeviceInterface {
@@ -78,17 +91,74 @@ export interface ListDeviceInterface {
   HandleClickDescription: (key: string) => void;
   HandleClickUpdate: (key: string) => void;
 }
-export interface CancelAddDeviceInterface {
+export interface AddDeviceInterface {
   HandleClickCancelAddDevice: () => void;
-  HandleClickOkAddDevice: () => void;
+  HandleClickOkAddDevice: (
+    deviceId: string,
+    deviceType: string,
+    deviceName: string,
+    userName: string,
+    addressIP: string,
+    password: string,
+    userDevice: string,
+  ) => void;
 }
 //type chi tiet thiet bi
 export interface DescriptionDeviceInterface {
   id: string;
   HandleClickUpdateDevice: (key: string) => void;
+  HandleClickGoBackDevice: () => void;
 }
 //type cap nhap thiet bi
 export interface UpdateDeviceInterface {
   id: string;
+  HandleClickCancelUpdateDevice: () => void;
+  HandleClickOkUpdateDevice: (
+    deviceId: string,
+    deviceType: string,
+    deviceName: string,
+    userName: string,
+    addressIP: string,
+    password: string,
+    userDevice: string,
+    listUserDevice: string[],
+  ) => void;
   // HandleClickUpdateDevice: (key: string) => void;
+}
+//services
+export interface ServiceInterface {
+  key: string;
+  serviceId: string;
+  serviceName: string;
+  online?: boolean;
+  describe: string;
+  rule: string[];
+}
+export interface ListServiceInterface {
+  HandleClickAddService: () => void;
+  HandleClickDescriptionService: (id: string) => void;
+  HandleClickUpdateService: (id: string) => void;
+}
+export interface AddServiceInterface {
+  HandleClickCancelAddService: () => void;
+  HandleClickOkAddService: () => void;
+}
+export interface DetailServiceInterface {
+  HandleClickUpdate: () => void;
+  HandleClickGoBack: () => void;
+  id: string;
+}
+//service detail
+export interface DataServiceDetailInterface {
+  key: string;
+  serviceId: string;
+  status: string;
+  stt: string;
+  date: string;
+}
+//update service
+export interface UpdateServiceInterface {
+  HandleClickCancelUpdateService: () => void;
+  HandleClickOkUpdateService: () => void;
+  id: string;
 }

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import NavBar from '../../../../../layout/navBar';
 import InputSearch from '../../../../../shared/components/inputSearch';
 import CustomSelect from '../../../../../shared/components/select';
@@ -111,6 +111,10 @@ export default function DSThietBi(props: ListDeviceInterface) {
     dispatch(GetDataDevices());
   }, [dispatch]);
 
+  const [inputSearch, setInputSearch] = useState<string>('');
+  const [onlineState, setOnlineState] = useState<string>('');
+  const [connectState, setConnectState] = useState<string>('');
+
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar textLv1="Thiết bị >" textLv2="" textLv3=" Danh sách thiết bị" />
@@ -119,15 +123,29 @@ export default function DSThietBi(props: ListDeviceInterface) {
         <div className="navbar-DS-thietBi d-flex ms-4">
           <div className="mt-2">
             <p>Trạng thái hoạt động</p>
-            <CustomSelect width={350} height={44} data={dataSelect1} />
+            <CustomSelect
+              width={350}
+              height={44}
+              data={dataSelect1}
+              HandleChooseSelect={select => setOnlineState(select)}
+            />
           </div>
           <div className="mt-2 ms-4">
             <p>Trạng thái kết nối</p>
-            <CustomSelect width={350} height={44} data={dataSelect2} />
+            <CustomSelect
+              width={350}
+              height={44}
+              data={dataSelect2}
+              HandleChooseSelect={select => setConnectState(select)}
+            />
           </div>
           <div className="mt-2">
             <p>Từ khóa</p>
-            <InputSearch HandleInputSearch={() => {}} width={400} placeholder="Nhập từ khóa" />
+            <InputSearch
+              HandleInputSearch={e => setInputSearch(e.target.value)}
+              width={400}
+              placeholder="Nhập từ khóa"
+            />
           </div>
         </div>
         <div className="list-DS-thietBi m-4 ">
