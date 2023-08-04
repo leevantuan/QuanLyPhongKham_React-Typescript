@@ -220,6 +220,7 @@ export interface DataAddServiceDetailInterface {
 }
 export interface AddCapSoInterface {
   HandleClickAddCapSo: () => void;
+  HandleClickChiTietCapSo: (id: string) => void;
 }
 export interface AddDataCapSoInterface {
   HandleClickAddCapSo: (
@@ -258,4 +259,9 @@ export interface ModalInSoInterface {
   servicerName: string;
   couter: string;
 }
+export interface DetailCapSoInterface {
+  id: string;
+  HandleClickGoBack: () => void;
+}
+
 ///

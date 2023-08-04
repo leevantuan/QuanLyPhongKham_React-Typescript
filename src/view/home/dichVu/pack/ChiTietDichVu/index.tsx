@@ -23,8 +23,8 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
 
 export default function ChiTietDichVu(props: DetailServiceInterface) {
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.queuing_system.Service);
-  const ListServiceDetail = useAppSelector(state => state.queuing_system.ServiceDetail);
+  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListServiceDetail = useAppSelector(state => state.ServiceDetail.ServiceDetail);
   //get data device
   useEffect(() => {
     dispatch(GetDataServices());

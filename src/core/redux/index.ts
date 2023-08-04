@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addDoc, collection, doc, getDocs, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../data';
+import { combineReducers } from '@reduxjs/toolkit';
 import {
   AccountInferface,
   AddDataServiceInterface,
@@ -400,16 +401,47 @@ export const AddDataServicDetail = createAsyncThunk(
   },
 );
 
-const initialState: ListAccountInterface = {
+// const initialState: ListAccountInterface = {
+//   Account: [],
+//   Device: [],
+//   Service: [],
+//   ServiceDetail: [],
+//   History: [],
+// };
+
+interface AccountState {
+  Account: AccountInferface[];
+}
+interface DeviceState {
+  Device: DeviceInterface[];
+}
+interface ServiceState {
+  Service: ServiceInterface[];
+}
+interface ServiceDetailState {
+  ServiceDetail: DataServiceDetailInterface[];
+}
+interface HistoryState {
+  History: HistoryInterface[];
+}
+const initialAccountState: AccountState = {
   Account: [],
+};
+const initialDeviceState: DeviceState = {
   Device: [],
+};
+const initialServiceState: ServiceState = {
   Service: [],
+};
+const initialServiceDetailState: ServiceDetailState = {
   ServiceDetail: [],
+};
+const initialHistoryState: HistoryState = {
   History: [],
 };
 const AccountSlice = createSlice({
-  name: 'Queuing_system',
-  initialState,
+  name: 'Account',
+  initialState: initialAccountState,
   reducers: {},
   extraReducers: builder => {
     builder
@@ -418,7 +450,15 @@ const AccountSlice = createSlice({
       })
       .addCase(ResetPasswordData.fulfilled, (state, action) => {
         state.Account = action.payload;
-      })
+      });
+  },
+});
+const DeviceSlice = createSlice({
+  name: 'Device',
+  initialState: initialDeviceState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
       //device
       .addCase(GetDataDevices.fulfilled, (state, action) => {
         state.Device = action.payload;
@@ -428,7 +468,15 @@ const AccountSlice = createSlice({
       })
       .addCase(AddDataDevices.fulfilled, (state, action) => {
         state.Device = action.payload;
-      })
+      });
+  },
+});
+const ServiceSlice = createSlice({
+  name: 'Service',
+  initialState: initialServiceState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
       //service
       .addCase(GetDataServices.fulfilled, (state, action) => {
         state.Service = action.payload;
@@ -438,14 +486,30 @@ const AccountSlice = createSlice({
       })
       .addCase(AddDataServices.fulfilled, (state, action) => {
         state.Service = action.payload;
-      })
+      });
+  },
+});
+const ServiceDetailSlice = createSlice({
+  name: 'ServiceDetail',
+  initialState: initialServiceDetailState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
       //service detail
       .addCase(GetDataServicDetail.fulfilled, (state, action) => {
         state.ServiceDetail = action.payload;
       })
       .addCase(AddDataServicDetail.fulfilled, (state, action) => {
         state.ServiceDetail = action.payload;
-      })
+      });
+  },
+});
+const HistorySlice = createSlice({
+  name: 'History',
+  initialState: initialHistoryState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
       //history
       .addCase(GetDataHistorys.fulfilled, (state, action) => {
         state.History = action.payload;
@@ -456,5 +520,12 @@ const AccountSlice = createSlice({
   },
 });
 
-const { actions, reducer } = AccountSlice;
-export default reducer;
+const rootReducer = combineReducers({
+  Account: AccountSlice.reducer,
+  Device: DeviceSlice.reducer,
+  Service: ServiceSlice.reducer,
+  ServiceDetail: ServiceDetailSlice.reducer,
+  History: HistorySlice.reducer,
+});
+
+export default rootReducer;

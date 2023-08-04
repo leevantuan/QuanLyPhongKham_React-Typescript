@@ -105,7 +105,7 @@ export default function DSThietBi(props: ListDeviceInterface) {
   ];
 
   const dispatch = useAppDispatch();
-  const ListDevices = useAppSelector(state => state.queuing_system.Device);
+  const ListDevices = useAppSelector(state => state.Device.Device);
   //get data device
   useEffect(() => {
     dispatch(GetDataDevices());

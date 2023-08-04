@@ -8,7 +8,7 @@ import avatarImg from '../../../shared/assets/avatar.png';
 
 export default function Profile() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.queuing_system.Account);
+  const InfoAccount = useAppSelector(state => state.Account.Account);
   useEffect(() => {
     dispatch(AccountLogin());
   }, [dispatch]);

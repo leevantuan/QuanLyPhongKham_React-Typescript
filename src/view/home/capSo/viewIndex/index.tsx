@@ -7,10 +7,11 @@ import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customR
 import { AccountLogin, AddDataHistory, AddDataServicDetail } from '../../../../core/redux';
 import { AddHistoryInterface, DataAddServiceDetailInterface } from '../../../../@types';
 import InSo from '../pack/inSo';
+import ChiTietCapSo from '../pack/chiTietCapSo';
 
 export default function ViewCapSo() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.queuing_system.Account);
+  const InfoAccount = useAppSelector(state => state.Account.Account);
   useEffect(() => {
     dispatch(AccountLogin());
   }, [dispatch]);
@@ -42,6 +43,7 @@ export default function ViewCapSo() {
   const [toDateTime, setToDateTime] = useState<Date>();
   const [serviceName, setServiceName] = useState<string>('');
   const [couter, setCouter] = useState<string>('');
+  const [id, setId] = useState<string>('');
 
   useEffect(() => {
     if (page === '0') {
@@ -97,7 +99,13 @@ export default function ViewCapSo() {
         couter={couter}
       />
       {page === '0' ? (
-        <DanhSachCapSo HandleClickAddCapSo={() => setPage('1')} />
+        <DanhSachCapSo
+          HandleClickAddCapSo={() => setPage('1')}
+          HandleClickChiTietCapSo={id => {
+            setId(id);
+            setPage('3');
+          }}
+        />
       ) : page === '1' ? (
         <ProfileCustomer
           HandleClickCancel={() => setPage('0')}
@@ -121,7 +129,7 @@ export default function ViewCapSo() {
           HandleClickCancelCapSo={() => setPage('1')}
         />
       ) : (
-        ''
+        <ChiTietCapSo id={id} HandleClickGoBack={() => setPage('0')} />
       )}
     </>
   );

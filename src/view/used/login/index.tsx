@@ -16,7 +16,7 @@ import { toast } from 'react-toastify';
 export default function ViewLogin() {
   let navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.queuing_system.Account);
+  const InfoAccount = useAppSelector(state => state.Account.Account);
 
   useEffect(() => {
     dispatch(AccountLogin());

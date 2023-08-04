@@ -55,7 +55,7 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
       title: 'Trạng thái',
       render: (_, record) =>
         record.status === 'success' ? (
-          <span className="status-online d-flex active-green">
+          <span className="status-online d-flex active-gray">
             <GoDotFill />
             <p>Đã sử dụng</p>
           </span>
@@ -80,15 +80,15 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
       key: 'update',
       title: '',
       render: (_, record) => (
-        <p className="text-link" onClick={() => {}}>
+        <p className="text-link" onClick={() => props.HandleClickChiTietCapSo(record.key)}>
           Chi tiết
         </p>
       ),
     },
   ];
   const dispatch = useAppDispatch();
-  const ListDetailServices = useAppSelector(state => state.queuing_system.ServiceDetail);
-  const ListServices = useAppSelector(state => state.queuing_system.Service);
+  const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  const ListServices = useAppSelector(state => state.Service.Service);
 
   const [inputSearch, setInputSearch] = useState<string>('');
   const [onlineState, setOnlineState] = useState<string>('');

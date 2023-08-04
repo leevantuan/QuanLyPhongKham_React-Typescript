@@ -4,13 +4,12 @@ import CheckEmail from '../../../shared/components/forgetPassword/checkEmail';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
 import { AccountLogin } from '../../../core/redux';
-import { AccountInferface } from '../../../@types';
 import ResetPassword from '../../../shared/components/forgetPassword/resetPassword';
 import { toast } from 'react-toastify';
 
 export default function ViewForgetPassword() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.queuing_system.Account);
+  const InfoAccount = useAppSelector(state => state.Account.Account);
 
   useEffect(() => {
     dispatch(AccountLogin());

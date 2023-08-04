@@ -71,7 +71,7 @@ export default function DanhSachDichVu(props: ListServiceInterface) {
     },
   ];
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.queuing_system.Service);
+  const ListServices = useAppSelector(state => state.Service.Service);
   const [inputSearch, setInputSearch] = useState<string>('');
   const [onlineState, setOnlineState] = useState<string>('');
   const [newList, setNewList] = useState<ServiceInterface[]>([]);

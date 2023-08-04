@@ -12,7 +12,7 @@ const { TextArea } = Input;
 
 export default function CapNhapDichVu(props: UpdateServiceInterface) {
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.queuing_system.Service);
+  const ListServices = useAppSelector(state => state.Service.Service);
   //get data Services
   useEffect(() => {
     dispatch(GetDataServices());

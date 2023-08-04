@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DeviceInterface, UpdateDeviceInterface } from '../../../../../@types';
+import { UpdateDeviceInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
@@ -8,7 +8,7 @@ import { IoMdClose } from 'react-icons/io';
 
 export default function CapNhapThietBi(props: UpdateDeviceInterface) {
   const dispatch = useAppDispatch();
-  const ListDevices = useAppSelector(state => state.queuing_system.Device);
+  const ListDevices = useAppSelector(state => state.Device.Device);
   //get data device
   useEffect(() => {
     dispatch(GetDataDevices());

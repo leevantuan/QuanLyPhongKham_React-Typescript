@@ -54,7 +54,7 @@ export default function ViewIndex() {
   const [account, setAccount] = useState<AccountInferface>();
   const checkIsLogin = isLogin();
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.queuing_system.Account);
+  const InfoAccount = useAppSelector(state => state.Account.Account);
   useEffect(() => {
     dispatch(AccountLogin());
   }, [dispatch]);

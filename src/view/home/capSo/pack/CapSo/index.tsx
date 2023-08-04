@@ -12,8 +12,8 @@ export default function CapSo(props: AddDataCapSoInterface) {
   const dateNow = moment().format('DD/MM/YYYY');
   const datTimeNow = new Date();
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.queuing_system.Service);
-  const ListDetailServices = useAppSelector(state => state.queuing_system.ServiceDetail);
+  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
 
   const [newListService, setNewListService] = useState<string[]>([]);
   const [capSo, setCapSo] = useState<string>('');

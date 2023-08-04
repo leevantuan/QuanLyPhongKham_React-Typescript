@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import AccountSlice from '../redux/index';
+import rootReducer from '../redux/index';
 
 export const store = configureStore({
-  reducer: {
-    queuing_system: AccountSlice,
-  },
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
