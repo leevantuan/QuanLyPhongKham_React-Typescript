@@ -1,0 +1,32 @@
+:where(.css-dev-only-do-not-override-txh9fw).ant-modal .ant-modal-title {
+  font-size: 36px;
+  padding-top: 40px;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-modal .ant-modal-content {
+  padding: 0;
+}
+.container-inso {
+  > h1 {
+    font-size: 60px;
+    color: #ff7506;
+  }
+  > p {
+    font-size: 20px;
+  }
+  > div {
+    margin-top: 28px;
+    background-color: #ff7506;
+    width: 100%;
+    padding: 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    > p {
+      margin: 8px;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 33px;
+      color: #fff;
+    }
+  }
+}

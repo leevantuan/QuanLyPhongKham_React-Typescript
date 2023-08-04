@@ -1,0 +1,68 @@
+.content-DS-CapSo {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .navbar-DS-CapSo {
+    > div:nth-child(1),
+    > div:nth-child(2),
+    > div:nth-child(3) {
+      margin-right: 24px;
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+    }
+    > div:nth-child(4) {
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+      //custom date picket
+      > .ant-picker {
+        > .ant-picker-input {
+          width: 100px;
+          padding-left: 26px;
+          position: relative;
+          > .ant-picker-clear .anticon {
+            > svg {
+              display: none;
+            }
+          }
+          > .ant-picker-suffix .anticon {
+            > svg {
+              position: absolute;
+              top: 0;
+              left: 0;
+              font-size: 20px;
+              color: #ff7506;
+            }
+          }
+        }
+      }
+    }
+    > div:nth-child(5) {
+      margin-left: 110px;
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+    }
+  }
+  > .list-DS-CapSo {
+    width: 1450px;
+  }
+}
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #ff7506;
+  outline: 0;
+  box-shadow: none;
+}
+//custom date picket
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker {
+  height: 44px;
+}

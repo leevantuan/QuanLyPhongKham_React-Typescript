@@ -1,0 +1,59 @@
+.content-form-CapSo {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .form-CapSo {
+    width: 1530px;
+    height: 750px;
+    background-color: #fff;
+    margin: 24px;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    > h1 {
+      margin: 40px 0;
+      font-weight: bold;
+      color: #ff7506;
+    }
+    > h5 {
+      margin: 24px 0;
+      font-weight: bold;
+    }
+    > div {
+      margin-top: 120px;
+      > button:nth-child(1) {
+        width: 160px;
+        margin: 16px 24px;
+        gap: 8px;
+        border-radius: 8px;
+        background-color: #fff2e7;
+        box-shadow: 0px 0px 6px 0px #fff2e7;
+        padding: 10px 32px;
+        color: #ff9138;
+        border: 1px solid #ff9138;
+        &:hover {
+          background-color: #ffecdd;
+        }
+      }
+      > button:nth-child(2) {
+        width: 160px;
+        margin: 16px 24px;
+        gap: 8px;
+        border-radius: 8px;
+        background-color: #ff9138;
+        box-shadow: 0px 0px 6px 0px #e7e9f2;
+        padding: 10px 32px;
+        color: white;
+        border: 1px solid #ff9138;
+        &:hover {
+          background-color: #ffb070;
+        }
+      }
+    }
+  }
+}

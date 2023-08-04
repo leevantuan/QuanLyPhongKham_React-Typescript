@@ -3,18 +3,25 @@ import { addDoc, collection, doc, getDocs, query, updateDoc } from 'firebase/fir
 import { db } from '../../data';
 import {
   AccountInferface,
+  AddDataServiceInterface,
   AddDeviceModalInterface,
+  AddHistoryInterface,
+  DataAddServiceDetailInterface,
   DataServiceDetailInterface,
   DeviceInterface,
+  HistoryInterface,
   ListAccountInterface,
+  ResetPasswordInterface,
   ServiceInterface,
+  UpdateDataServiceInterface,
 } from '../../@types';
-import { HandleDates } from '../../HandleLogic';
+import { HandleDates, HandleTimes } from '../../HandleLogic';
 
 export const accounts = query(collection(db, 'accounts'));
 export const devices = query(collection(db, 'devices'));
 export const services = query(collection(db, 'services'));
 export const serviceDetail = query(collection(db, 'serviceDetail'));
+export const historys = query(collection(db, 'historys'));
 
 //get data accouts
 export const AccountLogin = createAsyncThunk(
@@ -73,14 +80,28 @@ export const GetDataServicDetail = createAsyncThunk(
     const servicesDetailData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
 
     const data = servicesDetailData.map((event: any) => {
+      //covert
       const dateData = event.date.toDate();
+      const toDateData = event.toDate.toDate();
       const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const toDate = HandleDates(toDateData);
+      const toTime = HandleTimes(toDateData);
+
       const newData: DataServiceDetailInterface = {
         key: event.id,
         serviceId: event.serviceId,
         status: event.status,
         stt: event.stt,
         date: date,
+        serviceName: event.serviceName,
+        toDate: toDate,
+        customerName: event.customerName,
+        email: event.email,
+        phoneNumber: event.phoneNumber,
+        source: event.source,
+        time: time,
+        toTime: toTime,
       };
       return newData;
     });
@@ -98,10 +119,64 @@ export const GetDataServices = createAsyncThunk(
       const newData: ServiceInterface = {
         key: event.id,
         serviceId: event.serviceId,
-        serviceName: event.serviceId,
+        serviceName: event.serviceName,
         online: event.online,
         describe: event.describe,
         rule: event.rule,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//get data historys
+export const GetDataHistorys = createAsyncThunk(
+  'GetDataHistorys',
+  async (): Promise<HistoryInterface[]> => {
+    const getDatas = await getDocs(historys);
+    const historysData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = historysData.map((event: any) => {
+      //covert
+      const dateData = event.dateTime.toDate();
+      const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const newData: HistoryInterface = {
+        key: event.id,
+        userName: event.userName,
+        date: date,
+        time: time,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//reset password
+export const ResetPasswordData = createAsyncThunk(
+  'ResetPasswordData',
+  async (DataUpdate: ResetPasswordInterface): Promise<AccountInferface[]> => {
+    //update data
+    await updateDoc(doc(db, 'accounts', `${DataUpdate.AccountId}`), {
+      ...{
+        password: DataUpdate.password,
+      },
+    });
+    //get data after update
+    const getDatas = await getDocs(accounts);
+    const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = accountsData.map((event: any) => {
+      const newData: AccountInferface = {
+        id: event.id,
+        myFullName: event.myFullName,
+        userName: event.userName,
+        phoneNumber: event.phoneNumber,
+        password: event.password,
+        email: event.email,
+        role: event.role,
+        img: event.img,
+        state: event.state,
       };
       return newData;
     });
@@ -146,6 +221,68 @@ export const UpdateDataDevices = createAsyncThunk(
     return data;
   },
 );
+//update data services
+export const UpdateDataServices = createAsyncThunk(
+  'UpdateDataServices',
+  async (DataUpdate: UpdateDataServiceInterface): Promise<ServiceInterface[]> => {
+    //update data
+    await updateDoc(doc(db, 'services', `${DataUpdate.key}`), {
+      ...{
+        serviceId: DataUpdate.serviceId,
+        serviceName: DataUpdate.serviceName,
+        describe: DataUpdate.describe,
+        rule: DataUpdate.rule,
+      },
+    });
+    //get data after update
+    const getDatas = await getDocs(services);
+    const servicesData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = servicesData.map((event: any) => {
+      const newData: ServiceInterface = {
+        key: event.id,
+        serviceId: event.serviceId,
+        serviceName: event.event.serviceName,
+        online: event.online,
+        describe: event.describe,
+        rule: event.rule,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+
+//add data services
+export const AddDataServices = createAsyncThunk(
+  'AddDataServices',
+  async (DataAdd: AddDataServiceInterface): Promise<ServiceInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'services'), {
+      serviceId: DataAdd.serviceId,
+      serviceName: DataAdd.serviceName,
+      describe: DataAdd.describe,
+      rule: DataAdd.rule,
+      online: true,
+    });
+    //get data after add
+    const getDatas = await getDocs(services);
+    const servicesData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = servicesData.map((event: any) => {
+      const newData: ServiceInterface = {
+        key: event.id,
+        serviceId: event.serviceId,
+        serviceName: event.event.serviceName,
+        online: event.online,
+        describe: event.describe,
+        rule: event.rule,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
 //add data devices
 export const AddDataDevices = createAsyncThunk(
   'AddDataDevices',
@@ -183,12 +320,92 @@ export const AddDataDevices = createAsyncThunk(
     return data;
   },
 );
+//add data distorys
+export const AddDataHistory = createAsyncThunk(
+  'AddDataHistory',
+  async (DataAdd: AddHistoryInterface): Promise<HistoryInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'historys'), {
+      userName: DataAdd.userName,
+      dateTime: DataAdd.dateTime,
+    });
+    //get data after add
+    const getDatas = await getDocs(historys);
+    const historysData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = historysData.map((event: any) => {
+      //covert
+      const dateData = event.dateTime.toDate();
+      const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const newData: HistoryInterface = {
+        key: event.id,
+        userName: event.userName,
+        date: date,
+        time: time,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//add data service detail
+export const AddDataServicDetail = createAsyncThunk(
+  'AddDataServicDetail',
+  async (DataAdd: DataAddServiceDetailInterface): Promise<DataServiceDetailInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'serviceDetail'), {
+      serviceId: DataAdd.serviceId,
+      serviceName: DataAdd.serviceName,
+      status: 'waiting',
+      stt: DataAdd.stt,
+      date: DataAdd.date,
+      toDate: DataAdd.toDate,
+      customerName: DataAdd.customerName,
+      email: DataAdd.email,
+      phoneNumber: DataAdd.phoneNumber,
+      source: DataAdd.source,
+    });
+    //get data after add
+    const getDatas = await getDocs(serviceDetail);
+    const servicesDetailData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = servicesDetailData.map((event: any) => {
+      //covert
+      const dateData = event.date.toDate();
+      const toDateData = event.toDate.toDate();
+      const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const toDate = HandleDates(toDateData);
+      const toTime = HandleTimes(toDateData);
+
+      const newData: DataServiceDetailInterface = {
+        key: event.id,
+        serviceId: event.serviceId,
+        status: event.status,
+        stt: event.stt,
+        date: date,
+        serviceName: event.serviceName,
+        toDate: toDate,
+        customerName: event.customerName,
+        email: event.email,
+        phoneNumber: event.phoneNumber,
+        source: event.source,
+        time: time,
+        toTime: toTime,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
 
 const initialState: ListAccountInterface = {
   Account: [],
   Device: [],
   Service: [],
   ServiceDetail: [],
+  History: [],
 };
 const AccountSlice = createSlice({
   name: 'Queuing_system',
@@ -197,6 +414,9 @@ const AccountSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(AccountLogin.fulfilled, (state, action) => {
+        state.Account = action.payload;
+      })
+      .addCase(ResetPasswordData.fulfilled, (state, action) => {
         state.Account = action.payload;
       })
       //device
@@ -213,9 +433,25 @@ const AccountSlice = createSlice({
       .addCase(GetDataServices.fulfilled, (state, action) => {
         state.Service = action.payload;
       })
+      .addCase(UpdateDataServices.fulfilled, (state, action) => {
+        state.Service = action.payload;
+      })
+      .addCase(AddDataServices.fulfilled, (state, action) => {
+        state.Service = action.payload;
+      })
       //service detail
       .addCase(GetDataServicDetail.fulfilled, (state, action) => {
         state.ServiceDetail = action.payload;
+      })
+      .addCase(AddDataServicDetail.fulfilled, (state, action) => {
+        state.ServiceDetail = action.payload;
+      })
+      //history
+      .addCase(GetDataHistorys.fulfilled, (state, action) => {
+        state.History = action.payload;
+      })
+      .addCase(AddDataHistory.fulfilled, (state, action) => {
+        state.History = action.payload;
       });
   },
 });

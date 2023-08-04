@@ -11,6 +11,8 @@ import { AccountLogin } from '../../../core/redux';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { HandleCheckLogin } from '../../../HandleLogic';
 
+import { toast } from 'react-toastify';
+
 export default function ViewLogin() {
   let navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -32,11 +34,11 @@ export default function ViewLogin() {
       if (token) {
         localStorage.setItem('tokenUser', token);
       }
-      alert('oki');
+      toast.success('Đăng nhập thành công');
       setActiveBorder(false);
-      // navigate('/Auth/Product', { replace: true });
-      // navigate('/ForgetPassword', { replace: true });
+      navigate('/ViewIndex', { replace: true });
     } else {
+      toast.error('Đăng nhập thất bại');
       setActiveBorder(true);
       setMessage('Sai mật khẩu hoặc tên đăng nhập');
     }
@@ -93,7 +95,7 @@ export default function ViewLogin() {
         ) : (
           <div
             className="form-text text-danger d-flex justify-content-center mt-4"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', margin: 0 }}
             onClick={() => navigate('/ForgetPassword', { replace: true })}
           >
             Quên mật khẩu?

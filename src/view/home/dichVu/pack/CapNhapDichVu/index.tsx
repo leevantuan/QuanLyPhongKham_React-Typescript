@@ -19,6 +19,7 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
   }, [dispatch]);
   //find service
   const [services, setServices] = useState<ServiceInterface>();
+
   const [serviceId, setServiceId] = useState<string>('');
   const [serviceName, setServiceName] = useState<string>('');
   const [describe, setDescribe] = useState<string>('');
@@ -40,18 +41,13 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
     }
   }, [services]);
 
-  const [perfix, setPerfix] = useState<string>('0001');
-  const [surfix, setSurfix] = useState<string>('0001');
-  const [numberAutoFrom, setNumberAutoFrom] = useState<string>('0001');
-  const [numberAutoTo, setNumberAutoTo] = useState<string>('9999');
-
   const onChange = (checkedValues: CheckboxValueType[]) => {
     const newCheckList: string[] = checkedValues as string[];
     setRule(newCheckList);
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3="Cập nhập" />
+      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3=" Cập nhập" />
       <div className="content-update-service">
         <h3>Quản lí dịch vụ</h3>
         <div className="form-update-service">
@@ -95,29 +91,20 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
                 <Col>
                   <Checkbox value="1">
                     <p>Tăng tự động từ:</p>
-                    <input
-                      value={numberAutoFrom}
-                      type="text"
-                      onChange={e => setNumberAutoFrom(e.target.value)}
-                    />{' '}
-                    đến{' '}
-                    <input
-                      value={numberAutoTo}
-                      type="text"
-                      onChange={e => setNumberAutoTo(e.target.value)}
-                    />
+                    <input value={'0001'} type="text" disabled /> đến{' '}
+                    <input value={'9999'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
                   <Checkbox value="2">
                     <p>Prefix</p>
-                    <input value={perfix} type="text" onChange={e => setPerfix(e.target.value)} />
+                    <input value={'0001'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
                   <Checkbox value="3">
                     <p>Surfix</p>
-                    <input value={surfix} type="text" onChange={e => setSurfix(e.target.value)} />
+                    <input value={'0001'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
@@ -130,7 +117,11 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
         </div>
         <div className="d-flex justify-content-center">
           <button onClick={() => props.HandleClickCancelUpdateService()}>Hủy bỏ</button>
-          <button onClick={() => props.HandleClickOkUpdateService()}>Cập nhập dịch vụ</button>
+          <button
+            onClick={() => props.HandleClickOkUpdateService(serviceId, serviceName, describe, rule)}
+          >
+            Cập nhập dịch vụ
+          </button>
         </div>
       </div>
     </div>

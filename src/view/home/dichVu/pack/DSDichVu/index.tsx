@@ -11,7 +11,7 @@ import { ColumnsType } from 'antd/es/table';
 import { ListServiceInterface, ServiceInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GetDataServices } from '../../../../../core/redux';
 
 const dataSelect1: string[] = ['Tất cả', 'Hoạt động', 'Ngưng hoạt động'];
@@ -72,10 +72,26 @@ export default function DanhSachDichVu(props: ListServiceInterface) {
   ];
   const dispatch = useAppDispatch();
   const ListServices = useAppSelector(state => state.queuing_system.Service);
+  const [inputSearch, setInputSearch] = useState<string>('');
+  const [onlineState, setOnlineState] = useState<string>('');
+  const [newList, setNewList] = useState<ServiceInterface[]>([]);
   //get data Services
   useEffect(() => {
     dispatch(GetDataServices());
   }, [dispatch]);
+  useEffect(() => {
+    const newSearchText = ListServices.filter(service => service.serviceId.includes(inputSearch));
+    const newFilterOnline = newSearchText.filter(service => {
+      if (onlineState === 'Hoạt động') {
+        return service.online === true;
+      } else if (onlineState === 'Ngưng hoạt động') {
+        return service.online === false;
+      } else {
+        return service;
+      }
+    });
+    setNewList(newFilterOnline);
+  }, [inputSearch, onlineState, ListServices]);
 
   const onChangeFromDate: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString);
@@ -85,7 +101,7 @@ export default function DanhSachDichVu(props: ListServiceInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Thiết bị >" textLv2="" textLv3=" Danh sách thiết bị" />
+      <NavBar textLv1="Dịch vụ >" textLv2="" textLv3=" Danh sách dịch vụ" />
       <div className="content-DS-DichVu">
         <h3>Quản lí dịch vụ</h3>
         <div className="navbar-DS-DichVu d-flex ms-4">
@@ -95,7 +111,7 @@ export default function DanhSachDichVu(props: ListServiceInterface) {
               width={350}
               height={44}
               data={dataSelect1}
-              HandleChooseSelect={() => {}}
+              HandleChooseSelect={select => setOnlineState(select)}
             />
           </div>
           <div className="mt-2">
@@ -114,11 +130,15 @@ export default function DanhSachDichVu(props: ListServiceInterface) {
           </div>
           <div className="mt-2">
             <p>Từ khóa</p>
-            <InputSearch HandleInputSearch={() => {}} width={400} placeholder="Nhập từ khóa" />
+            <InputSearch
+              HandleInputSearch={e => setInputSearch(e.target.value)}
+              width={400}
+              placeholder="Nhập từ khóa"
+            />
           </div>
         </div>
         <div className="list-DS-DichVu m-4 ">
-          <CustomTable data={ListServices} columns={columns} />
+          <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div

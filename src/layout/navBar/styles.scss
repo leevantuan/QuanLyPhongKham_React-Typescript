@@ -18,31 +18,3 @@
     }
   }
 }
-.profile-user {
-  margin-right: 40px;
-  > .bell {
-    position: relative;
-    margin-right: 24px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #fff2e7;
-    > svg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #ffac6a;
-      font-size: 22px;
-    }
-  }
-  > .name-user {
-    > p {
-      padding: 0;
-      margin: 0;
-    }
-    > h3 {
-      font-weight: bold;
-    }
-  }
-}

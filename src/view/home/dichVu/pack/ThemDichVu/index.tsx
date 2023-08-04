@@ -14,11 +14,6 @@ export default function ThemDichVu(props: AddServiceInterface) {
   const [describe, setDescribe] = useState<string>('');
   const [rule, setRule] = useState<string[]>([]);
 
-  const [perfix, setPerfix] = useState<string>('0001');
-  const [surfix, setSurfix] = useState<string>('0001');
-  const [numberAutoFrom, setNumberAutoFrom] = useState<string>('0001');
-  const [numberAutoTo, setNumberAutoTo] = useState<string>('9999');
-
   const onChange = (checkedValues: CheckboxValueType[]) => {
     const newCheckList: string[] = checkedValues as string[];
     setRule(newCheckList);
@@ -69,29 +64,20 @@ export default function ThemDichVu(props: AddServiceInterface) {
                 <Col>
                   <Checkbox value="1">
                     <p>Tăng tự động từ:</p>
-                    <input
-                      value={numberAutoFrom}
-                      type="text"
-                      onChange={e => setNumberAutoFrom(e.target.value)}
-                    />{' '}
-                    đến{' '}
-                    <input
-                      value={numberAutoTo}
-                      type="text"
-                      onChange={e => setNumberAutoTo(e.target.value)}
-                    />
+                    <input value={'0001'} type="text" disabled /> đến{' '}
+                    <input value={'9999'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
                   <Checkbox value="2">
                     <p>Prefix</p>
-                    <input value={perfix} type="text" onChange={e => setPerfix(e.target.value)} />
+                    <input value={'0001'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
                   <Checkbox value="3">
                     <p>Surfix</p>
-                    <input value={surfix} type="text" onChange={e => setSurfix(e.target.value)} />
+                    <input value={'0001'} type="text" disabled />
                   </Checkbox>
                 </Col>
                 <Col>
@@ -104,7 +90,11 @@ export default function ThemDichVu(props: AddServiceInterface) {
         </div>
         <div className="d-flex justify-content-center">
           <button onClick={() => props.HandleClickCancelAddService()}>Hủy bỏ</button>
-          <button onClick={() => props.HandleClickOkAddService()}>Thêm dịch vụ</button>
+          <button
+            onClick={() => props.HandleClickOkAddService(serviceId, serviceName, describe, rule)}
+          >
+            Thêm dịch vụ
+          </button>
         </div>
       </div>
     </div>

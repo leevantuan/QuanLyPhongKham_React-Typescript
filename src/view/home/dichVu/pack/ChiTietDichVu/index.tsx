@@ -41,20 +41,20 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
       key: 'status',
       title: 'Trạng thái',
       render: (_, record) =>
-        record.status === 'Đã hoàn thành' ? (
+        record.status === 'success' ? (
           <span className="status-online d-flex active-green">
             <GoDotFill />
-            <p>{record.status}</p>
+            <p>Đã thực hiện</p>
           </span>
-        ) : record.status === 'Đang thực hiện' ? (
+        ) : record.status === 'waiting' ? (
           <span className="status-online d-flex active-blue">
             <GoDotFill />
-            <p>{record.status}</p>
+            <p>Đang thực hiện</p>
           </span>
         ) : (
           <span className="status-online d-flex active-red">
             <GoDotFill />
-            <p>{record.status}</p>
+            <p>Vắng</p>
           </span>
         ),
     },
@@ -99,7 +99,7 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3="Chi tiết" />
+      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3=" Chi tiết" />
       <div className="content-description-service">
         <h3>Quản lí dịch vụ</h3>
         <div className="d-flex">

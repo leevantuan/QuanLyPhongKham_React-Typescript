@@ -26,6 +26,7 @@ export interface ListAccountInterface {
   Device: DeviceInterface[];
   Service: ServiceInterface[];
   ServiceDetail: DataServiceDetailInterface[];
+  History: HistoryInterface[];
 }
 export interface AccountLoginInterface {
   userName: string;
@@ -36,6 +37,14 @@ export interface ForgetPasswordType {
   message: string;
   HandleClickContinue: (emailInput: string) => void;
 }
+export interface ResetPasswordType {
+  AccountId: string;
+}
+export interface ResetPasswordInterface {
+  AccountId: string;
+  password: string;
+}
+
 export interface BDCapSoType {
   icons: number;
   activeColor: string;
@@ -78,12 +87,6 @@ export interface AddDeviceModalInterface {
   userName: string;
   userService: string;
 }
-
-//data table
-// export interface DataTableInterface {
-//   columns: ColumnType<DeviceInterface | ServiceInterface>;
-//   data: DeviceInterface[];
-// }
 
 //Type DS thiet bi
 export interface ListDeviceInterface {
@@ -141,24 +144,118 @@ export interface ListServiceInterface {
 }
 export interface AddServiceInterface {
   HandleClickCancelAddService: () => void;
-  HandleClickOkAddService: () => void;
+  HandleClickOkAddService: (
+    serviceId: string,
+    serviceName: string,
+    describe: string,
+    rule: string[],
+  ) => void;
 }
 export interface DetailServiceInterface {
   HandleClickUpdate: () => void;
   HandleClickGoBack: () => void;
   id: string;
 }
+//update service
+export interface UpdateServiceInterface {
+  HandleClickCancelUpdateService: () => void;
+  HandleClickOkUpdateService: (
+    serviceId: string,
+    serviceName: string,
+    describe: string,
+    rule: string[],
+  ) => void;
+  id: string;
+}
+//////////////////My profile & bell
+export interface MyProfileInterface {
+  HandleClickMyProfile: () => void;
+  HandleClickBell: () => void;
+  myFullName: string | undefined;
+}
+//data update service
+export interface UpdateDataServiceInterface {
+  key: string;
+  serviceId: string;
+  serviceName: string;
+  describe: string;
+  rule: string[];
+}
+//data add service
+export interface AddDataServiceInterface {
+  serviceId: string;
+  serviceName: string;
+  describe: string;
+  rule: string[];
+  online?: boolean;
+}
+//cap so
 //service detail
 export interface DataServiceDetailInterface {
   key: string;
   serviceId: string;
+  serviceName: string;
   status: string;
   stt: string;
   date: string;
+  toDate: string;
+  customerName: string;
+  email: string;
+  phoneNumber: string;
+  source: string;
+  time: string;
+  toTime: string;
 }
-//update service
-export interface UpdateServiceInterface {
-  HandleClickCancelUpdateService: () => void;
-  HandleClickOkUpdateService: () => void;
-  id: string;
+export interface DataAddServiceDetailInterface {
+  serviceId: string;
+  serviceName: string;
+  status?: string;
+  stt: string;
+  date: Date;
+  toDate: Date;
+  customerName: string;
+  email: string;
+  phoneNumber: string;
+  source: string;
 }
+export interface AddCapSoInterface {
+  HandleClickAddCapSo: () => void;
+}
+export interface AddDataCapSoInterface {
+  HandleClickAddCapSo: (
+    capso: string,
+    dateTimeNow: Date,
+    serviceId: string,
+    serviceName: string,
+  ) => void;
+  HandleClickCancelCapSo: () => void;
+}
+export interface AddProfileCustomerInterface {
+  HandleClickContinue: (customerName: string, email: string, phoneNumber: string) => void;
+  HandleClickCancel: () => void;
+  customerName: string;
+  email: string;
+  phoneNumber: string;
+}
+//history
+export interface HistoryInterface {
+  key: string;
+  userName: string;
+  date: string;
+  time: string;
+}
+export interface AddHistoryInterface {
+  userName: string;
+  dateTime: Date;
+}
+//modal in so
+export interface ModalInSoInterface {
+  open: boolean;
+  HandleClickCacel: () => void;
+  stt: string;
+  dateTime: Date | undefined;
+  toDateTime: Date | undefined;
+  servicerName: string;
+  couter: string;
+}
+///

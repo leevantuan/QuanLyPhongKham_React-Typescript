@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedu
 import { AccountLogin } from '../../../core/redux';
 import { AccountInferface } from '../../../@types';
 import ResetPassword from '../../../shared/components/forgetPassword/resetPassword';
+import { toast } from 'react-toastify';
 
 export default function ViewForgetPassword() {
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ export default function ViewForgetPassword() {
       setOpenResetPassword(true);
       setActiveBorder(false);
     } else {
+      toast.error('Email không đúng');
       setActiveBorder(true);
       setMessage('Email không đúng vui lòng nhập lại');
     }
@@ -36,7 +38,7 @@ export default function ViewForgetPassword() {
     <div className="container-fluid col-12 d-flex" style={{ padding: 0 }}>
       <div className="left-login col-4">
         {openResetPassword ? (
-          <ResetPassword />
+          <ResetPassword AccountId={findIdAccount} />
         ) : (
           <CheckEmail
             activeBorder={activeBorder}

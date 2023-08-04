@@ -12,7 +12,7 @@ import { DeviceInterface, ListDeviceInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 
 const dataSelect1: string[] = ['Tất cả', 'Hoạt động', 'Ngưng hoạt động'];
-const dataSelect2: string[] = ['Tất cả', 'Kết nối', 'Ngưng kết nối'];
+const dataSelect2: string[] = ['Tất cả', 'Kết nối', 'Mất kết nối'];
 
 export default function DSThietBi(props: ListDeviceInterface) {
   //colunms device
@@ -114,6 +114,30 @@ export default function DSThietBi(props: ListDeviceInterface) {
   const [inputSearch, setInputSearch] = useState<string>('');
   const [onlineState, setOnlineState] = useState<string>('');
   const [connectState, setConnectState] = useState<string>('');
+  const [newList, setNewList] = useState<DeviceInterface[]>([]);
+
+  useEffect(() => {
+    const newSearchText = ListDevices.filter(device => device.deviceId.includes(inputSearch));
+    const newFilterOnline = newSearchText.filter(device => {
+      if (onlineState === 'Hoạt động') {
+        return device.online === true;
+      } else if (onlineState === 'Ngưng hoạt động') {
+        return device.online === false;
+      } else {
+        return device;
+      }
+    });
+    const newFilterConnect = newFilterOnline.filter(device => {
+      if (connectState === 'Kết nối') {
+        return device.connect === true;
+      } else if (connectState === 'Mất kết nối') {
+        return device.connect === false;
+      } else {
+        return device;
+      }
+    });
+    setNewList(newFilterConnect);
+  }, [inputSearch, onlineState, connectState, ListDevices]);
 
   return (
     <div className="col-10 d-flex position-relative">
@@ -149,7 +173,7 @@ export default function DSThietBi(props: ListDeviceInterface) {
           </div>
         </div>
         <div className="list-DS-thietBi m-4 ">
-          <CustomTable data={ListDevices} columns={columns} />
+          <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div
