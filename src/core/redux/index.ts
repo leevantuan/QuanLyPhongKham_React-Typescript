@@ -1,20 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { addDoc, collection, doc, getDocs, query, updateDoc } from 'firebase/firestore';
 import { db } from '../../data';
-import { combineReducers } from '@reduxjs/toolkit';
 import {
   AccountInferface,
+  AddDataAccountInferface,
   AddDataServiceInterface,
   AddDeviceModalInterface,
   AddHistoryInterface,
+  AddRoleInterface,
+  AddUserHistoryInterface,
   DataAddServiceDetailInterface,
   DataServiceDetailInterface,
   DeviceInterface,
   HistoryInterface,
-  ListAccountInterface,
   ResetPasswordInterface,
+  RoleInterface,
   ServiceInterface,
+  UpdateDataAccountInferface,
   UpdateDataServiceInterface,
+  UserHistoryInterface,
 } from '../../@types';
 import { HandleDates, HandleTimes } from '../../HandleLogic';
 
@@ -23,6 +27,8 @@ export const devices = query(collection(db, 'devices'));
 export const services = query(collection(db, 'services'));
 export const serviceDetail = query(collection(db, 'serviceDetail'));
 export const historys = query(collection(db, 'historys'));
+export const roles = query(collection(db, 'roles'));
+export const userHistory = query(collection(db, 'userHistory'));
 
 //get data accouts
 export const AccountLogin = createAsyncThunk(
@@ -33,7 +39,7 @@ export const AccountLogin = createAsyncThunk(
 
     const data = accountsData.map((event: any) => {
       const newData: AccountInferface = {
-        id: event.id,
+        key: event.id,
         myFullName: event.myFullName,
         userName: event.userName,
         phoneNumber: event.phoneNumber,
@@ -41,7 +47,7 @@ export const AccountLogin = createAsyncThunk(
         email: event.email,
         role: event.role,
         img: event.img,
-        state: event.state,
+        status: event.status,
       };
       return newData;
     });
@@ -153,6 +159,49 @@ export const GetDataHistorys = createAsyncThunk(
     return data;
   },
 );
+//get data roles
+export const GetDataRoles = createAsyncThunk('GetDataRoles', async (): Promise<RoleInterface[]> => {
+  const getDatas = await getDocs(roles);
+  const rolesData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+  const data = rolesData.map((event: any) => {
+    const newData: RoleInterface = {
+      key: event.id,
+      roleName: event.roleName,
+      describe: event.describe,
+      authorization: event.authorization,
+      authorization2: event.authorization2,
+    };
+    return newData;
+  });
+  return data;
+});
+//get data user history
+export const GetDataUserHistorys = createAsyncThunk(
+  'GetDataUserHistorys',
+  async (): Promise<UserHistoryInterface[]> => {
+    const getDatas = await getDocs(userHistory);
+    const userHistoryData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = userHistoryData.map((event: any) => {
+      //covert
+      const dateData = event.dateTime.toDate();
+      const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const newData: UserHistoryInterface = {
+        key: event.id,
+        userName: event.userName,
+        addressIP: event.addressIP,
+        operation: event.operation,
+        date: date,
+        time: time,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+
 //reset password
 export const ResetPasswordData = createAsyncThunk(
   'ResetPasswordData',
@@ -169,7 +218,7 @@ export const ResetPasswordData = createAsyncThunk(
 
     const data = accountsData.map((event: any) => {
       const newData: AccountInferface = {
-        id: event.id,
+        key: event.id,
         myFullName: event.myFullName,
         userName: event.userName,
         phoneNumber: event.phoneNumber,
@@ -177,7 +226,7 @@ export const ResetPasswordData = createAsyncThunk(
         email: event.email,
         role: event.role,
         img: event.img,
-        state: event.state,
+        status: event.status,
       };
       return newData;
     });
@@ -247,6 +296,74 @@ export const UpdateDataServices = createAsyncThunk(
         online: event.online,
         describe: event.describe,
         rule: event.rule,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//update data roles
+export const UpdateDataRoles = createAsyncThunk(
+  'UpdateDataRoles',
+  async (DataUpdate: RoleInterface): Promise<RoleInterface[]> => {
+    //update data
+    await updateDoc(doc(db, 'roles', `${DataUpdate.key}`), {
+      ...{
+        roleName: DataUpdate.roleName,
+        describe: DataUpdate.describe,
+        authorization: DataUpdate.authorization,
+        authorization2: DataUpdate.authorization2,
+      },
+    });
+    //get data after update
+    const getDatas = await getDocs(roles);
+    const rolesData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = rolesData.map((event: any) => {
+      const newData: RoleInterface = {
+        key: event.id,
+        roleName: event.roleName,
+        describe: event.describe,
+        authorization: event.authorization,
+        authorization2: event.authorization2,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//update data roles
+export const UpdateDataAccounts = createAsyncThunk(
+  'UpdateDataAccounts',
+  async (DataUpdate: UpdateDataAccountInferface): Promise<AccountInferface[]> => {
+    //update data
+    await updateDoc(doc(db, 'accounts', `${DataUpdate.key}`), {
+      ...{
+        myFullName: DataUpdate.myFullName,
+        userName: DataUpdate.userName,
+        phoneNumber: DataUpdate.phoneNumber,
+        password: DataUpdate.password,
+        email: DataUpdate.email,
+        role: DataUpdate.role,
+        img: DataUpdate.img,
+        status: DataUpdate.status,
+      },
+    });
+    //get data after update
+    const getDatas = await getDocs(accounts);
+    const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = accountsData.map((event: any) => {
+      const newData: AccountInferface = {
+        key: event.id,
+        myFullName: event.myFullName,
+        userName: event.userName,
+        phoneNumber: event.phoneNumber,
+        password: event.password,
+        email: event.email,
+        role: event.role,
+        img: event.img,
+        status: event.status,
       };
       return newData;
     });
@@ -400,14 +517,103 @@ export const AddDataServicDetail = createAsyncThunk(
     return data;
   },
 );
+//add data role
+export const AddDataRole = createAsyncThunk(
+  'AddDataRole',
+  async (DataAdd: AddRoleInterface): Promise<RoleInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'roles'), {
+      roleName: DataAdd.roleName,
+      describe: DataAdd.describe,
+      authorization: DataAdd.authorization,
+      authorization2: DataAdd.authorization2,
+    });
+    //get data after add
+    const getDatas = await getDocs(roles);
+    const rolesData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
 
-// const initialState: ListAccountInterface = {
-//   Account: [],
-//   Device: [],
-//   Service: [],
-//   ServiceDetail: [],
-//   History: [],
-// };
+    const data = rolesData.map((event: any) => {
+      const newData: RoleInterface = {
+        key: event.id,
+        roleName: event.roleName,
+        describe: event.describe,
+        authorization: event.authorization,
+        authorization2: event.authorization2,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//add data account
+export const AddDataAccount = createAsyncThunk(
+  'AddDataAccount',
+  async (DataAdd: AddDataAccountInferface): Promise<AccountInferface[]> => {
+    //add data
+    await addDoc(collection(db, 'accounts'), {
+      myFullName: DataAdd.myFullName,
+      userName: DataAdd.userName,
+      phoneNumber: DataAdd.phoneNumber,
+      password: DataAdd.password,
+      email: DataAdd.email,
+      role: DataAdd.role,
+      img: DataAdd.img,
+      status: DataAdd.status,
+    });
+    //get data after add
+    const getDatas = await getDocs(accounts);
+    const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = accountsData.map((event: any) => {
+      const newData: AccountInferface = {
+        key: event.id,
+        myFullName: event.myFullName,
+        userName: event.userName,
+        phoneNumber: event.phoneNumber,
+        password: event.password,
+        email: event.email,
+        role: event.role,
+        img: event.img,
+        status: event.status,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//add data user history
+export const AddDataUserHistory = createAsyncThunk(
+  'AddDataUserHistory',
+  async (DataAdd: AddUserHistoryInterface): Promise<UserHistoryInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'userHistory'), {
+      userName: DataAdd.userName,
+      addressIP: DataAdd.addressIP,
+      operation: DataAdd.operation,
+      dateTime: DataAdd.dateTime,
+    });
+    //get data after add
+    const getDatas = await getDocs(userHistory);
+    const userHistoryData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = userHistoryData.map((event: any) => {
+      //covert
+      const dateData = event.dateTime.toDate();
+      const date = HandleDates(dateData);
+      const time = HandleTimes(dateData);
+      const newData: UserHistoryInterface = {
+        key: event.id,
+        userName: event.userName,
+        addressIP: event.addressIP,
+        operation: event.operation,
+        date: date,
+        time: time,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
 
 interface AccountState {
   Account: AccountInferface[];
@@ -424,6 +630,12 @@ interface ServiceDetailState {
 interface HistoryState {
   History: HistoryInterface[];
 }
+interface RoleState {
+  Role: RoleInterface[];
+}
+interface UserHistoryState {
+  UserHistory: UserHistoryInterface[];
+}
 const initialAccountState: AccountState = {
   Account: [],
 };
@@ -439,7 +651,13 @@ const initialServiceDetailState: ServiceDetailState = {
 const initialHistoryState: HistoryState = {
   History: [],
 };
-const AccountSlice = createSlice({
+const initialRoleState: RoleState = {
+  Role: [],
+};
+const initialUserHistoryState: UserHistoryState = {
+  UserHistory: [],
+};
+export const AccountSlice = createSlice({
   name: 'Account',
   initialState: initialAccountState,
   reducers: {},
@@ -453,7 +671,7 @@ const AccountSlice = createSlice({
       });
   },
 });
-const DeviceSlice = createSlice({
+export const DeviceSlice = createSlice({
   name: 'Device',
   initialState: initialDeviceState,
   reducers: {},
@@ -471,7 +689,7 @@ const DeviceSlice = createSlice({
       });
   },
 });
-const ServiceSlice = createSlice({
+export const ServiceSlice = createSlice({
   name: 'Service',
   initialState: initialServiceState,
   reducers: {},
@@ -489,7 +707,7 @@ const ServiceSlice = createSlice({
       });
   },
 });
-const ServiceDetailSlice = createSlice({
+export const ServiceDetailSlice = createSlice({
   name: 'ServiceDetail',
   initialState: initialServiceDetailState,
   reducers: {},
@@ -504,7 +722,7 @@ const ServiceDetailSlice = createSlice({
       });
   },
 });
-const HistorySlice = createSlice({
+export const HistorySlice = createSlice({
   name: 'History',
   initialState: initialHistoryState,
   reducers: {},
@@ -519,13 +737,46 @@ const HistorySlice = createSlice({
       });
   },
 });
-
-const rootReducer = combineReducers({
-  Account: AccountSlice.reducer,
-  Device: DeviceSlice.reducer,
-  Service: ServiceSlice.reducer,
-  ServiceDetail: ServiceDetailSlice.reducer,
-  History: HistorySlice.reducer,
+export const RoleSlice = createSlice({
+  name: 'Role',
+  initialState: initialRoleState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      //role
+      .addCase(GetDataRoles.fulfilled, (state, action) => {
+        state.Role = action.payload;
+      })
+      .addCase(UpdateDataRoles.fulfilled, (state, action) => {
+        state.Role = action.payload;
+      })
+      .addCase(AddDataRole.fulfilled, (state, action) => {
+        state.Role = action.payload;
+      });
+  },
+});
+export const UserHistorySlice = createSlice({
+  name: 'UserHistory',
+  initialState: initialUserHistoryState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      //role
+      .addCase(GetDataUserHistorys.fulfilled, (state, action) => {
+        state.UserHistory = action.payload;
+      })
+      .addCase(AddDataUserHistory.fulfilled, (state, action) => {
+        state.UserHistory = action.payload;
+      });
+  },
 });
 
-export default rootReducer;
+// const rootReducer = combineReducers({
+//   Account: AccountSlice.reducer,
+//   Device: DeviceSlice.reducer,
+//   Service: ServiceSlice.reducer,
+//   ServiceDetail: ServiceDetailSlice.reducer,
+//   History: HistorySlice.reducer,
+// });
+
+// export default rootReducer;

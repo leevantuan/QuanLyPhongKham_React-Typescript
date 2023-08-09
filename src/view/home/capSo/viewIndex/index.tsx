@@ -3,35 +3,24 @@ import DanhSachCapSo from '../pack/DSCapSo';
 import CapSo from '../pack/CapSo';
 import ProfileCustomer from '../pack/profileCustomer';
 import { ConvertToTimestamp, HandleDateIncrease } from '../../../../HandleLogic';
-import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
-import { AccountLogin, AddDataHistory, AddDataServicDetail } from '../../../../core/redux';
+import { useAppDispatch } from '../../../../shared/hooks/customRedux';
+import { AddDataHistory, AddDataServicDetail } from '../../../../core/redux';
 import { AddHistoryInterface, DataAddServiceDetailInterface } from '../../../../@types';
 import InSo from '../pack/inSo';
 import ChiTietCapSo from '../pack/chiTietCapSo';
 
 export default function ViewCapSo() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.Account.Account);
-  useEffect(() => {
-    dispatch(AccountLogin());
-  }, [dispatch]);
 
   const [source, setSource] = useState<string>('');
   useEffect(() => {
     const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.id === token);
-    if (findAccount) {
-      if (
-        findAccount.role === 'Quản lí' ||
-        findAccount.role === 'Admin' ||
-        findAccount.role === 'Superadmin'
-      ) {
-        setSource('Hệ thống');
-      } else {
-        setSource('Kiosk');
-      }
+    if (token) {
+      setSource('Hệ thống');
+    } else {
+      setSource('Kiosk');
     }
-  }, [InfoAccount]);
+  }, []);
 
   const [open, setOpen] = useState<boolean>(false);
   const [page, setPage] = useState<string>('0');

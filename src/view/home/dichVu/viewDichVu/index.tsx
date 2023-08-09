@@ -1,14 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DanhSachDichVu from '../pack/DSDichVu';
 import ThemDichVu from '../pack/ThemDichVu';
 import ChiTietDichVu from '../pack/ChiTietDichVu';
 import CapNhapDichVu from '../pack/CapNhapDichVu';
-import { AddDataServiceInterface, UpdateDataServiceInterface } from '../../../../@types';
-import { useAppDispatch } from '../../../../shared/hooks/customRedux';
-import { AddDataServices, UpdateDataServices } from '../../../../core/redux';
+import {
+  AddDataServiceInterface,
+  AddUserHistoryInterface,
+  UpdateDataServiceInterface,
+} from '../../../../@types';
+import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
+import {
+  AccountLogin,
+  AddDataServices,
+  AddDataUserHistory,
+  UpdateDataServices,
+} from '../../../../core/redux';
 
 export default function ViewDichVu() {
+  const dateTimeNow = new Date();
+
+  const [userName, setUserName] = useState<string>('');
   const dispatch = useAppDispatch();
+  const InfoAccount = useAppSelector(state => state.Account.Account);
+  useEffect(() => {
+    dispatch(AccountLogin());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('tokenUser');
+    const findAccount = InfoAccount.find(acc => acc.key === token);
+    if (findAccount) {
+      setUserName(findAccount.userName);
+    }
+  }, [InfoAccount]);
+
   const [page, setPage] = useState<string>('0');
   const [id, setId] = useState<string>('');
   return (
@@ -41,6 +66,13 @@ export default function ViewDichVu() {
                 describe: describe,
                 rule: rule,
               };
+              const newDataHistory: AddUserHistoryInterface = {
+                userName: userName,
+                addressIP: '192.168.1.1',
+                operation: `Đã thêm dịch vụ ${serviceId}`,
+                dateTime: dateTimeNow,
+              };
+              dispatch(AddDataUserHistory(newDataHistory));
               dispatch(AddDataServices(newData));
               alert('Add success');
               setPage('0');
@@ -72,6 +104,13 @@ export default function ViewDichVu() {
                 describe: describe,
                 rule: rule,
               };
+              const newDataHistory: AddUserHistoryInterface = {
+                userName: userName,
+                addressIP: '192.168.1.1',
+                operation: `Đã cập nhập thông tin dịch vụ ${serviceId}`,
+                dateTime: dateTimeNow,
+              };
+              dispatch(AddDataUserHistory(newDataHistory));
               dispatch(UpdateDataServices(newData));
               alert('Update success');
               setPage('0');

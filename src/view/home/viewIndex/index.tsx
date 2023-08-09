@@ -21,6 +21,10 @@ import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedu
 import { AccountLogin } from '../../../core/redux';
 import { AccountInferface } from '../../../@types';
 import ViewCapSo from '../capSo/viewIndex';
+import ViewVaiTro from '../caiDatHeThong/vaitro/viewIndex';
+import ViewTaiKhoan from '../caiDatHeThong/taikhoan/viewIndex';
+import ViewNhatKi from '../caiDatHeThong/nhatki';
+import Bell from '../../../shared/components/bell';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -44,12 +48,17 @@ const items: MenuItem[] = [
   getItem('Dịch vụ', '2', <TbBrandWechat />),
   getItem('Cấp số', '3', <TbBrandWechat />),
   getItem('Báo cáo', '4', <HiOutlineDocumentReport />),
-  getItem('Cài đặt hệ thống', '5', <TbSettings2 />),
+  getItem('Cài đặt hệ thống', '5', <TbSettings2 />, [
+    getItem('Quản lý vai trò', '6'),
+    getItem('Quản lý tài khoản', '7'),
+    getItem('Quản lí người dùng', '8'),
+  ]),
 ];
 
 export default function ViewIndex() {
   let navigate = useNavigate();
   const [handlePage, setHandlePage] = useState<string>('0');
+  const [openBell, setOpenBell] = useState<boolean>(false);
   const [handleActive, setHandleActive] = useState<string>('0');
   const [account, setAccount] = useState<AccountInferface>();
   const checkIsLogin = isLogin();
@@ -60,7 +69,7 @@ export default function ViewIndex() {
   }, [dispatch]);
   useEffect(() => {
     if (checkIsLogin) {
-      const findAccount = InfoAccount.find(acc => acc.id === checkIsLogin);
+      const findAccount = InfoAccount.find(acc => acc.key === checkIsLogin);
       setAccount(findAccount);
     }
   }, [InfoAccount, checkIsLogin]);
@@ -84,9 +93,10 @@ export default function ViewIndex() {
         className="container-fluid col-12 d-flex position-relative"
         style={{ padding: 0, backgroundColor: '#f6f6f6' }}
       >
+        <Bell open={openBell} HandleClickCancel={() => setOpenBell(false)} />
         <div className="my-avatar position-absolute">
           <MyAvatar
-            HandleClickBell={() => alert('Bell')}
+            HandleClickBell={() => setOpenBell(true)}
             HandleClickMyProfile={() => {
               setHandleActive('10');
               setHandlePage('10');
@@ -122,6 +132,12 @@ export default function ViewIndex() {
           <Profile />
         ) : handlePage === '3' ? (
           <ViewCapSo />
+        ) : handlePage === '6' ? (
+          <ViewVaiTro />
+        ) : handlePage === '7' ? (
+          <ViewTaiKhoan />
+        ) : handlePage === '8' ? (
+          <ViewNhatKi />
         ) : (
           ''
         )}
@@ -131,22 +147,62 @@ export default function ViewIndex() {
   } else {
     return (
       <div
-        style={{
-          marginTop: 300,
-          textAlign: 'center',
-        }}
+        className="container-fluid col-12 d-flex position-relative"
+        style={{ padding: 0, backgroundColor: '#f6f6f6' }}
       >
-        <h1>Vui lòng đăng nhập để tiếp tục sử dụng trang wed</h1>
-        <h1
-          onClick={() => navigate('/', { replace: true })}
-          style={{
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            textDecoration: 'underline',
-          }}
-        >
-          Click để tiếp tục
-        </h1>
+        <div className="my-avatar position-absolute">
+          <MyAvatar
+            HandleClickBell={() => {}}
+            HandleClickMyProfile={() => {
+              alert('Vui lòng đăng nhập để tiếp tực sử dụng dịch vụ này!');
+              navigate('/', { replace: true });
+            }}
+            myFullName={'Login'}
+          />
+        </div>
+        <div className="col-2 left-dashboard position-relative">
+          <img className="logo-view-index" src={logoImg} alt="" onClick={HanldeClickLogo} />
+          <Menu
+            className="custom-menu"
+            selectedKeys={[handleActive]}
+            mode="inline"
+            items={items}
+            onSelect={HanldeClickMenu}
+          />
+          <div className="d-flex justify-content-center position-absolute">
+            <button className="btn-logout " onClick={HandleClickLogout}>
+              Đăng xuất
+            </button>
+          </div>
+        </div>
+
+        {/* Router here */}
+
+        {handlePage === '3' ? (
+          <ViewCapSo />
+        ) : (
+          <div
+            style={{
+              width: 1000,
+              marginTop: 300,
+              marginLeft: 300,
+              textAlign: 'center',
+            }}
+          >
+            <h1>Vui lòng đăng nhập để tiếp tục sử dụng trang wed</h1>
+            <h1
+              onClick={() => navigate('/', { replace: true })}
+              style={{
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+              }}
+            >
+              Click để tiếp tục
+            </h1>
+          </div>
+        )}
+        {/* Router here */}
       </div>
     );
   }

@@ -16,7 +16,7 @@ export default function Profile() {
   const [account, setAccount] = useState<AccountInferface>();
   useEffect(() => {
     const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.id === token);
+    const findAccount = InfoAccount.find(acc => acc.key === token);
     if (findAccount) {
       setAccount(findAccount);
     }

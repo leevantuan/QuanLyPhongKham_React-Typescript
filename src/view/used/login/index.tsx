@@ -29,7 +29,7 @@ export default function ViewLogin() {
   const HanldeClickLogin = () => {
     const checkLogin = HandleCheckLogin(userNameInput, passwordInput, InfoAccount);
     const FindAccount = InfoAccount.find(account => account.userName === userNameInput);
-    const token = FindAccount?.id;
+    const token = FindAccount?.key;
     if (checkLogin) {
       if (token) {
         localStorage.setItem('tokenUser', token);

@@ -1,0 +1,31 @@
+.content-DS-VaiTro {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .navbar-DS-VaiTro {
+    > div {
+      margin-left: 1050px;
+      > p {
+        margin: 0 0 8px;
+        font-weight: 600;
+      }
+    }
+  }
+  > .list-DS-VaiTro {
+    width: 1450px;
+  }
+}
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #ff7506;
+  outline: 0;
+  box-shadow: none;
+}
+//custom date picket
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker {
+  height: 44px;
+}

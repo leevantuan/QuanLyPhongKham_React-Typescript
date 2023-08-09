@@ -1,0 +1,89 @@
+.content-add-account {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .form-add-account {
+    width: 1530px;
+    height: 650px;
+    background-color: #fff;
+    margin: 24px;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    > h5 {
+      font-weight: bold;
+      color: #ff7506;
+    }
+    > P {
+      margin: 24px 12px;
+      color: #a9a9b0;
+      &::before {
+        content: ' *';
+        color: #ff7506;
+        margin-right: 12px;
+      }
+    }
+    > form {
+      > div {
+        width: 48%;
+        > div {
+          margin-top: 24px;
+          > label {
+            font-weight: 600;
+            &::after {
+              content: '*';
+              color: #ff7506;
+              margin-left: 8px;
+            }
+          }
+          > input {
+            font-size: 16px;
+            padding: 10px 20px;
+          }
+          > select {
+            width: 703px;
+            height: 46px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1.5px solid #dbdbdb;
+          }
+        }
+      }
+    }
+  }
+  > div {
+    > button:nth-child(1) {
+      width: 160px;
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #fff2e7;
+      box-shadow: 0px 0px 6px 0px #fff2e7;
+      padding: 10px 32px;
+      color: #ff9138;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffecdd;
+      }
+    }
+    > button:nth-child(2) {
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #ff9138;
+      box-shadow: 0px 0px 6px 0px #e7e9f2;
+      padding: 10px 32px;
+      color: white;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffb070;
+      }
+    }
+  }
+}

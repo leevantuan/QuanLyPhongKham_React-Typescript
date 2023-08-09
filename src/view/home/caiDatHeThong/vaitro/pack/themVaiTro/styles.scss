@@ -1,0 +1,134 @@
+.content-add-role {
+  margin-top: 100px;
+  > h3 {
+    margin-left: 24px;
+    font-weight: bold;
+    color: #ff7506;
+  }
+  > .form-add-role {
+    width: 1530px;
+    height: 650px;
+    background-color: #fff;
+    margin: 24px;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+    > P {
+      margin: 24px 12px;
+      color: #a9a9b0;
+      &::before {
+        content: ' *';
+        color: #ff7506;
+        margin-right: 12px;
+      }
+    }
+    //form
+    > form {
+      padding-top: 12px;
+      > div {
+        margin-top: 16px;
+        width: 48%;
+        > div {
+          > label {
+            font-weight: 600;
+            &::after {
+              content: ' *';
+              color: #ff7506;
+            }
+          }
+          > input {
+            border-radius: 8px;
+            border: 1.5px solid #d4d4d7;
+            &::placeholder {
+              color: #a9a9b0;
+            }
+            &:focus-visible {
+              outline: 1.5px solid #ff7506;
+              border: none;
+            }
+            &:focus {
+              box-shadow: none;
+            }
+          }
+          > TextArea {
+            font-size: 16px;
+            height: 150px !important;
+          }
+          > .form-phan-quyen {
+            width: 90%;
+            height: 480px;
+            background-color: #fff2e7;
+            padding: 32px 40px;
+            border-radius: 12px;
+            > div {
+              > h5 {
+                font-weight: bold;
+                color: #ff7506;
+              }
+              :where(.css-dev-only-do-not-override-txh9fw).ant-checkbox-group > .ant-row {
+                display: flow-root;
+              }
+              :where(.css-dev-only-do-not-override-txh9fw)[class^='ant-checkbox']
+                [class^='ant-checkbox'],
+              :where(.css-dev-only-do-not-override-txh9fw)[class*=' ant-checkbox']
+                [class^='ant-checkbox'],
+              :where(.css-dev-only-do-not-override-txh9fw)[class^='ant-checkbox']
+                [class*=' ant-checkbox'],
+              :where(.css-dev-only-do-not-override-txh9fw)[class*=' ant-checkbox']
+                [class*=' ant-checkbox'] {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+              }
+              :where(.css-dev-only-do-not-override-txh9fw).ant-checkbox + span {
+                padding-inline-start: 8px;
+                padding-inline-end: 8px;
+                margin: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    //form
+  }
+  > div {
+    > button:nth-child(1) {
+      width: 160px;
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #fff2e7;
+      box-shadow: 0px 0px 6px 0px #fff2e7;
+      padding: 10px 32px;
+      color: #ff9138;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffecdd;
+      }
+    }
+    > button:nth-child(2) {
+      margin: 16px 24px;
+      gap: 8px;
+      border-radius: 8px;
+      background-color: #ff9138;
+      box-shadow: 0px 0px 6px 0px #e7e9f2;
+      padding: 10px 32px;
+      color: white;
+      border: 1px solid #ff9138;
+      &:hover {
+        background-color: #ffb070;
+      }
+    }
+  }
+}
+.p-sao {
+  color: #d4d4d7;
+  &::before {
+    margin-right: 8px;
+    content: ' *';
+    color: #ff7506;
+  }
+}

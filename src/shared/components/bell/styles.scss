@@ -1,0 +1,20 @@
+.content-bell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #d4d4d7;
+  > h6:nth-child(1) {
+    color: #bf5805;
+  }
+}
+//cusstom
+:where(.css-dev-only-do-not-override-txh9fw).ant-modal .ant-modal-title {
+  font-size: 28px;
+  padding: 20px 24px;
+  background-color: #ff7506;
+  color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-modal .ant-modal-content {
+  padding: 0;
+  width: 400px;
+}

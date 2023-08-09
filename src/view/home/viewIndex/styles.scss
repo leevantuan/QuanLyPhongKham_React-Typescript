@@ -48,3 +48,17 @@
 li.ant-menu-item ant-menu-item-selected {
   margin: 0 !important;
 }
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title,
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light
+  > .ant-menu
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  background-color: #ff7506;
+  color: #fff;
+  &:hover {
+    background-color: #ff9742;
+    color: #fff;
+  }
+}

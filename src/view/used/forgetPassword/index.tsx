@@ -23,7 +23,7 @@ export default function ViewForgetPassword() {
   const HandleClickContinue = (emailInput: string) => {
     const checkEmail = InfoAccount.find(account => account.email === emailInput);
     if (checkEmail) {
-      setFindIdAccount(checkEmail.id);
+      setFindIdAccount(checkEmail.key);
       setOpenResetPassword(true);
       setActiveBorder(false);
     } else {

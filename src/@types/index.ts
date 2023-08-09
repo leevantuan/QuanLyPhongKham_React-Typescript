@@ -11,15 +11,36 @@ export interface ButtonTypeInterface {
   HandleChangeButton(): void;
 }
 export interface AccountInferface {
-  id: string;
+  key: string;
   myFullName: string;
   userName: string;
-  phoneNumber: number;
+  phoneNumber: string;
   password: string;
   email: string;
   role: string;
   img: string;
-  state: boolean;
+  status: boolean;
+}
+export interface AddDataAccountInferface {
+  myFullName: string;
+  userName: string;
+  phoneNumber: string;
+  password: string;
+  email: string;
+  role: string;
+  img?: string;
+  status: boolean;
+}
+export interface UpdateDataAccountInferface {
+  key: string;
+  myFullName: string;
+  userName: string;
+  phoneNumber: string;
+  password: string;
+  email: string;
+  role: string;
+  img?: string;
+  status: boolean;
 }
 export interface ListAccountInterface {
   Account: AccountInferface[];
@@ -264,4 +285,92 @@ export interface DetailCapSoInterface {
   HandleClickGoBack: () => void;
 }
 
-///
+///role
+export interface RoleInterface {
+  key: string;
+  roleName: string;
+  describe: string;
+  authorization: string[];
+  authorization2: string[];
+}
+export interface AddRoleInterface {
+  roleName: string;
+  describe: string;
+  authorization: string[];
+  authorization2: string[];
+}
+export interface DSVaiTroInterface {
+  HandleClickAddRole: () => void;
+  HandleClickUpdateRole: (id: string) => void;
+}
+export interface AddModalRoleInterface {
+  HandleClickOkAddRole: (
+    roleName: string,
+    describe: string,
+    authorization: string[],
+    authorization2: string[],
+  ) => void;
+  HandleClickCancelAddRole: () => void;
+}
+export interface UpdateModalRoleInterface {
+  HandleClickOkUpdateRole: (
+    roleName: string,
+    describe: string,
+    authorization: string[],
+    authorization2: string[],
+  ) => void;
+  HandleClickCancelUpdateRole: () => void;
+  id: string;
+}
+//account
+export interface DSTaiKhoanInterface {
+  HandleClickAddAccount: () => void;
+  HandleClickUpdateAccount: (id: string) => void;
+}
+export interface AddTaiKhoanInterface {
+  HandleClickCancelAddAccount: () => void;
+  HandleClickOkAddAccount: (
+    myFullName: string,
+    userName: string,
+    phoneNumber: string,
+    password: string,
+    confirmPassword: string,
+    email: string,
+    role: string,
+    status: string,
+  ) => void;
+}
+export interface UpdateTaiKhoanInterface {
+  HandleClickCancelUpdateAccount: () => void;
+  HandleClickOkUpdateAccount: (
+    myFullName: string,
+    userName: string,
+    phoneNumber: string,
+    password: string,
+    confirmPassword: string,
+    email: string,
+    role: string,
+    status: string,
+  ) => void;
+  id: string;
+}
+//history users
+export interface UserHistoryInterface {
+  key: string;
+  userName: string;
+  addressIP: string;
+  operation: string;
+  date: string;
+  time: string;
+}
+export interface AddUserHistoryInterface {
+  userName: string;
+  addressIP: string;
+  operation: string;
+  dateTime: Date;
+}
+///bell
+export interface BellInterface {
+  open: boolean;
+  HandleClickCancel: () => void;
+}
