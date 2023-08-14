@@ -11,7 +11,8 @@ export default function MyAvatar(props: MyProfileInterface) {
         <AiFillBell />
       </div>
       <div className="me-4" onClick={() => props.HandleClickMyProfile()}>
-        <Avatar src={avatarImg} size={48} />
+        {/* <Avatar src={ avatarImg } size={ 48 } />  */}
+        <Avatar size={48}>{props.myFullName?.charAt(0)}</Avatar>
       </div>
       <div className="name-user" onClick={() => props.HandleClickMyProfile()}>
         <p>Xin chào</p>

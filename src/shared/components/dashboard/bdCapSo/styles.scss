@@ -33,7 +33,12 @@
     > p {
       position: absolute;
       right: 0;
-      line-height: 40px;
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 40%;
+      margin-top: 12px;
     }
   }
 }
@@ -52,4 +57,12 @@
 .activeColor-4 {
   background-color: #ffd9d9;
   color: #f86d6d;
+}
+.activePercent-1 {
+  background-color: rgba(255, 149, 1, 0.15);
+  color: #ff9138;
+}
+.activePercent-2 {
+  background-color: rgba(231, 63, 63, 0.15);
+  color: #e73f3f;
 }

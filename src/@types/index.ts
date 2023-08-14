@@ -1,5 +1,6 @@
 import { ColumnType } from 'antd/es/table';
-
+import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import dayjs from 'dayjs';
 export interface InputTypeInterface {
   width: number;
   height: number;
@@ -373,4 +374,39 @@ export interface AddUserHistoryInterface {
 export interface BellInterface {
   open: boolean;
   HandleClickCancel: () => void;
+}
+export interface ModalFilterInterface {
+  open: boolean;
+  title: string;
+  data: string[];
+  text: string;
+  HandleClickCancel: () => void;
+  HandleClickSetValue: (event: string) => void;
+}
+export interface ModalCheckedInterface {
+  open: boolean;
+  title: string;
+  data: string[];
+  text: string[];
+  HandleClickCancel: () => void;
+  HandleClickSetValue: (event: CheckboxValueType[]) => void;
+}
+export interface ChartInterface {
+  select: string;
+}
+export interface CustomDoughutInterface {
+  percent: number;
+  colorOne: string;
+  colorTwo: string;
+}
+export interface CustomDoughutThreeInterface {
+  percent: number;
+  percentTwo: number;
+  colorOne: string;
+  colorTwo: string;
+  colorThree: string;
+}
+export interface DatePicketInterface {
+  HandleClickDate: (value: dayjs.Dayjs) => void;
+  setDate: string;
 }

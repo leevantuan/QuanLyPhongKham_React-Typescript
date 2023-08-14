@@ -47,3 +47,22 @@
   color: #ff7506 !important;
   border-color: #ff7506 !important;
 }
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  gap: 2.4rem;
+}
+.custom-date {
+  margin-top: 28px;
+  padding-left: 40px;
+  padding-right: 40px;
+  color: #ff7506;
+  font-weight: bold;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar-mini {
+  border-radius: 8px;
+  width: 480px;
+  box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -webkit-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+}

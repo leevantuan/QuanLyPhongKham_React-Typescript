@@ -49,7 +49,6 @@ export default function CapSo(props: AddDataCapSoInterface) {
       setCapSo(newNumber);
     }
   }, [ListDetailServices, dateNow, serviceId, chooseService]);
-  // console.log(capSo);
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar textLv1="Cấp số >" textLv2="Danh sách cấp số >" textLv3="Cấp số mới" />

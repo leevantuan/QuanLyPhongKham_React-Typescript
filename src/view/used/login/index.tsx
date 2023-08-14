@@ -30,13 +30,18 @@ export default function ViewLogin() {
     const checkLogin = HandleCheckLogin(userNameInput, passwordInput, InfoAccount);
     const FindAccount = InfoAccount.find(account => account.userName === userNameInput);
     const token = FindAccount?.key;
-    if (checkLogin) {
+    const checkStatus = FindAccount?.status;
+    if (checkLogin && checkStatus) {
       if (token) {
         localStorage.setItem('tokenUser', token);
       }
       toast.success('Đăng nhập thành công');
       setActiveBorder(false);
       navigate('/ViewIndex', { replace: true });
+    } else if (checkStatus === false) {
+      toast.error('Đăng nhập thất bại');
+      setActiveBorder(true);
+      setMessage('Tài khoản của bạn đã bị khóa');
     } else {
       toast.error('Đăng nhập thất bại');
       setActiveBorder(true);

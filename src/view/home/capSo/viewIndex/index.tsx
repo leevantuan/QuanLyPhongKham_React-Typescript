@@ -3,8 +3,13 @@ import DanhSachCapSo from '../pack/DSCapSo';
 import CapSo from '../pack/CapSo';
 import ProfileCustomer from '../pack/profileCustomer';
 import { ConvertToTimestamp, HandleDateIncrease } from '../../../../HandleLogic';
-import { useAppDispatch } from '../../../../shared/hooks/customRedux';
-import { AddDataHistory, AddDataServicDetail } from '../../../../core/redux';
+import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
+import {
+  AccountLogin,
+  AddDataHistory,
+  AddDataServicDetail,
+  GetDataRoles,
+} from '../../../../core/redux';
 import { AddHistoryInterface, DataAddServiceDetailInterface } from '../../../../@types';
 import InSo from '../pack/inSo';
 import ChiTietCapSo from '../pack/chiTietCapSo';
@@ -18,7 +23,7 @@ export default function ViewCapSo() {
     if (token) {
       setSource('Hệ thống');
     } else {
-      setSource('Kiosk');
+      setSource('kiosk');
     }
   }, []);
 
@@ -75,7 +80,6 @@ export default function ViewCapSo() {
     dispatch(AddDataHistory(newDataHistory));
     setPage('0');
   };
-
   return (
     <>
       <InSo

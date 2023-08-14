@@ -7,7 +7,7 @@ export default function CustomTable(props: any) {
   return (
     <Table
       columns={columns}
-      pagination={{ pageSize: 10, showSizeChanger: false, position: ['bottomRight'] }}
+      pagination={{ pageSize: 12, showSizeChanger: false, position: ['bottomRight'] }}
       dataSource={data}
     />
   );

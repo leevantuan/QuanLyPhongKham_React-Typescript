@@ -36,6 +36,7 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
         setPhoneNumber(account.phoneNumber);
         setEmail(account.email);
         setRole(account.role);
+        setPassword(account.password);
         if (account.status === true) {
           setStatus('true');
         } else {
@@ -111,6 +112,7 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
                   type="text"
                   className="form-control"
                   value={userName}
+                  disabled
                   onChange={e => setUserName(e.target.value)}
                 />
               </div>

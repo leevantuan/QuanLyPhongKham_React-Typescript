@@ -25,6 +25,8 @@ import ViewVaiTro from '../caiDatHeThong/vaitro/viewIndex';
 import ViewTaiKhoan from '../caiDatHeThong/taikhoan/viewIndex';
 import ViewNhatKi from '../caiDatHeThong/nhatki';
 import Bell from '../../../shared/components/bell';
+import ViewBaoCao from '../baoCao';
+import { GoStack } from 'react-icons/go';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -46,7 +48,7 @@ const items: MenuItem[] = [
   getItem('Dashboard', '0', <LuLayoutDashboard />),
   getItem('Thiết bị', '1', <TbDeviceImac />),
   getItem('Dịch vụ', '2', <TbBrandWechat />),
-  getItem('Cấp số', '3', <TbBrandWechat />),
+  getItem('Cấp số', '3', <GoStack />),
   getItem('Báo cáo', '4', <HiOutlineDocumentReport />),
   getItem('Cài đặt hệ thống', '5', <TbSettings2 />, [
     getItem('Quản lý vai trò', '6'),
@@ -139,7 +141,7 @@ export default function ViewIndex() {
         ) : handlePage === '8' ? (
           <ViewNhatKi />
         ) : (
-          ''
+          <ViewBaoCao />
         )}
         {/* Router here */}
       </div>
