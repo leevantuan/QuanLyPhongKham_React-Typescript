@@ -22,8 +22,8 @@ import { TbDeviceImac } from 'react-icons/tb';
 import { TbBrandWechat } from 'react-icons/tb';
 import { GoStack } from 'react-icons/go';
 import { BsDot } from 'react-icons/bs';
-import CustomDoughnutThree from '../../../shared/components/dashboard/doughnut3';
 import dayjs from 'dayjs';
+import DashBoardDoughnut from '../../../shared/components/dashboard/dashboardDoughnut';
 export default function Dashboard() {
   // const dateNow = moment().format('DD/MM/YYYY');
   const dispatch = useAppDispatch();
@@ -179,7 +179,7 @@ export default function Dashboard() {
       {
         icons: 1,
         activeColor: 'activeColor-1',
-        text: 'Số thứ tự đã cấp',
+        text: 'Số lượng đã cấp',
         percent: daCapPercent,
         percentStatus: daCapStatus,
         data: daCap,
@@ -187,7 +187,7 @@ export default function Dashboard() {
       {
         icons: 2,
         activeColor: 'activeColor-2',
-        text: 'Số thứ tự đã sử dụng',
+        text: 'Số lượng đã sử dụng',
         percent: daSuDungPercent,
         percentStatus: daSuDungStatus,
         data: daSuDung,
@@ -195,18 +195,10 @@ export default function Dashboard() {
       {
         icons: 3,
         activeColor: 'activeColor-3',
-        text: 'Số thứ tự đang chờ',
+        text: 'Số lượng đang chờ',
         percent: dangChoPercent,
         percentStatus: dangChoStatus,
         data: dangCho,
-      },
-      {
-        icons: 4,
-        activeColor: 'activeColor-4',
-        text: 'Số thứ tự đã bỏ qua',
-        percent: boQuaPercent,
-        percentStatus: boQuaStatus,
-        data: boQua,
       },
     ];
     setListBDCapSo(listBDCapSo);
@@ -258,10 +250,10 @@ export default function Dashboard() {
   if (checkAuth) {
     return (
       <div className="col-10 d-flex position-relative">
-        <NavBar textLv3="Dashboard" textLv1="" textLv2="" />
+        <NavBar textLv3="Thống Kê" textLv1="" textLv2="" />
         <div className="col-md-8 center-dashboard">
-          <h3 className="fw-bold">Biểu đồ cấp số</h3>
-          <div className="top-center-dashboard d-flex m-4">
+          <h3>Thống kê trong tháng 11</h3>
+          <div className="top-center-dashboard d-flex mb-4 ms-4 me-4 justify-content-between">
             {/* bieu do cap so */}
             {listBDCapSo.map(event => {
               return (
@@ -306,7 +298,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="chart-line">
+            <div className="chart-line mt-4">
               <LineChart select={selected} />
             </div>
           </div>
@@ -314,123 +306,41 @@ export default function Dashboard() {
         <div className="col-md-4 right-dashboard">
           <h3 className="fw-bold">Tổng quan</h3>
           {/* BD 1 */}
-          <div className="BD-percent ms-4 d-flex">
-            <div style={{ width: 150, height: 115 }}>
-              <CustomDoughnut colorOne="#FF7506" colorTwo="#7E7D88" percent={devicePercent} />
-            </div>
-            <div style={{ width: 120, height: 115, marginTop: 24 }}>
-              <h3 className="fw-bold">{deviceTrueSL + deviceFalseSL}</h3>
-              <p style={{ color: '#FF7506', fontSize: 20 }}>
-                <span className="me-2" style={{ fontSize: 20 }}>
-                  <TbDeviceImac />
-                </span>
-                Thiết bị
-              </p>
-            </div>
-            <div style={{ height: 115, marginTop: 24 }}>
-              <p className="d-flex">
-                <span style={{ color: '#ff7506', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Đang hoạt động
-                <p style={{ marginLeft: 16, color: '#FF7506', fontWeight: 'bold' }}>
-                  {' '}
-                  {deviceTrueSL}
-                </p>
-              </p>
-              <p className="mt-2 d-flex">
-                <span style={{ color: '#7e7d88', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Ngưng hoạt động
-                <p style={{ color: '#FF7506', fontWeight: 'bold', marginLeft: 6 }}>
-                  {' '}
-                  {deviceFalseSL}
-                </p>
-              </p>
-            </div>
-          </div>
+          <DashBoardDoughnut
+            colorOne="#6493f9"
+            colorTwo="#7E7D88"
+            percent={75}
+            icons="1"
+            quantityFalse={25}
+            quantityTrue={75}
+            textOne="Còn sử dụng"
+            textTwo="Không sử dụng"
+            textTitle="Dịch Vụ"
+          />
           {/* BD 2 */}
-          <div className="BD-percent ms-4 d-flex">
-            <div style={{ width: 150, height: 115 }}>
-              <CustomDoughnut colorOne="#4277FF" colorTwo="#7E7D88" percent={servicePercent} />
-            </div>
-            <div style={{ width: 120, height: 115, marginTop: 24 }}>
-              <h3 className="fw-bold">{serviceTrueSL + serviceFalseSL}</h3>
-              <p style={{ color: '#4277FF', fontSize: 20 }}>
-                <span className="me-2" style={{ fontSize: 20 }}>
-                  <TbBrandWechat />
-                </span>
-                Dịch vụ
-              </p>
-            </div>
-            <div style={{ height: 115, marginTop: 24 }}>
-              <p className="d-flex">
-                <span style={{ color: '#4277FF', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Đang hoạt động
-                <p style={{ marginLeft: 16, color: '#4277FF', fontWeight: 'bold' }}>
-                  {' '}
-                  {serviceTrueSL}
-                </p>
-              </p>
-              <p className="mt-2 d-flex">
-                <span style={{ color: '#7e7d88', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Ngưng hoạt động
-                <p style={{ color: '#4277FF', fontWeight: 'bold', marginLeft: 6 }}>
-                  {' '}
-                  {serviceFalseSL}
-                </p>
-              </p>
-            </div>
-          </div>
-          {/* BD 3 */}
-          <div className="BD-percent ms-4 d-flex">
-            <div style={{ width: 150, height: 115 }}>
-              <CustomDoughnutThree
-                colorOne="#35C75A"
-                colorTwo="#7E7D88"
-                percent={capSoPercent}
-                colorThree="#F178B6"
-                percentTwo={capSoPercent2}
-              />
-            </div>
-            <div style={{ width: 120, height: 115, marginTop: 24 }}>
-              <h3 className="fw-bold">{daCap}</h3>
-              <p style={{ color: '#35C75A', fontSize: 20 }}>
-                <span className="me-2" style={{ fontSize: 20 }}>
-                  <GoStack />
-                </span>
-                Cấp số
-              </p>
-            </div>
-            <div style={{ height: 115, marginTop: 12 }}>
-              <p className="d-flex">
-                <span style={{ color: '#35C75A', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Đang chờ
-                <p style={{ marginLeft: 65, color: '#35C75A', fontWeight: 'bold' }}> {dangCho}</p>
-              </p>
-              <p className="mt-1 d-flex">
-                <span style={{ color: '#7e7d88', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Đã sử dụng
-                <p style={{ color: '#35C75A', fontWeight: 'bold', marginLeft: 50 }}> {daSuDung}</p>
-              </p>
-              <p className="mt-1 d-flex">
-                <span style={{ color: '#7e7d88', fontSize: 20 }}>
-                  <BsDot />
-                </span>
-                Bỏ qua
-                <p style={{ color: '#35C75A', fontWeight: 'bold', marginLeft: 80 }}> {boQua}</p>
-              </p>
-            </div>
-          </div>
+          <DashBoardDoughnut
+            colorOne="#039800"
+            colorTwo="#7E7D88"
+            percent={88}
+            icons="1"
+            quantityFalse={12}
+            quantityTrue={88}
+            textOne="Có BHYT"
+            textTwo="Không BHYT"
+            textTitle="BHYT"
+          />
+          {/* BD 1 */}
+          <DashBoardDoughnut
+            colorOne="#ffac6a"
+            colorTwo="#7E7D88"
+            percent={80}
+            icons="3"
+            quantityFalse={20}
+            quantityTrue={80}
+            textOne="Đã sử dụng"
+            textTwo="Đang chờ"
+            textTitle="Cấp Số"
+          />
           <div className="ms-4 mt-4">
             <DatePicketDashboard HandleClickDate={HandleClickSetDate} setDate={newDate} />
           </div>

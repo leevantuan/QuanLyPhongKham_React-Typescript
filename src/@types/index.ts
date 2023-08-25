@@ -410,3 +410,15 @@ export interface DatePicketInterface {
   HandleClickDate: (value: dayjs.Dayjs) => void;
   setDate: string;
 }
+//doughnut
+export interface DoughtnutInterface {
+  colorOne: string;
+  colorTwo: string;
+  percent: number;
+  icons: string;
+  textTitle: string;
+  textOne: string;
+  textTwo: string;
+  quantityTrue: number;
+  quantityFalse: number;
+}

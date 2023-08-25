@@ -2,7 +2,7 @@ import './styles.scss';
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd/es/menu';
 import { useEffect, useState } from 'react';
-import logoImg from '../../../shared/assets/LogoPng.png';
+import logoImg from '../../../shared/assets/logo.png';
 
 import { LuLayoutDashboard } from 'react-icons/lu';
 import { TbDeviceImac } from 'react-icons/tb';
@@ -45,8 +45,8 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Dashboard', '0', <LuLayoutDashboard />),
-  getItem('Thiết bị', '1', <TbDeviceImac />),
+  getItem('Thống kê', '0', <LuLayoutDashboard />),
+  getItem('Phòng Khám', '1', <TbDeviceImac />),
   getItem('Dịch vụ', '2', <TbBrandWechat />),
   getItem('Cấp số', '3', <GoStack />),
   getItem('Báo cáo', '4', <HiOutlineDocumentReport />),

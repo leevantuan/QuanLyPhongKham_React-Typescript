@@ -35,7 +35,7 @@ export default function ViewForgetPassword() {
 
   return (
     <div className="container-fluid col-12 d-flex" style={{ padding: 0 }}>
-      <div className="left-login col-4">
+      <div className="login col-4">
         {openResetPassword ? (
           <ResetPassword AccountId={findIdAccount} />
         ) : (
@@ -45,9 +45,6 @@ export default function ViewForgetPassword() {
             message={message}
           />
         )}
-      </div>
-      <div className="right-login col-8">
-        <img className="ms-4" src={ForgetImg} alt="" />
       </div>
     </div>
   );

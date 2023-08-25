@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LogoImg from '../../assets/logo.png';
 import InputPassword from '../input/inputPassword';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';

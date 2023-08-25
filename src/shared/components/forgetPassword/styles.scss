@@ -1,6 +1,14 @@
 .container-forget-password {
+  > div {
+    > .input-text {
+      :where(.css-dev-only-do-not-override-txh9fw).ant-input:focus-visible {
+        border: 1.5px solid #039800;
+        outline: none;
+      }
+    }
+  }
   > .logo-login {
-    margin: 102px 0 0 228px;
+    margin: 65px 0 0 220px;
     width: 190px;
     height: 156px;
   }
@@ -9,13 +17,13 @@
       > .btn-custom {
         gap: 8px;
         border-radius: 8px;
-        background-color: #ff9138;
+        background-color: #039800;
         box-shadow: 0px 0px 6px 0px #e7e9f2;
         padding: 10px 32px;
         color: white;
-        border: 1px solid #ff9138;
+        border: 1px solid #039800;
         &:hover {
-          background-color: #ffb070;
+          background-color: #039800a9;
         }
       }
     }
@@ -23,15 +31,15 @@
 }
 .container-button {
   width: 360px;
-  margin: 40px auto 0;
+  margin: 60px auto 0;
   > div > button:nth-child(1) {
     gap: 8px;
     border-radius: 8px;
     background-color: white;
     box-shadow: 0px 0px 6px 0px #e7e9f2;
     padding: 10px 32px;
-    color: #ff9138;
-    border: 1px solid #ff9138;
+    color: #039800;
+    border: 1px solid #039800;
     &:hover {
       background-color: rgb(228, 228, 228);
     }
@@ -39,13 +47,13 @@
   > div > button:nth-child(2) {
     gap: 8px;
     border-radius: 8px;
-    background-color: #ff9138;
+    background-color: #039800;
     box-shadow: 0px 0px 6px 0px #e7e9f2;
     padding: 10px 32px;
     color: white;
-    border: 1px solid #ff9138;
+    border: 1px solid #039800;
     &:hover {
-      background-color: #ffb070;
+      background-color: #039800a9;
     }
   }
 }

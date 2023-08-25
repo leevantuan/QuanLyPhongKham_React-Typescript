@@ -19,7 +19,7 @@ export default function CheckEmail(props: ForgetPasswordType) {
         <label className="d-flex justify-content-center">
           Vui lòng nhập email để đặt lại mật khẩu của bạn *
         </label>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center input-text">
           <InputText
             placeholder="Email "
             width={400}

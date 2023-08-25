@@ -1,8 +1,16 @@
-.left-login {
+.login {
   background-color: #f6f6f6;
-  height: 100vh;
+  height: 75vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   > .logo-login {
-    margin: 102px 0 0 228px;
+    margin: 65px 0 0 220px;
     width: 190px;
     height: 156px;
   }
@@ -13,6 +21,21 @@
       margin-top: 0;
       font-size: 20px;
     }
+    > div:nth-child(1) {
+      :where(.css-dev-only-do-not-override-txh9fw).ant-input:focus-visible {
+        border: 1.5px solid #039800;
+        outline: none;
+      }
+    }
+    > .mb-3 {
+      > label {
+        font-size: 20px;
+        &::before {
+          content: '*';
+          color: red;
+        }
+      }
+    }
     > div {
       > .form-text {
         margin: 0;
@@ -20,19 +43,45 @@
     }
   }
 }
-.right-login {
-  > img {
-    height: 100vh;
-  }
-}
 .btn-custom {
+  margin-top: 24px;
   gap: 8px;
   border-radius: 8px;
-  background-color: #ff9138;
+  background-color: #039800;
   box-shadow: 0px 0px 6px 0px #e7e9f2;
-  padding: 10px 24px;
+  padding: 12px 24px;
   color: white;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    background-color: #039800a9;
+  }
+  &:focus {
+    box-shadow: none;
+  }
 }
 .active-input {
   border: 1px solid red;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-input:hover {
+  border-color: #039800;
+  border-inline-end-width: 1px;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-input:focus-visible {
+  border: 1.5px solid #039800;
+  outline: none;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-input-affix-wrapper:not(
+    .ant-input-affix-wrapper-disabled
+  ):hover {
+  border-color: #039800;
+  border-inline-end-width: 1px;
+  z-index: 1;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-input-affix-wrapper:focus,
+:where(.css-dev-only-do-not-override-txh9fw).ant-input-affix-wrapper-focused {
+  border-color: #039800;
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  border-inline-end-width: 1px;
+  outline: 0;
 }

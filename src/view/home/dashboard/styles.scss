@@ -1,16 +1,20 @@
 //center
 .center-dashboard {
   height: 100vh;
+  padding-top: 100px;
+  box-sizing: border-box;
   background-color: #f6f6f6;
   > h3 {
-    margin: 100px 0 0 24px;
-    color: #ff9138;
+    margin-left: 28px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #000000;
   }
 }
 .bottom-center-dashboard {
-  width: 1000px;
+  width: 940px;
   box-sizing: border-box;
-  height: 580px;
+  height: 584px;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
@@ -34,7 +38,7 @@
 }
 .BD-percent {
   margin-top: 24px;
-  width: 480px;
+  width: 465px;
   height: 115px;
   border-radius: 8px;
   box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
@@ -59,7 +63,14 @@
 //custom chart
 .chart-line {
   margin-left: 40px;
-  height: 480px;
+  height: 465px;
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-picker-calendar-mini {
+  border-radius: 8px;
+  width: 465px !important;
+  box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -webkit-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -2px -2px 11px -4px rgba(0, 0, 0, 0.62);
 }
 //right
 .right-dashboard {
@@ -67,6 +78,6 @@
   background-color: #fff;
   > h3 {
     margin: 100px 0 0 24px;
-    color: #ff9138;
+    color: #039800;
   }
 }

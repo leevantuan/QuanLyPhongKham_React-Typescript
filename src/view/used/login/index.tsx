@@ -1,16 +1,13 @@
 import './styles.scss';
 import LogoImg from '../../../shared/assets/logo.png';
-import LoginImg from '../../../shared/assets/loginImg.png';
 import InputPassword from '../../../shared/components/input/inputPassword';
 import InputText from '../../../shared/components/input/inputText';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
 import { AccountLogin } from '../../../core/redux';
-
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { HandleCheckLogin } from '../../../HandleLogic';
-
 import { toast } from 'react-toastify';
 
 export default function ViewLogin() {
@@ -49,12 +46,12 @@ export default function ViewLogin() {
     }
   };
   return (
-    <div className="container-fluid col-12 d-flex" style={{ padding: 0 }}>
-      <div className="left-login col-4">
+    <div className="container-fluid col-12 d-flex justify-content-center" style={{ padding: 0 }}>
+      <div className="login col-4">
         <img className="logo-login" src={LogoImg} alt="" />
         <div className="form-login">
           <div className="mb-3 ">
-            <label>Tên đăng nhập *</label>
+            <label> Tên đăng nhập </label>
             <br />
             <InputText
               placeholder="Tên đăng nhập "
@@ -65,7 +62,7 @@ export default function ViewLogin() {
             />
           </div>
           <div className="mb-3 mt-4">
-            <label>Mật khẩu *</label>
+            <label> Mật khẩu </label>
             <br />
             <InputPassword
               placeholder="Mật khẩu "
@@ -106,9 +103,6 @@ export default function ViewLogin() {
             Quên mật khẩu?
           </div>
         )}
-      </div>
-      <div className="right-login col-8">
-        <img className="ms-4" src={LoginImg} alt="" />
       </div>
     </div>
   );

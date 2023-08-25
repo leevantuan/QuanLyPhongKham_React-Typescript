@@ -3,17 +3,17 @@
   background-color: #fff;
   > .logo-view-index {
     cursor: pointer;
-    margin: 62px 100px;
+    margin: 24px 44px;
   }
   > div {
     bottom: 40px;
-    left: 16px;
+    left: 14px;
     > .btn-logout {
       font-weight: bold;
-      background-color: #fff2e7;
+      background-color: #0398001e;
       border: none;
       border-radius: 8px;
-      color: #ff7506;
+      color: #039800;
       width: 276px;
       padding: 12px;
       align-items: center;
@@ -33,11 +33,11 @@
   border: none !important;
   padding-left: 0 !important;
   font-weight: 500 !important;
-  font-size: 16px !important;
+  font-size: 18px !important;
 }
 :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light .ant-menu-item-selected,
 :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu .ant-menu-item-selected {
-  background-color: #ff7506;
+  background-color: #039800;
 }
 :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light .ant-menu-item-selected,
 :where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu .ant-menu-item-selected {
@@ -55,10 +55,22 @@ li.ant-menu-item ant-menu-item-selected {
   > .ant-menu
   .ant-menu-submenu-selected
   > .ant-menu-submenu-title {
-  background-color: #ff7506;
+  background-color: #039800;
   color: #fff;
+  padding: 4px 0;
   &:hover {
-    background-color: #ff9742;
+    background-color: #039800a9;
     color: #fff;
+  }
+}
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-txh9fw).ant-menu-light > .ant-menu .ant-menu-item-selected {
+  color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+}
+.ant-menu {
+  > li.ant-menu-item {
+    padding: 24px !important;
   }
 }

@@ -1,5 +1,5 @@
 .bd-cap-so {
-  width: 226px;
+  width: 290px;
   height: 160px;
   background-color: #fff;
   border-radius: 10px;
@@ -22,7 +22,8 @@
       }
     }
     > h5 {
-      width: 100px;
+      margin-left: 24px;
+      width: 120px;
     }
   }
   > div:nth-child(2) {
@@ -53,10 +54,6 @@
 .activeColor-3 {
   background-color: #fde3ce;
   color: #ffac6a;
-}
-.activeColor-4 {
-  background-color: #ffd9d9;
-  color: #f86d6d;
 }
 .activePercent-1 {
   background-color: rgba(255, 149, 1, 0.15);
