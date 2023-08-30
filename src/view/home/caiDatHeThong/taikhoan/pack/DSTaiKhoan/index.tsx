@@ -95,7 +95,7 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cài đặt hệ thống >" textLv2="" textLv3=" Quản lý tài khoản" />
+      <NavBar text="Phòng Khám" />
       <div className="content-DS-TaiKhoan">
         <h3>Danh sách tài khoản</h3>
         <div className="navbar-DS-TaiKhoan d-flex ms-4">

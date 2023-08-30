@@ -1,21 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
   AccountSlice,
-  DeviceSlice,
+  RoomSlice,
   ServiceSlice,
-  ServiceDetailSlice,
+  CapSoSlice,
   HistorySlice,
   RoleSlice,
   UserHistorySlice,
+  DoctorSlice,
+  BHYTSlice,
 } from '../redux/index';
 
 export const store = configureStore({
   // reducer: rootReducer,
   reducer: {
     Account: AccountSlice.reducer,
-    Device: DeviceSlice.reducer,
+    Room: RoomSlice.reducer,
+    Doctor: DoctorSlice.reducer,
+    BHYT: BHYTSlice.reducer,
     Service: ServiceSlice.reducer,
-    ServiceDetail: ServiceDetailSlice.reducer,
+    CapSo: CapSoSlice.reducer,
     History: HistorySlice.reducer,
     Role: RoleSlice.reducer,
     UserHistory: UserHistorySlice.reducer,

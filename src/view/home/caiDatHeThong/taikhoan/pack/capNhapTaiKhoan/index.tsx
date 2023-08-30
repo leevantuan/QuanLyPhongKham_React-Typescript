@@ -54,11 +54,7 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
   }, [ListRoles]);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar
-        textLv1="Quản lý hệ thống >"
-        textLv2="Quản lí tài khoản >"
-        textLv3="Cập nhập tài khoản"
-      />
+      <NavBar text="Phòng Khám" />
       <div className="content-add-account">
         <h3>Quản lí tài khoản</h3>
         <div className="form-add-account">

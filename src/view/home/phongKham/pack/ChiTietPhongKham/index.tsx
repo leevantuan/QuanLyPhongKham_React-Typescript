@@ -1,36 +1,36 @@
 import { useEffect, useState } from 'react';
-import { DescriptionDeviceInterface, DeviceInterface } from '../../../../../@types';
+import { DescriptionRoomInterface, RoomsInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
-import { GetDataDevices } from '../../../../../core/redux';
 import { MdEditSquare } from 'react-icons/md';
 import { RiArrowGoBackFill } from 'react-icons/ri';
+import { GetDataRooms } from '../../../../../core/redux';
 
-export default function ChiTietThietBi(props: DescriptionDeviceInterface) {
+export default function ChiTietPhongKham(props: DescriptionRoomInterface) {
   const dispatch = useAppDispatch();
-  const ListDevices = useAppSelector(state => state.Device.Device);
-  //get data device
+  const ListRooms = useAppSelector(state => state.Room.Room);
+  //get data room
   useEffect(() => {
-    dispatch(GetDataDevices());
+    dispatch(GetDataRooms());
   }, [dispatch]);
 
-  const [device, setDevice] = useState<DeviceInterface[]>([]);
-  //find device
+  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
+  //find room
   useEffect(() => {
     if (props.id) {
-      const device = ListDevices.filter(device => device.key === props.id);
-      setDevice(device);
+      const room = ListRooms.filter(room => room.key === props.id);
+      setRooms(room);
     }
-  }, [ListDevices, props.id]);
+  }, [props.id, ListRooms]);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Thiết bị >" textLv2="Danh sách thiết bị >" textLv3="Chi tiết thiết bị" />
-      <div className="content-description-device">
-        <h3>Quản lí thiết bị</h3>
-        <div className="form-chi-tiet-thiet-bi">
-          <h5>Thông tin thiết bị</h5>
-          {device.map(device => {
+      <NavBar text="Phòng Khám" />
+      <div className="content-description-room">
+        <h3>Chi tiết phòng khám</h3>
+        <div className="form-chi-tiet-room">
+          <h5>Thông tin phòng khám</h5>
+          {/* {device.map(device => {
             return (
               <div key={device.key}>
                 <div className="d-flex">
@@ -69,19 +69,19 @@ export default function ChiTietThietBi(props: DescriptionDeviceInterface) {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
       <div
-        className="button-update-device position-absolute"
-        onClick={() => props.HandleClickUpdateDevice(props.id)}
+        className="button-update-room position-absolute"
+        onClick={() => props.HandleClickUpdateRoom(props.id)}
       >
         <MdEditSquare />
-        <p> Cập nhập thiết bị</p>
+        <p>Cập nhập</p>
       </div>
       <div
-        className="button-goback-device position-absolute"
-        onClick={() => props.HandleClickGoBackDevice()}
+        className="button-goback-room position-absolute"
+        onClick={() => props.HandleClickGoBackRoom()}
       >
         <RiArrowGoBackFill />
         <p>Quay lại</p>

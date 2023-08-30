@@ -10,7 +10,7 @@ import { TbBrandWechat } from 'react-icons/tb';
 import { TbSettings2 } from 'react-icons/tb';
 import { HiOutlineDocumentReport } from 'react-icons/hi';
 import Dashboard from '../dashboard';
-import ViewThietBi from '../thietBi/viewThietBi';
+import ViewPhongKham from '../phongKham/viewPhongKham';
 import ViewDichVu from '../dichVu/viewDichVu';
 import MyAvatar from '../../../layout/avatar';
 import Profile from '../profile';
@@ -27,6 +27,8 @@ import ViewNhatKi from '../caiDatHeThong/nhatki';
 import Bell from '../../../shared/components/bell';
 import ViewBaoCao from '../baoCao';
 import { GoStack } from 'react-icons/go';
+import ViewBacSi from '../bacSi/viewIndex';
+import ViewBHYT from '../BHYT/viewIndex';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -48,12 +50,14 @@ const items: MenuItem[] = [
   getItem('Thống kê', '0', <LuLayoutDashboard />),
   getItem('Phòng Khám', '1', <TbDeviceImac />),
   getItem('Dịch vụ', '2', <TbBrandWechat />),
-  getItem('Cấp số', '3', <GoStack />),
-  getItem('Báo cáo', '4', <HiOutlineDocumentReport />),
-  getItem('Cài đặt hệ thống', '5', <TbSettings2 />, [
-    getItem('Quản lý vai trò', '6'),
-    getItem('Quản lý tài khoản', '7'),
-    getItem('Quản lí người dùng', '8'),
+  getItem('BHYT', '3', <TbBrandWechat />),
+  getItem('Cấp số', '4', <GoStack />),
+  getItem('Báo cáo', '5', <HiOutlineDocumentReport />),
+  getItem('Bác sĩ', '6', <TbBrandWechat />),
+  getItem('Cài đặt hệ thống', '7', <TbSettings2 />, [
+    getItem('Quản lý vai trò', '8'),
+    getItem('Quản lý tài khoản', '9'),
+    getItem('Quản lí người dùng', '10'),
   ]),
 ];
 
@@ -100,8 +104,8 @@ export default function ViewIndex() {
           <MyAvatar
             HandleClickBell={() => setOpenBell(true)}
             HandleClickMyProfile={() => {
-              setHandleActive('10');
-              setHandlePage('10');
+              setHandleActive('20');
+              setHandlePage('20');
             }}
             myFullName={account?.myFullName}
           />
@@ -127,19 +131,23 @@ export default function ViewIndex() {
         {handlePage === '0' ? (
           <Dashboard />
         ) : handlePage === '1' ? (
-          <ViewThietBi />
+          <ViewPhongKham />
         ) : handlePage === '2' ? (
           <ViewDichVu />
-        ) : handlePage === '10' ? (
+        ) : handlePage === '20' ? (
           <Profile />
-        ) : handlePage === '3' ? (
+        ) : handlePage === '4' ? (
           <ViewCapSo />
-        ) : handlePage === '6' ? (
-          <ViewVaiTro />
         ) : handlePage === '7' ? (
-          <ViewTaiKhoan />
+          <ViewVaiTro />
         ) : handlePage === '8' ? (
+          <ViewTaiKhoan />
+        ) : handlePage === '9' ? (
           <ViewNhatKi />
+        ) : handlePage === '6' ? (
+          <ViewBacSi />
+        ) : handlePage === '3' ? (
+          <ViewBHYT />
         ) : (
           <ViewBaoCao />
         )}
@@ -180,7 +188,7 @@ export default function ViewIndex() {
 
         {/* Router here */}
 
-        {handlePage === '3' ? (
+        {handlePage === '4' ? (
           <ViewCapSo />
         ) : (
           <div

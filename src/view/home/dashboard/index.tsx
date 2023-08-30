@@ -7,13 +7,7 @@ import { Select } from 'antd';
 import NavBar from '../../../layout/navBar';
 import DatePicketDashboard from '../../../shared/components/dashboard/datePicket';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
-import {
-  AccountLogin,
-  GetDataDevices,
-  GetDataRoles,
-  GetDataServicDetail,
-  GetDataServices,
-} from '../../../core/redux';
+import { AccountLogin, GetDataRoles, GetDataServices } from '../../../core/redux';
 import { isAuthorization2 } from '../../../shared/isLogin';
 import moment from 'moment';
 import { SoSanhMonth, SoSanhMonthBefore } from '../../../HandleLogic';
@@ -27,19 +21,19 @@ import DashBoardDoughnut from '../../../shared/components/dashboard/dashboardDou
 export default function Dashboard() {
   // const dateNow = moment().format('DD/MM/YYYY');
   const dispatch = useAppDispatch();
-  const DataDetailService = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  // const DataDetailService = useAppSelector(state => state.ServiceDetail.ServiceDetail);
   const DataService = useAppSelector(state => state.Service.Service);
-  const DataDevice = useAppSelector(state => state.Device.Device);
+  // const DataDevice = useAppSelector(state => state.Device.Device);
   //check authorization
   const InfoAccount = useAppSelector(state => state.Account.Account);
   const DataRole = useAppSelector(state => state.Role.Role);
   useEffect(() => {
     dispatch(AccountLogin());
     dispatch(GetDataRoles());
-    dispatch(GetDataServicDetail());
+    // dispatch(GetDataServicDetail());
     dispatch(GetDataServices());
-    dispatch(GetDataDevices());
-    dispatch(GetDataServicDetail());
+    // dispatch(GetDataDevices());
+    // dispatch(GetDataServicDetail());
   }, [dispatch]);
   const [account, setAccount] = useState<AccountInferface>();
   const [checkAuth, setCheckAuth] = useState<boolean>();
@@ -102,77 +96,77 @@ export default function Dashboard() {
   const [boQuaStatus, setBoQuaStatus] = useState<boolean>(true);
   const [listBDCapSo, setListBDCapSo] = useState<BDCapSoType[]>([]);
   //set data
-  useEffect(() => {
-    const ListMonthNow = DataDetailService.filter(event => {
-      const check = SoSanhMonth(event.date, findDate);
-      if (check === true) {
-        return event;
-      } else {
-        return '';
-      }
-    });
-    const ListMonthBefore = DataDetailService.filter(event => {
-      const check = SoSanhMonthBefore(event.date, findDate);
-      if (check === true) {
-        return event;
-      } else {
-        return '';
-      }
-    });
-    if (ListMonthNow.length > 0) {
-      const daSuDung = ListMonthNow.filter(event => event.status === 'success');
-      const dangCho = ListMonthNow.filter(event => event.status === 'waiting');
-      const boQua = ListMonthNow.filter(event => event.status === 'pass');
-      setDaCap(ListMonthNow.length);
-      setDaSuDung(daSuDung.length);
-      setDangCho(dangCho.length);
-      setBoQua(boQua.length);
-    }
+  // useEffect(() => {
+  //   const ListMonthNow = DataDetailService.filter(event => {
+  //     const check = SoSanhMonth(event.date, findDate);
+  //     if (check === true) {
+  //       return event;
+  //     } else {
+  //       return '';
+  //     }
+  //   });
+  //   const ListMonthBefore = DataDetailService.filter(event => {
+  //     const check = SoSanhMonthBefore(event.date, findDate);
+  //     if (check === true) {
+  //       return event;
+  //     } else {
+  //       return '';
+  //     }
+  //   });
+  //   if (ListMonthNow.length > 0) {
+  //     const daSuDung = ListMonthNow.filter(event => event.status === 'success');
+  //     const dangCho = ListMonthNow.filter(event => event.status === 'waiting');
+  //     const boQua = ListMonthNow.filter(event => event.status === 'pass');
+  //     setDaCap(ListMonthNow.length);
+  //     setDaSuDung(daSuDung.length);
+  //     setDangCho(dangCho.length);
+  //     setBoQua(boQua.length);
+  //   }
 
-    if (ListMonthBefore.length > 0) {
-      const daSuDung = ListMonthNow.filter(event => event.status === 'success');
-      const dangCho = ListMonthNow.filter(event => event.status === 'waiting');
-      const boQua = ListMonthNow.filter(event => event.status === 'pass');
-      const daSuDungBefore = ListMonthBefore.filter(event => event.status === 'success');
-      const dangChoBefore = ListMonthBefore.filter(event => event.status === 'waiting');
-      const boQuaBefore = ListMonthBefore.filter(event => event.status === 'pass');
+  //   if (ListMonthBefore.length > 0) {
+  //     // const daSuDung = ListMonthNow.filter(event => event.status === 'success');
+  //     // const dangCho = ListMonthNow.filter(event => event.status === 'waiting');
+  //     // const boQua = ListMonthNow.filter(event => event.status === 'pass');
+  //     // const daSuDungBefore = ListMonthBefore.filter(event => event.status === 'success');
+  //     // const dangChoBefore = ListMonthBefore.filter(event => event.status === 'waiting');
+  //     // const boQuaBefore = ListMonthBefore.filter(event => event.status === 'pass');
 
-      setDaCapPercent((ListMonthNow.length / ListMonthBefore.length) * 100 - 100);
-      setDaSuDungPercent((daSuDung.length / daSuDungBefore.length) * 100 - 100);
-      setDangChoPercent((dangCho.length / dangChoBefore.length) * 100 - 100);
-      setBoQuaPercent((boQua.length / boQuaBefore.length) * 100 - 100);
+  //     // setDaCapPercent((ListMonthNow.length / ListMonthBefore.length) * 100 - 100);
+  //     // setDaSuDungPercent((daSuDung.length / daSuDungBefore.length) * 100 - 100);
+  //     // setDangChoPercent((dangCho.length / dangChoBefore.length) * 100 - 100);
+  //     // setBoQuaPercent((boQua.length / boQuaBefore.length) * 100 - 100);
 
-      if (ListMonthNow.length > ListMonthBefore.length) {
-        setDaCapStatus(true);
-      } else {
-        setDaCapStatus(false);
-      }
-      if (daSuDung.length > daSuDungBefore.length) {
-        setDaSuDungStatus(true);
-      } else {
-        setDaSuDungStatus(false);
-      }
-      if (dangCho.length > dangChoBefore.length) {
-        setDangChoStatus(true);
-      } else {
-        setDangChoStatus(false);
-      }
-      if (boQua.length > boQuaBefore.length) {
-        setBoQuaStatus(true);
-      } else {
-        setBoQuaStatus(false);
-      }
-    } else {
-      setDaCapPercent(100);
-      setDaSuDungPercent(100);
-      setDangChoPercent(100);
-      setBoQuaPercent(100);
-      setDaCapStatus(true);
-      setDaSuDungStatus(true);
-      setDangChoStatus(true);
-      setBoQuaStatus(true);
-    }
-  }, [DataDetailService, findDate]);
+  //     if (ListMonthNow.length > ListMonthBefore.length) {
+  //       setDaCapStatus(true);
+  //     } else {
+  //       setDaCapStatus(false);
+  //     }
+  //     if (daSuDung.length > daSuDungBefore.length) {
+  //       setDaSuDungStatus(true);
+  //     } else {
+  //       setDaSuDungStatus(false);
+  //     }
+  //     if (dangCho.length > dangChoBefore.length) {
+  //       setDangChoStatus(true);
+  //     } else {
+  //       setDangChoStatus(false);
+  //     }
+  //     if (boQua.length > boQuaBefore.length) {
+  //       setBoQuaStatus(true);
+  //     } else {
+  //       setBoQuaStatus(false);
+  //     }
+  //   } else {
+  //     setDaCapPercent(100);
+  //     setDaSuDungPercent(100);
+  //     setDangChoPercent(100);
+  //     setBoQuaPercent(100);
+  //     setDaCapStatus(true);
+  //     setDaSuDungStatus(true);
+  //     setDangChoStatus(true);
+  //     setBoQuaStatus(true);
+  //   }
+  // }, [DataDetailService, findDate]);
   //end
   useEffect(() => {
     const listBDCapSo: BDCapSoType[] = [
@@ -236,21 +230,21 @@ export default function Dashboard() {
     setCapSoPercent(Math.round(percentCapSo1));
     setCapSoPercent2(Math.round(percentCapSo2));
     //service
-    const listDataServiceTrue = DataService.filter(service => service.online === true);
-    setServiceTrueSL(listDataServiceTrue.length);
-    setServiceFalseSL(DataService.length - listDataServiceTrue.length);
-    setServicePercent(Math.round((listDataServiceTrue.length / DataService.length) * 100));
+    // const listDataServiceTrue = DataService.filter(service => service.online === true);
+    // setServiceTrueSL(listDataServiceTrue.length);
+    // setServiceFalseSL(DataService.length - listDataServiceTrue.length);
+    // setServicePercent(Math.round((listDataServiceTrue.length / DataService.length) * 100));
     //deive
-    const listDataDeviceTrue = DataDevice.filter(device => device.online === true);
-    setDeviceTrueSL(listDataDeviceTrue.length);
-    setDeviceFalseSL(DataDevice.length - listDataDeviceTrue.length);
-    setDevicePercent(Math.round((listDataDeviceTrue.length / DataDevice.length) * 100));
-  }, [daCap, dangCho, daSuDung, DataService, DataDevice]);
+    // const listDataDeviceTrue = DataDevice.filter(device => device.online === true);
+    // setDeviceTrueSL(listDataDeviceTrue.length);
+    // setDeviceFalseSL(DataDevice.length - listDataDeviceTrue.length);
+    // setDevicePercent(Math.round((listDataDeviceTrue.length / DataDevice.length) * 100));
+  }, [daCap, dangCho, daSuDung, DataService]);
   //end set data percent
   if (checkAuth) {
     return (
       <div className="col-10 d-flex position-relative">
-        <NavBar textLv3="Thống Kê" textLv1="" textLv2="" />
+        <NavBar text="Thống Kê" />
         <div className="col-md-8 center-dashboard">
           <h3>Thống kê trong tháng 11</h3>
           <div className="top-center-dashboard d-flex mb-4 ms-4 me-4 justify-content-between">

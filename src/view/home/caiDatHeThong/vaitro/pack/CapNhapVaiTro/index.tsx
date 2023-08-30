@@ -62,7 +62,7 @@ export default function CapNhapVaiTro(props: UpdateModalRoleInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cài đặt hệ thống >" textLv2="Quản lí vài trò >" textLv3="Thêm vai trò" />
+      <NavBar text="Phòng Khám" />
       <div className="content-add-role">
         <h3>Quản lí dịch vụ</h3>
         <div className="form-add-role">

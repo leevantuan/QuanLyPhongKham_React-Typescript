@@ -10,71 +10,63 @@ import CustomTable from '../../../../../shared/components/table';
 import { ColumnsType } from 'antd/es/table';
 import {
   AddCapSoInterface,
-  DataServiceDetailInterface,
+  CapSoInterface,
+  ModalAddCapSoInterface,
   ServiceInterface,
 } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import { useEffect, useState } from 'react';
-import { GetDataServicDetail, GetDataServices } from '../../../../../core/redux';
+import { GetDataCapSo, GetDataServices } from '../../../../../core/redux';
 
-const dataSelect2: string[] = ['Tất cả', 'Đang chờ', 'Đã sử dụng', 'Bỏ qua'];
-const dataSelect3: string[] = ['Tất cả', 'Kiosk', 'Hệ thống'];
-const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
-
-export default function DanhSachCapSo(props: AddCapSoInterface) {
-  //colunms device
-  const columns: ColumnsType<DataServiceDetailInterface> = [
+export default function DanhSachCapSo(props: ModalAddCapSoInterface) {
+  //colunms cap so
+  const columns: ColumnsType<CapSoInterface> = [
     {
-      key: 'stt',
-      title: 'STT',
-      dataIndex: 'stt',
+      key: 'capsoID',
+      title: 'Mã Cấp Số',
+      dataIndex: 'capsoID',
     },
     {
-      key: 'customerName',
-      title: 'Tên khách hàng',
-      dataIndex: 'customerName',
+      key: 'fullName',
+      title: 'Họ và Tên',
+      dataIndex: 'fullName',
     },
     {
-      key: 'serviceName',
-      title: 'Tên dịch vụ',
-      dataIndex: 'serviceName',
+      key: 'phoneNumber',
+      title: 'Số điện thoại',
+      dataIndex: 'phoneNumber',
+    },
+    {
+      key: 'serviceID',
+      title: 'Mã dịch vụ',
+      dataIndex: 'serviceID',
     },
     {
       key: 'date',
       title: 'Thời gian cấp',
-      render: (_, record) => <p>{record.time + ' - ' + record.date}</p>,
+      render: (_, record) => <p>{record.startDate}</p>,
     },
     {
       key: 'toDate',
       title: 'Hạn sử dụng',
-      render: (_, record) => <p>{record.toTime + ' - ' + record.toDate}</p>,
+      render: (_, record) => <p>{record.endDate}</p>,
     },
     {
       key: 'status',
       title: 'Trạng thái',
       render: (_, record) =>
-        record.status === 'success' ? (
+        record.status ? (
           <span className="status-online d-flex active-gray">
             <GoDotFill />
-            <p>Đã sử dụng</p>
-          </span>
-        ) : record.status === 'waiting' ? (
-          <span className="status-online d-flex active-blue">
-            <GoDotFill />
-            <p>Đang chờ</p>
+            <p>Đã đóng tiền</p>
           </span>
         ) : (
           <span className="status-online d-flex active-red">
             <GoDotFill />
-            <p>Bỏ qua</p>
+            <p>Chưa đóng tiền</p>
           </span>
         ),
-    },
-    {
-      key: 'source',
-      title: 'Nguồn cấp',
-      dataIndex: 'source',
     },
     {
       key: 'update',
@@ -87,7 +79,7 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
     },
   ];
   const dispatch = useAppDispatch();
-  const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  const ListCapSo = useAppSelector(state => state.CapSo.CapSo);
   const ListServices = useAppSelector(state => state.Service.Service);
 
   const [inputSearch, setInputSearch] = useState<string>('');
@@ -95,17 +87,9 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
   const [newListService, setNewListService] = useState<string[]>([]);
   //get data Services
   useEffect(() => {
-    dispatch(GetDataServicDetail());
+    dispatch(GetDataCapSo());
     dispatch(GetDataServices());
   }, [dispatch]);
-  useEffect(() => {
-    const serviceName = ListServices.map(service => service.serviceName);
-    if (serviceName) {
-      const defaultList = ['Tất cả'];
-      const newList = defaultList.concat(serviceName);
-      setNewListService(newList);
-    }
-  }, [ListServices]);
   //   useEffect(() => {
   //     const newSearchText = ListServices.filter(service => service.serviceId.includes(inputSearch));
   //     const newFilterOnline = newSearchText.filter(service => {
@@ -119,61 +103,13 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
   //     });
   //     setNewList(newFilterOnline);
   //   }, [inputSearch, onlineState, ListServices]);
-
-  const onChangeFromDate: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
-  const onChangeToDate: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString);
-  };
+  // console.log(ListCapSo);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cấp số >" textLv2="" textLv3=" Danh sách cấp số" />
+      <NavBar text="Cấp Số" />
       <div className="content-DS-CapSo">
         <h3>Quản lí cấp số</h3>
         <div className="navbar-DS-CapSo d-flex ms-4">
-          <div className="mt-2">
-            <p>Tên dịch vụ</p>
-            <CustomSelect
-              width={200}
-              height={44}
-              data={newListService}
-              HandleChooseSelect={select => setOnlineState(select)}
-            />
-          </div>
-          <div className="mt-2">
-            <p>Tình trạng</p>
-            <CustomSelect
-              width={200}
-              height={44}
-              data={dataSelect2}
-              HandleChooseSelect={select => setOnlineState(select)}
-            />
-          </div>
-          <div className="mt-2">
-            <p>Nguồn cấp</p>
-            <CustomSelect
-              width={200}
-              height={44}
-              data={dataSelect3}
-              HandleChooseSelect={select => setOnlineState(select)}
-            />
-          </div>
-
-          <div className="mt-2">
-            <p>Chọn thời gian</p>
-            <DatePicker
-              defaultValue={dayjs('01/01/2015', dateFormatList[0])}
-              format={dateFormatList}
-              onChange={onChangeFromDate}
-            />
-            {' > '}
-            <DatePicker
-              defaultValue={dayjs('01/01/2015', dateFormatList[0])}
-              format={dateFormatList}
-              onChange={onChangeToDate}
-            />
-          </div>
           <div className="mt-2">
             <p>Từ khóa</p>
             <InputSearch
@@ -184,16 +120,16 @@ export default function DanhSachCapSo(props: AddCapSoInterface) {
           </div>
         </div>
         <div className="list-DS-CapSo m-4 ">
-          <CustomTable data={ListDetailServices} columns={columns} />
+          <CustomTable data={ListCapSo} columns={columns} />
         </div>
       </div>
-      <div
+      {/* <div
         className="button-add-device position-absolute"
         onClick={() => props.HandleClickAddCapSo()}
       >
         <MdAddBox />
         <p> Cấp số mới</p>
-      </div>
+      </div> */}
     </div>
   );
 }

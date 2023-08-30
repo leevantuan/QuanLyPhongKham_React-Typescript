@@ -1,11 +1,11 @@
-.content-DS-dichVu {
+.content-DS-BHYT {
   margin-top: 100px;
   > h3 {
     margin-left: 24px;
     font-weight: bold;
     color: #000;
   }
-  > .navbar-DS-dichVu {
+  > .navbar-DS-BHYT {
     > div:nth-child(1),
     > div:nth-child(2) {
       > p {
@@ -21,7 +21,7 @@
       }
     }
   }
-  > .list-DS-dichVu {
+  > .list-DS-BHYT {
     width: 1460px;
   }
 }
@@ -31,28 +31,6 @@
   border-color: #ff7506;
   outline: 0;
   box-shadow: none;
-}
-.button-add-dichVu {
-  top: 165px;
-  right: 38px;
-  width: 155px;
-  height: 65px;
-  border-radius: 8px;
-  background-color: #03980031;
-  color: #039800;
-  padding: 12px;
-  text-align: center;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
-  -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
-  &:hover {
-    background-color: #03980017;
-  }
-  > svg {
-    font-size: 38px;
-  }
 }
 .form-control:focus {
   color: #212529;

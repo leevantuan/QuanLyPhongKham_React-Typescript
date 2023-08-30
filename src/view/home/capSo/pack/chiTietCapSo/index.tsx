@@ -2,32 +2,31 @@ import NavBar from '../../../../../layout/navBar';
 import './styles.scss';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import { useEffect, useState } from 'react';
-import { GetDataServicDetail } from '../../../../../core/redux';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { DataServiceDetailInterface, DetailCapSoInterface } from '../../../../../@types';
+import { DetailCapSoInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 
 export default function ChiTietCapSo(props: DetailCapSoInterface) {
   //colunms device
 
   const dispatch = useAppDispatch();
-  const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  // const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
 
-  const [listData, setListData] = useState<DataServiceDetailInterface>();
+  // const [listData, setListData] = useState<DataServiceDetailInterface>();
   //get data Services detail
   useEffect(() => {
-    dispatch(GetDataServicDetail());
+    // dispatch(GetDataServicDetail());
   }, [dispatch]);
-  useEffect(() => {
-    if (props.id) {
-      const newList = ListDetailServices.find(service => service.key === props.id);
-      setListData(newList);
-    }
-  }, [props.id, ListDetailServices]);
+  // useEffect(() => {
+  //   if (props.id) {
+  //     const newList = ListDetailServices.find(service => service.key === props.id);
+  //     setListData(newList);
+  //   }
+  // }, [props.id, ListDetailServices]);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cấp số >" textLv2="Danh sách cấp số" textLv3="Chi tiết" />
-      <div className="content-chiTiet-CapSo">
+      <NavBar text="Phòng Khám" />
+      {/* <div className="content-chiTiet-CapSo">
         <h3>Quản lí cấp số</h3>
         <div>
           <h5>Thông tin cấp số</h5>
@@ -91,7 +90,7 @@ export default function ChiTietCapSo(props: DetailCapSoInterface) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div
         className="button-goback-capSo position-absolute"
         onClick={() => props.HandleClickGoBack()}

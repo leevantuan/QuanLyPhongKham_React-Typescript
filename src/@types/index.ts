@@ -43,13 +43,6 @@ export interface UpdateDataAccountInferface {
   img?: string;
   status: boolean;
 }
-export interface ListAccountInterface {
-  Account: AccountInferface[];
-  Device: DeviceInterface[];
-  Service: ServiceInterface[];
-  ServiceDetail: DataServiceDetailInterface[];
-  History: HistoryInterface[];
-}
 export interface AccountLoginInterface {
   userName: string;
   password: string;
@@ -76,9 +69,7 @@ export interface BDCapSoType {
   data: number;
 }
 export interface TextNavbarType {
-  textLv1: string;
-  textLv2: string;
-  textLv3: string;
+  text: string;
 }
 export interface CustomSelectType {
   width: number;
@@ -86,33 +77,24 @@ export interface CustomSelectType {
   data: string[];
   HandleChooseSelect: (select: string) => void;
 }
-//Device
-export interface DeviceInterface {
+//rooms------------------------------------------
+export interface RoomsInterface {
   key: string;
-  addressIP: string;
-  connect?: boolean;
-  deviceId: string;
-  deviceName: string;
-  deviceType: string;
-  online?: boolean;
-  password: string;
-  userName: string;
-  userService: string;
+  roomID: string;
+  status: boolean;
+  doctor: string[];
+  service: string[];
 }
 //add
-export interface AddDeviceModalInterface {
-  addressIP: string;
-  deviceId: string;
-  deviceName: string;
-  deviceType: string;
-  password: string;
-  userName: string;
-  userService: string;
+export interface AddRoomsInterface {
+  roomID: string;
+  status: boolean;
+  doctor: string[];
+  service: string[];
 }
-
-//Type DS thiet bi
-export interface ListDeviceInterface {
-  HandleClickAddDevice: () => void;
+//Type DS phong khám
+export interface ListRoomInterface {
+  HandleClickAddRoom: () => void;
   HandleClickDescription: (key: string) => void;
   HandleClickUpdate: (key: string) => void;
 }
@@ -128,13 +110,13 @@ export interface AddDeviceInterface {
     userDevice: string,
   ) => void;
 }
-//type chi tiet thiet bi
-export interface DescriptionDeviceInterface {
+//type chi tiet phong kham
+export interface DescriptionRoomInterface {
   id: string;
-  HandleClickUpdateDevice: (key: string) => void;
-  HandleClickGoBackDevice: () => void;
+  HandleClickUpdateRoom: (key: string) => void;
+  HandleClickGoBackRoom: () => void;
 }
-//type cap nhap thiet bi
+//type cap nhap phong kham
 export interface UpdateDeviceInterface {
   id: string;
   HandleClickCancelUpdateDevice: () => void;
@@ -150,13 +132,63 @@ export interface UpdateDeviceInterface {
   ) => void;
   // HandleClickUpdateDevice: (key: string) => void;
 }
+//doctors------------------------------------------
+export interface DoctorsInterface {
+  key: string;
+  doctorID: string;
+  professional: string[];
+  status: boolean;
+  fullName: string;
+  birthday: string;
+  dateWork: string;
+  phoneNumber: string;
+  address: string;
+}
+//add
+export interface AddDoctorsInterface {
+  doctorID: string;
+  professional: string[];
+  status: boolean;
+  fullName: string;
+  birthday: string;
+  dateWork: string;
+  phoneNumber: string;
+  address: string;
+}
+//BHYT
+export interface BHYTInterface {
+  key: string;
+  BHYTID: string;
+  fullName: string;
+  address: string;
+  birthday: string;
+  endDate: string;
+  phoneNumber: string;
+  profession: string;
+  startDate: string;
+  status: boolean;
+}
+//add BHYT
+export interface AddBHYTInterface {
+  BHYTID: string;
+  fullName: string;
+  address: string;
+  birthday: string;
+  endDate: string;
+  phoneNumber: string;
+  profession: string;
+  startDate: string;
+  status: boolean;
+}
+
 //services
 export interface ServiceInterface {
   key: string;
   serviceId: string;
   serviceName: string;
-  online?: boolean;
-  describe: string;
+  status: boolean;
+  price: string;
+  rooms: string[];
   rule: string[];
 }
 export interface ListServiceInterface {
@@ -212,35 +244,30 @@ export interface AddDataServiceInterface {
   online?: boolean;
 }
 //cap so
-//service detail
-export interface DataServiceDetailInterface {
+export interface CapSoInterface {
   key: string;
-  serviceId: string;
-  serviceName: string;
+  BHYTID: string;
+  capsoID: string;
+  endDate: string;
+  fullName: string;
+  phoneNumber: string;
+  price: string;
+  serviceID: string;
+  startDate: string;
   status: string;
-  stt: string;
-  date: string;
-  toDate: string;
-  customerName: string;
-  email: string;
-  phoneNumber: string;
-  source: string;
-  time: string;
-  toTime: string;
-}
-export interface DataAddServiceDetailInterface {
-  serviceId: string;
-  serviceName: string;
-  status?: string;
-  stt: string;
-  date: Date;
-  toDate: Date;
-  customerName: string;
-  email: string;
-  phoneNumber: string;
-  source: string;
 }
 export interface AddCapSoInterface {
+  BHYTID: string;
+  capsoID: string;
+  endDate: Date;
+  fullName: string;
+  phoneNumber: string;
+  price: string;
+  serviceID: string;
+  startDate: Date;
+  status: string;
+}
+export interface ModalAddCapSoInterface {
   HandleClickAddCapSo: () => void;
   HandleClickChiTietCapSo: (id: string) => void;
 }

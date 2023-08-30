@@ -4,7 +4,6 @@ import { Line } from 'react-chartjs-2';
 import { ChartInterface } from '../../../../@types';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/customRedux';
-import { GetDataServicDetail } from '../../../../core/redux';
 import moment from 'moment';
 import { ConvertToTimestamp, SoSanhMonth } from '../../../../HandleLogic';
 
@@ -59,10 +58,10 @@ export default function LineChart(props: ChartInterface) {
   const monthNow = moment().format('MM/YYYY');
   const yearNow = moment().format('YYYY');
   const dispatch = useAppDispatch();
-  const listData = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  // const listData = useAppSelector(state => state.ServiceDetail.ServiceDetail);
 
   useEffect(() => {
-    dispatch(GetDataServicDetail());
+    // dispatch(GetDataServicDetail());
   }, [dispatch]);
 
   const [listDays] = useState<string[]>(['01', '08', '15', '22', '31']);
@@ -86,116 +85,116 @@ export default function LineChart(props: ChartInterface) {
   const [totalWeeks, setTotalWeeks] = useState<number[]>([]);
   const [totalMonths, setTotalMonths] = useState<number[]>([]);
 
-  useEffect(() => {
-    //custom days
-    const customListDays = listDays.map(days => {
-      switch (days) {
-        case '01': {
-          const check = listData.filter(data => data.date === `01/${monthNow}`);
-          return check.length;
-        }
-        case '08': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`01/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`08/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        case '15': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`08/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`15/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        case '22': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`15/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`22/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        default:
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`22/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`31/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-      }
-    });
-    //custom weeks
-    const customListWeeks = listWeeks.map(weeks => {
-      switch (weeks) {
-        case 'Tuần 1': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`01/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`08/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        case 'Tuần 2': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`08/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`15/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        case 'Tuần 3': {
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`15/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`22/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-        }
-        default:
-          const check = listData.filter(
-            data =>
-              ConvertToTimestamp(data.date, '00:00:00') >
-                ConvertToTimestamp(`22/${monthNow}`, '00:00:00') &&
-              ConvertToTimestamp(data.date, '00:00:00') <=
-                ConvertToTimestamp(`31/${monthNow}`, '00:00:00'),
-          );
-          return check.length;
-      }
-    });
-    //custom months
-    const customListMonths = listMonths.map(months => {
-      const check = listData.filter(data => {
-        const checkDate = SoSanhMonth(data.date, `01/${months}/${yearNow}`);
-        if (checkDate) {
-          return data;
-        } else {
-          return '';
-        }
-      });
-      return check.length;
-    });
+  // useEffect(() => {
+  //   //custom days
+  //   const customListDays = listDays.map(days => {
+  //     switch (days) {
+  //       case '01': {
+  //         const check = listData.filter(data => data.date === `01/${monthNow}`);
+  //         return check.length;
+  //       }
+  //       case '08': {
+  //         const check = listData.filter(
+  //           data =>
+  //             ConvertToTimestamp(data.date, '00:00:00') >
+  //               ConvertToTimestamp(`01/${monthNow}`, '00:00:00') &&
+  //             ConvertToTimestamp(data.date, '00:00:00') <=
+  //               ConvertToTimestamp(`08/${monthNow}`, '00:00:00'),
+  //         );
+  //         return check.length;
+  //       }
+  //       case '15': {
+  //         const check = listData.filter(
+  //           data =>
+  //             ConvertToTimestamp(data.date, '00:00:00') >
+  //               ConvertToTimestamp(`08/${monthNow}`, '00:00:00') &&
+  //             ConvertToTimestamp(data.date, '00:00:00') <=
+  //               ConvertToTimestamp(`15/${monthNow}`, '00:00:00'),
+  //         );
+  //         return check.length;
+  //       }
+  //       case '22': {
+  //         const check = listData.filter(
+  //           data =>
+  //             ConvertToTimestamp(data.date, '00:00:00') >
+  //               ConvertToTimestamp(`15/${monthNow}`, '00:00:00') &&
+  //             ConvertToTimestamp(data.date, '00:00:00') <=
+  //               ConvertToTimestamp(`22/${monthNow}`, '00:00:00'),
+  //         );
+  //         return check.length;
+  //       }
+  //       default:
+  //         const check = listData.filter(
+  //           data =>
+  //             ConvertToTimestamp(data.date, '00:00:00') >
+  //               ConvertToTimestamp(`22/${monthNow}`, '00:00:00') &&
+  //             ConvertToTimestamp(data.date, '00:00:00') <=
+  //               ConvertToTimestamp(`31/${monthNow}`, '00:00:00'),
+  //         );
+  //         return check.length;
+  //     }
+  //   });
+  //   //custom weeks
+  //   // const customListWeeks = listWeeks.map(weeks => {
+  //   //   switch (weeks) {
+  //   //     case 'Tuần 1': {
+  //   //       const check = listData.filter(
+  //   //         data =>
+  //   //           ConvertToTimestamp(data.date, '00:00:00') >
+  //   //             ConvertToTimestamp(`01/${monthNow}`, '00:00:00') &&
+  //   //           ConvertToTimestamp(data.date, '00:00:00') <=
+  //   //             ConvertToTimestamp(`08/${monthNow}`, '00:00:00'),
+  //   //       );
+  //   //       return check.length;
+  //   //     }
+  //   //     case 'Tuần 2': {
+  //   //       const check = listData.filter(
+  //   //         data =>
+  //   //           ConvertToTimestamp(data.date, '00:00:00') >
+  //   //             ConvertToTimestamp(`08/${monthNow}`, '00:00:00') &&
+  //   //           ConvertToTimestamp(data.date, '00:00:00') <=
+  //   //             ConvertToTimestamp(`15/${monthNow}`, '00:00:00'),
+  //   //       );
+  //   //       return check.length;
+  //   //     }
+  //   //     case 'Tuần 3': {
+  //   //       const check = listData.filter(
+  //   //         data =>
+  //   //           ConvertToTimestamp(data.date, '00:00:00') >
+  //   //             ConvertToTimestamp(`15/${monthNow}`, '00:00:00') &&
+  //   //           ConvertToTimestamp(data.date, '00:00:00') <=
+  //   //             ConvertToTimestamp(`22/${monthNow}`, '00:00:00'),
+  //   //       );
+  //   //       return check.length;
+  //   //     }
+  //   //     default:
+  //   //       const check = listData.filter(
+  //   //         data =>
+  //   //           ConvertToTimestamp(data.date, '00:00:00') >
+  //   //             ConvertToTimestamp(`22/${monthNow}`, '00:00:00') &&
+  //   //           ConvertToTimestamp(data.date, '00:00:00') <=
+  //   //             ConvertToTimestamp(`31/${monthNow}`, '00:00:00'),
+  //   //       );
+  //   //       return check.length;
+  //   //   }
+  //   // });
+  //   //custom months
+  //   // const customListMonths = listMonths.map(months => {
+  //   //   const check = listData.filter(data => {
+  //   //     const checkDate = SoSanhMonth(data.date, `01/${months}/${yearNow}`);
+  //   //     if (checkDate) {
+  //   //       return data;
+  //   //     } else {
+  //   //       return '';
+  //   //     }
+  //   //   });
+  //   //   return check.length;
+  //   // });
 
-    setTotalDays(customListDays);
-    setTotalWeeks(customListWeeks);
-    setTotalMonths(customListMonths);
-  }, [listDays, listMonths, listWeeks, monthNow, listData, yearNow]);
+  //   setTotalDays(customListDays);
+  //   setTotalWeeks(customListWeeks);
+  //   // setTotalMonths(customListMonths);
+  // }, [listDays, listMonths, listWeeks, monthNow, listData, yearNow]);
 
   const data = {
     labels: listDays,

@@ -3,19 +3,7 @@
   width: 100%;
   > div {
     > div {
-      flex: 1;
-      > h4:nth-child(1),
-      > h4:nth-child(2) {
-        margin-left: 16px;
-        color: #7e7d88;
-        line-height: 88px;
-        font-weight: bold;
-        font-size: 32px;
-      }
-      > h4:nth-child(1) {
-        margin-left: 0;
-      }
-      > h4:nth-child(3) {
+      > h4 {
         margin-left: 16px;
         font-weight: 600;
         color: #039800;

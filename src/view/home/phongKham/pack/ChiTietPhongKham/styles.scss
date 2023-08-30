@@ -1,14 +1,15 @@
-.content-description-device {
+.content-description-room {
   margin-top: 100px;
   > h3 {
+    margin-top: 32px;
     margin-left: 24px;
     font-weight: bold;
-    color: #ff7506;
+    color: #000;
   }
-  > .form-chi-tiet-thiet-bi {
+  > .form-chi-tiet-room {
     padding: 24px;
-    margin: 24px;
-    width: 1450px;
+    margin: 0 24px;
+    width: 1360px;
     height: 700px;
     background-color: #fff;
     border-radius: 16px;
@@ -17,7 +18,7 @@
     -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
     > h5 {
       font-weight: bold;
-      color: #ff7506;
+      color: #000;
     }
     > div {
       > div {
@@ -44,14 +45,14 @@
   }
 }
 //
-.button-update-device {
-  top: 160px;
+.button-update-room {
+  top: 175px;
   right: 0;
   width: 100px;
-  height: 120px;
+  height: 100px;
   border-radius: 8px;
-  background-color: #fcecde;
-  color: #ff7506;
+  background-color: #03980031;
+  color: #039800;
   padding: 12px;
   text-align: center;
   font-weight: 500;
@@ -60,20 +61,20 @@
   -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   &:hover {
-    background-color: #f8e3d1;
+    background-color: #03980017;
   }
   > svg {
     font-size: 38px;
   }
 }
-.button-goback-device {
-  top: 300px;
+.button-goback-room {
+  top: 295px;
   right: 0;
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  background-color: #fcecde;
-  color: #ff7506;
+  background-color: #03980031;
+  color: #039800;
   padding: 12px;
   text-align: center;
   font-weight: 500;
@@ -82,7 +83,7 @@
   -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   &:hover {
-    background-color: #f8e3d1;
+    background-color: #03980017;
   }
   > svg {
     font-size: 38px;

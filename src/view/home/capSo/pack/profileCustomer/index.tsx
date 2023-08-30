@@ -16,7 +16,7 @@ export default function ProfileCustomer(props: AddProfileCustomerInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cấp số >" textLv2="Danh sách cấp số >" textLv3="Thông tin khách hàng" />
+      <NavBar text="Phòng Khám" />
       <div className="content-form-CapSo">
         <h3>Quản lí cấp số</h3>
         <div className="form-CapSo text-center">

@@ -1,4 +1,4 @@
-import { AccountInferface, DataServiceDetailInterface } from '../@types';
+import { AccountInferface } from '../@types';
 import dayjs from 'dayjs';
 
 export const HandleCheckLogin = (userName: string, password: string, data: AccountInferface[]) => {
@@ -83,19 +83,19 @@ export const ConvertToTimestamp = (date: string, time: string) => {
   const timestamp = newDate.getTime();
   return newDate;
 };
-export const NewNumber = (data: DataServiceDetailInterface[], serviceId: string) => {
-  if (data.length > 0) {
-    const listSort = [...data].sort((a, b) => (a.stt > b.stt ? 1 : -1));
-    const lastIndex = listSort[listSort.length - 1];
-    const capSo = lastIndex.stt;
-    const capSoToNumber: number = Number(capSo) as number;
-    const newCapSo: string = String(capSoToNumber + 1) as string;
-    return newCapSo;
-  } else {
-    const newCapSo = serviceId + '0001';
-    return newCapSo;
-  }
-};
+// export const NewNumber = (data: DataServiceDetailInterface[], serviceId: string) => {
+//   if (data.length > 0) {
+//     const listSort = [...data].sort((a, b) => (a.stt > b.stt ? 1 : -1));
+//     const lastIndex = listSort[listSort.length - 1];
+//     const capSo = lastIndex.stt;
+//     const capSoToNumber: number = Number(capSo) as number;
+//     const newCapSo: string = String(capSoToNumber + 1) as string;
+//     return newCapSo;
+//   } else {
+//     const newCapSo = serviceId + '0001';
+//     return newCapSo;
+//   }
+// };
 export const SoSanhMonth = (date: string, dateNow: string) => {
   const setDate = date.split('/');
   const setDateNow = dateNow.split('/');

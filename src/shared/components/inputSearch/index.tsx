@@ -16,7 +16,7 @@ export default function InputSearch(props: InputSearchProps) {
         placeholder={placeholder}
         onChange={props.HandleInputSearch}
       />
-      <i className="position-absolute " style={{ top: 8, right: 16, color: '#FF7506' }}>
+      <i className="position-absolute " style={{ top: 8, right: 16, color: '#039800' }}>
         <SearchOutlined />
       </i>
     </div>

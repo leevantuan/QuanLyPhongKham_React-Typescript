@@ -55,7 +55,7 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cài đặt hệ thống >" textLv2="" textLv3=" Danh sách vai trò" />
+      <NavBar text="Phòng Khám" />
       <div className="content-DS-VaiTro">
         <h3>Quản lí Vai trò</h3>
         <div className="navbar-DS-VaiTro d-flex ms-4">

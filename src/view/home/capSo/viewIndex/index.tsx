@@ -4,13 +4,8 @@ import CapSo from '../pack/CapSo';
 import ProfileCustomer from '../pack/profileCustomer';
 import { ConvertToTimestamp, HandleDateIncrease } from '../../../../HandleLogic';
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
-import {
-  AccountLogin,
-  AddDataHistory,
-  AddDataServicDetail,
-  GetDataRoles,
-} from '../../../../core/redux';
-import { AddHistoryInterface, DataAddServiceDetailInterface } from '../../../../@types';
+import { AccountLogin, AddDataHistory, GetDataRoles } from '../../../../core/redux';
+import { AddHistoryInterface } from '../../../../@types';
 import InSo from '../pack/inSo';
 import ChiTietCapSo from '../pack/chiTietCapSo';
 
@@ -53,32 +48,32 @@ export default function ViewCapSo() {
     serviceId: string,
     serviceName: string,
   ) => {
-    const toDate = HandleDateIncrease(dateTimeNow);
-    const toDateTime = ConvertToTimestamp(toDate, '17:30:00');
-    const newDataServiceDetail: DataAddServiceDetailInterface = {
-      serviceId: serviceId,
-      serviceName: serviceName,
-      stt: capso,
-      date: dateTimeNow,
-      toDate: toDateTime,
-      customerName: customerName,
-      email: email,
-      phoneNumber: phoneNumber,
-      source: source,
-    };
-    const newDataHistory: AddHistoryInterface = {
-      userName: customerName,
-      dateTime: dateTimeNow,
-    };
-    setOpen(true);
-    setSoThuTu(capso);
-    setServiceName(serviceName);
-    setDateTime(dateTimeNow);
-    setToDateTime(toDateTime);
-    setCouter(serviceId[serviceId.length - 1]);
-    dispatch(AddDataServicDetail(newDataServiceDetail));
-    dispatch(AddDataHistory(newDataHistory));
-    setPage('0');
+    // const toDate = HandleDateIncrease(dateTimeNow);
+    // const toDateTime = ConvertToTimestamp(toDate, '17:30:00');
+    // const newDataServiceDetail: DataAddServiceDetailInterface = {
+    //   serviceId: serviceId,
+    //   serviceName: serviceName,
+    //   stt: capso,
+    //   date: dateTimeNow,
+    //   toDate: toDateTime,
+    //   customerName: customerName,
+    //   email: email,
+    //   phoneNumber: phoneNumber,
+    //   source: source,
+    // };
+    // const newDataHistory: AddHistoryInterface = {
+    //   userName: customerName,
+    //   dateTime: dateTimeNow,
+    // };
+    // setOpen(true);
+    // setSoThuTu(capso);
+    // setServiceName(serviceName);
+    // setDateTime(dateTimeNow);
+    // setToDateTime(toDateTime);
+    // setCouter(serviceId[serviceId.length - 1]);
+    // dispatch(AddDataServicDetail(newDataServiceDetail));
+    // dispatch(AddDataHistory(newDataHistory));
+    // setPage('0');
   };
   return (
     <>

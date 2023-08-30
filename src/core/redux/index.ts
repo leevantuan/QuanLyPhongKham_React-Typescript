@@ -5,13 +5,12 @@ import {
   AccountInferface,
   AddDataAccountInferface,
   AddDataServiceInterface,
-  AddDeviceModalInterface,
+  AddRoomsInterface,
   AddHistoryInterface,
   AddRoleInterface,
   AddUserHistoryInterface,
-  DataAddServiceDetailInterface,
-  DataServiceDetailInterface,
-  DeviceInterface,
+  CapSoInterface,
+  RoomsInterface,
   HistoryInterface,
   ResetPasswordInterface,
   RoleInterface,
@@ -19,16 +18,22 @@ import {
   UpdateDataAccountInferface,
   UpdateDataServiceInterface,
   UserHistoryInterface,
+  DoctorsInterface,
+  BHYTInterface,
+  AddBHYTInterface,
+  AddCapSoInterface,
 } from '../../@types';
 import { HandleDates, HandleTimes } from '../../HandleLogic';
 
 export const accounts = query(collection(db, 'accounts'));
-export const devices = query(collection(db, 'devices'));
 export const services = query(collection(db, 'services'));
-export const serviceDetail = query(collection(db, 'serviceDetail'));
+export const capso = query(collection(db, 'capso'));
 export const historys = query(collection(db, 'historys'));
 export const roles = query(collection(db, 'roles'));
 export const userHistory = query(collection(db, 'userHistory'));
+export const rooms = query(collection(db, 'rooms'));
+export const doctors = query(collection(db, 'doctors'));
+export const BHYT = query(collection(db, 'BHYT'));
 
 //get data accouts
 export const AccountLogin = createAsyncThunk(
@@ -54,61 +59,97 @@ export const AccountLogin = createAsyncThunk(
     return data;
   },
 );
-//get data devices
-export const GetDataDevices = createAsyncThunk(
-  'GetDataDevices',
-  async (): Promise<DeviceInterface[]> => {
-    const getDatas = await getDocs(devices);
+//get data rooms
+export const GetDataRooms = createAsyncThunk(
+  'GetDataRooms',
+  async (): Promise<RoomsInterface[]> => {
+    const getDatas = await getDocs(rooms);
     const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
 
     const data = accountsData.map((event: any) => {
-      const newData: DeviceInterface = {
+      const newData: RoomsInterface = {
         key: event.id,
-        addressIP: event.addressIP,
-        connect: event.connect,
-        deviceId: event.deviceId,
-        deviceName: event.deviceName,
-        deviceType: event.deviceType,
-        online: event.online,
-        password: event.password,
-        userName: event.userName,
-        userService: event.userService,
+        roomID: event.roomID,
+        status: event.status,
+        doctor: event.doctor,
+        service: event.service,
       };
       return newData;
     });
     return data;
   },
 );
-//get data services detail
-export const GetDataServicDetail = createAsyncThunk(
-  'GetDataServicDetail',
-  async (): Promise<DataServiceDetailInterface[]> => {
-    const getDatas = await getDocs(serviceDetail);
-    const servicesDetailData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+//get data doctors
+export const GetDataDoctors = createAsyncThunk(
+  'GetDataDoctors',
+  async (): Promise<DoctorsInterface[]> => {
+    const getDatas = await getDocs(doctors);
+    const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
 
-    const data = servicesDetailData.map((event: any) => {
-      //covert
-      const dateData = event.date.toDate();
-      const toDateData = event.toDate.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const toDate = HandleDates(toDateData);
-      const toTime = HandleTimes(toDateData);
-
-      const newData: DataServiceDetailInterface = {
+    const data = Data.map((event: any) => {
+      const newData: DoctorsInterface = {
         key: event.id,
-        serviceId: event.serviceId,
+        doctorID: event.doctorID,
+        professional: event.professional,
         status: event.status,
-        stt: event.stt,
-        date: date,
-        serviceName: event.serviceName,
-        toDate: toDate,
-        customerName: event.customerName,
-        email: event.email,
+        fullName: event.fullName,
+        birthday: event.birthday,
+        dateWork: event.dateWork,
         phoneNumber: event.phoneNumber,
-        source: event.source,
-        time: time,
-        toTime: toTime,
+        address: event.address,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//get data BHYT
+export const GetDataBHYT = createAsyncThunk('GetDataBHYT', async (): Promise<BHYTInterface[]> => {
+  const getDatas = await getDocs(BHYT);
+  const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+  const data = Data.map((event: any) => {
+    const newData: BHYTInterface = {
+      key: event.id,
+      BHYTID: event.BHYTID,
+      fullName: event.fullName,
+      address: event.address,
+      birthday: event.birthday,
+      endDate: event.endDate,
+      phoneNumber: event.phoneNumber,
+      profession: event.profession,
+      startDate: event.startDate,
+      status: event.status,
+    };
+    return newData;
+  });
+  return data;
+});
+//get data cap so
+export const GetDataCapSo = createAsyncThunk(
+  'GetDataCapSo',
+  async (): Promise<CapSoInterface[]> => {
+    const getDatas = await getDocs(capso);
+    const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = Data.map((event: any) => {
+      //covert
+      const startDate = event.startDate.toDate();
+      const endDate = event.endDate.toDate();
+      const date = HandleDates(startDate);
+      const toDate = HandleDates(endDate);
+
+      const newData: CapSoInterface = {
+        key: event.id,
+        BHYTID: event.BHYTID,
+        capsoID: event.capsoID,
+        endDate: toDate,
+        fullName: event.fullName,
+        phoneNumber: event.phoneNumber,
+        price: event.price,
+        serviceID: event.serviceID,
+        startDate: date,
+        status: event.status,
       };
       return newData;
     });
@@ -127,8 +168,9 @@ export const GetDataServices = createAsyncThunk(
         key: event.id,
         serviceId: event.serviceId,
         serviceName: event.serviceName,
-        online: event.online,
-        describe: event.describe,
+        status: event.status,
+        price: event.price,
+        rooms: event.rooms,
         rule: event.rule,
       };
       return newData;
@@ -234,37 +276,70 @@ export const ResetPasswordData = createAsyncThunk(
   },
 );
 
-//update data devices
-export const UpdateDataDevices = createAsyncThunk(
-  'UpdateDataDevices',
-  async (DataUpdate: DeviceInterface): Promise<DeviceInterface[]> => {
+//update data rooms
+export const UpdateDataRooms = createAsyncThunk(
+  'UpdateDataRooms',
+  async (DataUpdate: RoomsInterface): Promise<RoomsInterface[]> => {
     //update data
-    await updateDoc(doc(db, 'devices', `${DataUpdate.key}`), {
+    await updateDoc(doc(db, 'rooms', `${DataUpdate.key}`), {
       ...{
-        addressIP: DataUpdate.addressIP,
-        deviceId: DataUpdate.deviceId,
-        deviceName: DataUpdate.deviceName,
-        deviceType: DataUpdate.deviceType,
-        password: DataUpdate.password,
-        userName: DataUpdate.userName,
-        userService: DataUpdate.userService,
+        roomID: DataUpdate.roomID,
+        status: DataUpdate.status,
+        doctor: DataUpdate.doctor,
+        service: DataUpdate.service,
       },
     });
     //get data after update
-    const getDatas = await getDocs(devices);
+    const getDatas = await getDocs(rooms);
     const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
     const data = accountsData.map((event: any) => {
-      const newData: DeviceInterface = {
+      const newData: RoomsInterface = {
         key: event.id,
-        addressIP: event.addressIP,
-        connect: event.connect,
-        deviceId: event.deviceId,
-        deviceName: event.deviceName,
-        deviceType: event.deviceType,
-        online: event.online,
-        password: event.password,
-        userName: event.userName,
-        userService: event.userService,
+        roomID: event.roomID,
+        status: event.status,
+        doctor: event.doctor,
+        service: event.service,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//update data BHYT
+export const UpdateDataBHYT = createAsyncThunk(
+  'UpdateDataBHYT',
+  async (DataUpdate: BHYTInterface): Promise<BHYTInterface[]> => {
+    //update data
+    await updateDoc(doc(db, 'BHYT', `${DataUpdate.key}`), {
+      ...{
+        BHYTID: DataUpdate.BHYTID,
+        address: DataUpdate.address,
+        fullName: DataUpdate.fullName,
+        birthday: DataUpdate.birthday,
+        endDate: DataUpdate.endDate,
+        phoneNumber: DataUpdate.phoneNumber,
+        profession: DataUpdate.profession,
+        startDate: DataUpdate.startDate,
+        status: DataUpdate.status,
+      },
+    });
+    //get data after update
+    const getDatas = await getDocs(BHYT);
+    const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = Data.map((event: any) => {
+      const newData: BHYTInterface = {
+        key: event.id,
+        BHYTID: event.BHYTID,
+        fullName: event.fullName,
+        address: event.address,
+        birthday: event.birthday,
+        endDate: event.endDate,
+        phoneNumber: event.phoneNumber,
+        profession: event.profession,
+        startDate: event.startDate,
+        status: event.status,
       };
       return newData;
     });
@@ -292,9 +367,10 @@ export const UpdateDataServices = createAsyncThunk(
       const newData: ServiceInterface = {
         key: event.id,
         serviceId: event.serviceId,
-        serviceName: event.event.serviceName,
-        online: event.online,
-        describe: event.describe,
+        serviceName: event.serviceName,
+        status: event.status,
+        price: event.price,
+        rooms: event.rooms,
         rule: event.rule,
       };
       return newData;
@@ -391,9 +467,10 @@ export const AddDataServices = createAsyncThunk(
       const newData: ServiceInterface = {
         key: event.id,
         serviceId: event.serviceId,
-        serviceName: event.event.serviceName,
-        online: event.online,
-        describe: event.describe,
+        serviceName: event.serviceName,
+        status: event.status,
+        price: event.price,
+        rooms: event.rooms,
         rule: event.rule,
       };
       return newData;
@@ -401,37 +478,66 @@ export const AddDataServices = createAsyncThunk(
     return data;
   },
 );
-//add data devices
-export const AddDataDevices = createAsyncThunk(
-  'AddDataDevices',
-  async (DataAdd: AddDeviceModalInterface): Promise<DeviceInterface[]> => {
+//add data rooms
+export const AddDataRooms = createAsyncThunk(
+  'AddDataRooms',
+  async (DataAdd: AddRoomsInterface): Promise<RoomsInterface[]> => {
     //add data
-    await addDoc(collection(db, 'devices'), {
-      addressIP: DataAdd.addressIP,
-      connect: true,
-      deviceId: DataAdd.deviceId,
-      deviceName: DataAdd.deviceName,
-      deviceType: DataAdd.deviceType,
-      online: true,
-      password: DataAdd.password,
-      userName: DataAdd.userName,
-      userService: DataAdd.userService,
+    await addDoc(collection(db, 'rooms'), {
+      roomID: DataAdd.roomID,
+      status: DataAdd.status,
+      doctor: DataAdd.doctor,
+      service: DataAdd.service,
     });
     //get data after add
-    const getDatas = await getDocs(devices);
+    const getDatas = await getDocs(rooms);
     const accountsData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
     const data = accountsData.map((event: any) => {
-      const newData: DeviceInterface = {
+      const newData: RoomsInterface = {
         key: event.id,
-        addressIP: event.addressIP,
-        connect: event.connect,
-        deviceId: event.deviceId,
-        deviceName: event.deviceName,
-        deviceType: event.deviceType,
-        online: event.online,
-        password: event.password,
-        userName: event.userName,
-        userService: event.userService,
+        roomID: event.roomID,
+        status: event.status,
+        doctor: event.doctor,
+        service: event.service,
+      };
+      return newData;
+    });
+    return data;
+  },
+);
+//add data BHYT
+export const AddDataBHYT = createAsyncThunk(
+  'AddDataBHYT',
+  async (DataAdd: AddBHYTInterface): Promise<BHYTInterface[]> => {
+    //add data
+    await addDoc(collection(db, 'BHYT'), {
+      BHYTID: DataAdd.BHYTID,
+      address: DataAdd.address,
+      fullName: DataAdd.fullName,
+      birthday: DataAdd.birthday,
+      endDate: DataAdd.endDate,
+      phoneNumber: DataAdd.phoneNumber,
+      profession: DataAdd.profession,
+      startDate: DataAdd.startDate,
+      status: DataAdd.status,
+    });
+    //get data after add
+    const getDatas = await getDocs(BHYT);
+    const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+
+    const data = Data.map((event: any) => {
+      const newData: BHYTInterface = {
+        key: event.id,
+        BHYTID: event.BHYTID,
+        fullName: event.fullName,
+        address: event.address,
+        birthday: event.birthday,
+        endDate: event.endDate,
+        phoneNumber: event.phoneNumber,
+        profession: event.profession,
+        startDate: event.startDate,
+        status: event.status,
       };
       return newData;
     });
@@ -468,49 +574,43 @@ export const AddDataHistory = createAsyncThunk(
   },
 );
 //add data service detail
-export const AddDataServicDetail = createAsyncThunk(
-  'AddDataServicDetail',
-  async (DataAdd: DataAddServiceDetailInterface): Promise<DataServiceDetailInterface[]> => {
+export const AddDataCapSo = createAsyncThunk(
+  'AddDataCapSo',
+  async (DataAdd: AddCapSoInterface): Promise<CapSoInterface[]> => {
     //add data
-    await addDoc(collection(db, 'serviceDetail'), {
-      serviceId: DataAdd.serviceId,
-      serviceName: DataAdd.serviceName,
-      status: 'waiting',
-      stt: DataAdd.stt,
-      date: DataAdd.date,
-      toDate: DataAdd.toDate,
-      customerName: DataAdd.customerName,
-      email: DataAdd.email,
+    await addDoc(collection(db, 'capso'), {
+      BHYTID: DataAdd.BHYTID,
+      capsoID: DataAdd.capsoID,
+      endDate: DataAdd.endDate,
+      fullName: DataAdd.fullName,
       phoneNumber: DataAdd.phoneNumber,
-      source: DataAdd.source,
+      price: DataAdd.price,
+      serviceID: DataAdd.serviceID,
+      startDate: DataAdd.startDate,
+      status: DataAdd.status,
     });
     //get data after add
-    const getDatas = await getDocs(serviceDetail);
-    const servicesDetailData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
+    const getDatas = await getDocs(capso);
+    const Data = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
 
-    const data = servicesDetailData.map((event: any) => {
+    const data = Data.map((event: any) => {
       //covert
-      const dateData = event.date.toDate();
-      const toDateData = event.toDate.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const toDate = HandleDates(toDateData);
-      const toTime = HandleTimes(toDateData);
+      const startDate = event.startDate.toDate();
+      const endDate = event.endDate.toDate();
+      const date = HandleDates(startDate);
+      const toDate = HandleDates(endDate);
 
-      const newData: DataServiceDetailInterface = {
+      const newData: CapSoInterface = {
         key: event.id,
-        serviceId: event.serviceId,
-        status: event.status,
-        stt: event.stt,
-        date: date,
-        serviceName: event.serviceName,
-        toDate: toDate,
-        customerName: event.customerName,
-        email: event.email,
+        BHYTID: event.BHYTID,
+        capsoID: event.capsoID,
+        endDate: toDate,
+        fullName: event.fullName,
         phoneNumber: event.phoneNumber,
-        source: event.source,
-        time: time,
-        toTime: toTime,
+        price: event.price,
+        serviceID: event.serviceID,
+        startDate: date,
+        status: event.status,
       };
       return newData;
     });
@@ -618,14 +718,20 @@ export const AddDataUserHistory = createAsyncThunk(
 interface AccountState {
   Account: AccountInferface[];
 }
-interface DeviceState {
-  Device: DeviceInterface[];
+interface RoomState {
+  Room: RoomsInterface[];
+}
+interface DoctorState {
+  Doctor: DoctorsInterface[];
+}
+interface BHYTState {
+  BHYT: BHYTInterface[];
 }
 interface ServiceState {
   Service: ServiceInterface[];
 }
-interface ServiceDetailState {
-  ServiceDetail: DataServiceDetailInterface[];
+interface CapSoState {
+  CapSo: CapSoInterface[];
 }
 interface HistoryState {
   History: HistoryInterface[];
@@ -639,14 +745,20 @@ interface UserHistoryState {
 const initialAccountState: AccountState = {
   Account: [],
 };
-const initialDeviceState: DeviceState = {
-  Device: [],
+const initialRoomState: RoomState = {
+  Room: [],
+};
+const initialDoctorState: DoctorState = {
+  Doctor: [],
+};
+const initialBHYTState: BHYTState = {
+  BHYT: [],
 };
 const initialServiceState: ServiceState = {
   Service: [],
 };
-const initialServiceDetailState: ServiceDetailState = {
-  ServiceDetail: [],
+const initialCapSoState: CapSoState = {
+  CapSo: [],
 };
 const initialHistoryState: HistoryState = {
   History: [],
@@ -671,21 +783,56 @@ export const AccountSlice = createSlice({
       });
   },
 });
-export const DeviceSlice = createSlice({
-  name: 'Device',
-  initialState: initialDeviceState,
+export const RoomSlice = createSlice({
+  name: 'Rooms',
+  initialState: initialRoomState,
   reducers: {},
   extraReducers: builder => {
     builder
       //device
-      .addCase(GetDataDevices.fulfilled, (state, action) => {
-        state.Device = action.payload;
+      .addCase(GetDataRooms.fulfilled, (state, action) => {
+        state.Room = action.payload;
       })
-      .addCase(UpdateDataDevices.fulfilled, (state, action) => {
-        state.Device = action.payload;
+      .addCase(UpdateDataRooms.fulfilled, (state, action) => {
+        state.Room = action.payload;
       })
-      .addCase(AddDataDevices.fulfilled, (state, action) => {
-        state.Device = action.payload;
+      .addCase(AddDataRooms.fulfilled, (state, action) => {
+        state.Room = action.payload;
+      });
+  },
+});
+export const DoctorSlice = createSlice({
+  name: 'Doctors',
+  initialState: initialDoctorState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      //device
+      .addCase(GetDataDoctors.fulfilled, (state, action) => {
+        state.Doctor = action.payload;
+      });
+    // .addCase(UpdateDataRooms.fulfilled, (state, action) => {
+    //   state.Room = action.payload;
+    // })
+    // .addCase(AddDataRooms.fulfilled, (state, action) => {
+    //   state.Room = action.payload;
+    // });
+  },
+});
+export const BHYTSlice = createSlice({
+  name: 'BHYT',
+  initialState: initialBHYTState,
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(GetDataBHYT.fulfilled, (state, action) => {
+        state.BHYT = action.payload;
+      })
+      .addCase(UpdateDataBHYT.fulfilled, (state, action) => {
+        state.BHYT = action.payload;
+      })
+      .addCase(AddDataBHYT.fulfilled, (state, action) => {
+        state.BHYT = action.payload;
       });
   },
 });
@@ -707,19 +854,17 @@ export const ServiceSlice = createSlice({
       });
   },
 });
-export const ServiceDetailSlice = createSlice({
-  name: 'ServiceDetail',
-  initialState: initialServiceDetailState,
+export const CapSoSlice = createSlice({
+  name: 'CapSo',
+  initialState: initialCapSoState,
   reducers: {},
   extraReducers: builder => {
-    builder
-      //service detail
-      .addCase(GetDataServicDetail.fulfilled, (state, action) => {
-        state.ServiceDetail = action.payload;
-      })
-      .addCase(AddDataServicDetail.fulfilled, (state, action) => {
-        state.ServiceDetail = action.payload;
-      });
+    builder.addCase(GetDataCapSo.fulfilled, (state, action) => {
+      state.CapSo = action.payload;
+    });
+    // .addCase(AddDataCapSo.fulfilled, (state, action) => {
+    //   state.CapSo = action.payload;
+    // });
   },
 });
 export const HistorySlice = createSlice({

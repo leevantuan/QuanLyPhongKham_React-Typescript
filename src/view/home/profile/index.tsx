@@ -24,7 +24,7 @@ export default function Profile() {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="" textLv2="" textLv3="Thông tin cá nhân" />
+      <NavBar text="Thông tin cá nhân" />
       <div className="my-profile-content d-flex">
         <div>
           <img src={avatarImg} alt="" />

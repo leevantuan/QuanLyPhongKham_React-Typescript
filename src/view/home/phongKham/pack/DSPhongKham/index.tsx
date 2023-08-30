@@ -6,36 +6,43 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import './styles.scss';
 import { MdAddBox } from 'react-icons/md';
 import { ColumnsType } from 'antd/es/table';
-import { ListServiceInterface, RoomsInterface, ServiceInterface } from '../../../../../@types';
+import { ListRoomInterface, RoomsInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { GetDataServices } from '../../../../../core/redux';
+import { GetDataRooms } from '../../../../../core/redux';
 
-export default function DSDichVu(props: ListServiceInterface) {
-  //colunms services
-  const columns: ColumnsType<ServiceInterface> = [
+export default function DSPhongKham(props: ListRoomInterface) {
+  //colunms rooms
+  const columns: ColumnsType<RoomsInterface> = [
     {
-      key: 'serviceId',
-      title: 'Mã dịch vụ',
-      dataIndex: 'serviceId',
+      key: 'roomID',
+      title: 'Mã phòng',
+      dataIndex: 'roomID',
     },
     {
-      key: 'serviceName',
-      title: 'Tên dịch vụ',
-      dataIndex: 'serviceName',
-    },
-    {
-      key: 'price',
-      title: 'Giá dịch vụ',
-      render: (_, record) => <p className="mt-1 mb-1">{record.price} vnd</p>,
-    },
-    {
-      key: 'rooms',
+      key: 'roomID',
       title: 'Số phòng',
+      dataIndex: 'roomID',
+    },
+    {
+      key: 'service',
+      title: 'Dịch vụ',
       render: (_, record) =>
-        record.rooms.map((room, index) => {
+        record.service.map((service, index) => {
           return (
             <p className="mt-1 mb-1" key={index}>
-              - P.{room}
+              - {service}
+            </p>
+          );
+        }),
+    },
+    {
+      key: 'doctor',
+      title: 'Bác sĩ',
+      render: (_, record) =>
+        record.doctor.map((doctor, index) => {
+          return (
+            <p className="mt-1 mb-1" key={index}>
+              BS. {doctor}
             </p>
           );
         }),
@@ -60,7 +67,7 @@ export default function DSDichVu(props: ListServiceInterface) {
       key: 'description',
       title: '',
       render: (_, record) => (
-        <p className="text-link" onClick={() => props.HandleClickDescriptionService(record.key)}>
+        <p className="text-link" onClick={() => props.HandleClickDescription(record.key)}>
           Chi tiết
         </p>
       ),
@@ -69,55 +76,55 @@ export default function DSDichVu(props: ListServiceInterface) {
       key: 'update',
       title: '',
       render: (_, record) => (
-        <p className="text-link" onClick={() => props.HandleClickUpdateService(record.key)}>
+        <p className="text-link" onClick={() => props.HandleClickUpdate(record.key)}>
           Cập nhập
         </p>
       ),
     },
   ];
-  //get data servies
+  //get data device
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListRooms = useAppSelector(state => state.Room.Room);
   useEffect(() => {
-    dispatch(GetDataServices());
+    dispatch(GetDataRooms());
   }, [dispatch]);
 
   const [inputSearch, setInputSearch] = useState<string>('');
-  const [newList, setNewList] = useState<ServiceInterface[]>([]);
+  const [newList, setNewList] = useState<RoomsInterface[]>([]);
   //filter data
   useEffect(() => {
-    if (ListServices.length > 0) {
-      const listSort = [...ListServices].sort((a, b) => (a.serviceId > b.serviceId ? 1 : -1));
-      const newSearchText = listSort.filter(room => room.serviceId.includes(inputSearch));
+    if (ListRooms.length > 0) {
+      const listSort = [...ListRooms].sort((a, b) => (a.roomID > b.roomID ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.roomID.includes(inputSearch));
       setNewList(newSearchText);
     }
-  }, [inputSearch, ListServices]);
+  }, [inputSearch, ListRooms]);
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Dịch Vụ" />
-      <div className="content-DS-dichVu">
-        <h3>Danh sách dịch vụ</h3>
-        <div className="navbar-DS-dichVu d-flex ms-4">
+      <NavBar text="Phòng Khám" />
+      <div className="content-DS-phongKham">
+        <h3>Danh sách phòng khám</h3>
+        <div className="navbar-DS-phongKham d-flex ms-4">
           <div className="mt-2">
-            <p>Tìm kiếm tên dịch vụ</p>
+            <p>Tìm kiếm số phòng</p>
             <InputSearch
               HandleInputSearch={e => setInputSearch(e.target.value)}
               width={400}
-              placeholder="Nhập tên dịch vụ"
+              placeholder="Nhập số phòng"
             />
           </div>
         </div>
-        <div className="list-DS-dichVu m-4 ">
+        <div className="list-DS-phongKham m-4 ">
           <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div
-        className="button-add-dichVu position-absolute d-flex"
-        onClick={() => props.HandleClickAddService()}
+        className="button-add-room position-absolute d-flex"
+        onClick={() => props.HandleClickAddRoom()}
       >
         <MdAddBox />
-        <p> Thêm dịch vụ</p>
+        <p> Thêm phòng khám</p>
       </div>
     </div>
   );

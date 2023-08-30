@@ -6,14 +6,14 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import { GetDataServices } from '../../../../../core/redux';
 import { AddDataCapSoInterface } from '../../../../../@types';
 import moment from 'moment';
-import { NewNumber } from '../../../../../HandleLogic';
+// import { NewNumber } from '../../../../../HandleLogic';
 
 export default function CapSo(props: AddDataCapSoInterface) {
   const dateNow = moment().format('DD/MM/YYYY');
   const datTimeNow = new Date();
   const dispatch = useAppDispatch();
   const ListServices = useAppSelector(state => state.Service.Service);
-  const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  // const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
 
   const [newListService, setNewListService] = useState<string[]>([]);
   const [capSo, setCapSo] = useState<string>('');
@@ -41,17 +41,17 @@ export default function CapSo(props: AddDataCapSoInterface) {
     }
   }, [ListServices, chooseService]);
   //check cap so STT
-  useEffect(() => {
-    if (ListDetailServices) {
-      const listData = ListDetailServices.filter(servicer => servicer.date === dateNow);
-      const newlistData = listData.filter(data => data.serviceId === serviceId);
-      const newNumber = NewNumber(newlistData, serviceId);
-      setCapSo(newNumber);
-    }
-  }, [ListDetailServices, dateNow, serviceId, chooseService]);
+  // useEffect(() => {
+  //   if (ListDetailServices) {
+  //     const listData = ListDetailServices.filter(servicer => servicer.date === dateNow);
+  //     const newlistData = listData.filter(data => data.serviceId === serviceId);
+  //     const newNumber = NewNumber(newlistData, serviceId);
+  //     setCapSo(newNumber);
+  //   }
+  // }, [ListDetailServices, dateNow, serviceId, chooseService]);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cấp số >" textLv2="Danh sách cấp số >" textLv3="Cấp số mới" />
+      <NavBar text="Phòng Khám" />
       <div className="content-form-CapSo">
         <h3>Quản lí cấp số</h3>
         <div className="form-CapSo text-center">

@@ -1,11 +1,11 @@
-.content-DS-dichVu {
+.content-DS-phongKham {
   margin-top: 100px;
   > h3 {
     margin-left: 24px;
     font-weight: bold;
     color: #000;
   }
-  > .navbar-DS-dichVu {
+  > .navbar-DS-phongKham {
     > div:nth-child(1),
     > div:nth-child(2) {
       > p {
@@ -21,7 +21,7 @@
       }
     }
   }
-  > .list-DS-dichVu {
+  > .list-DS-phongKham {
     width: 1460px;
   }
 }
@@ -32,10 +32,10 @@
   outline: 0;
   box-shadow: none;
 }
-.button-add-dichVu {
+.button-add-room {
   top: 165px;
   right: 38px;
-  width: 155px;
+  width: 175px;
   height: 65px;
   border-radius: 8px;
   background-color: #03980031;

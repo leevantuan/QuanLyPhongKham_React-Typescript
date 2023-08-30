@@ -20,7 +20,7 @@ export default function ThemDichVu(props: AddServiceInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3="Thêm dịch vụ" />
+      <NavBar text="Phòng Khám" />
       <div className="content-add-service">
         <h3>Quản lí dịch vụ</h3>
         <div className="form-add-service">

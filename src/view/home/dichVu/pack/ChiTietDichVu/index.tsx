@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
-import {
-  DataServiceDetailInterface,
-  DetailServiceInterface,
-  ServiceInterface,
-} from '../../../../../@types';
+import { DetailServiceInterface, ServiceInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
-import { GetDataServicDetail, GetDataServices } from '../../../../../core/redux';
+import { GetDataServices } from '../../../../../core/redux';
 import { MdEditSquare } from 'react-icons/md';
 import { RiArrowGoBackFill } from 'react-icons/ri';
 import CustomSelect from '../../../../../shared/components/select';
@@ -24,43 +20,43 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
 export default function ChiTietDichVu(props: DetailServiceInterface) {
   const dispatch = useAppDispatch();
   const ListServices = useAppSelector(state => state.Service.Service);
-  const ListServiceDetail = useAppSelector(state => state.ServiceDetail.ServiceDetail);
+  // const ListServiceDetail = useAppSelector(state => state.ServiceDetail.ServiceDetail);
   //get data device
   useEffect(() => {
     dispatch(GetDataServices());
-    dispatch(GetDataServicDetail());
+    // dispatch(GetDataServicDetail());
   }, [dispatch]);
   //columns
-  const columns: ColumnsType<DataServiceDetailInterface> = [
-    {
-      key: 'stt',
-      title: 'Số thứ tự',
-      dataIndex: 'stt',
-    },
-    {
-      key: 'status',
-      title: 'Trạng thái',
-      render: (_, record) =>
-        record.status === 'success' ? (
-          <span className="status-online d-flex active-green">
-            <GoDotFill />
-            <p>Đã thực hiện</p>
-          </span>
-        ) : record.status === 'waiting' ? (
-          <span className="status-online d-flex active-blue">
-            <GoDotFill />
-            <p>Đang thực hiện</p>
-          </span>
-        ) : (
-          <span className="status-online d-flex active-red">
-            <GoDotFill />
-            <p>Vắng</p>
-          </span>
-        ),
-    },
-  ];
+  // const columns: ColumnsType<DataServiceDetailInterface> = [
+  //   {
+  //     key: 'stt',
+  //     title: 'Số thứ tự',
+  //     dataIndex: 'stt',
+  //   },
+  //   {
+  //     key: 'status',
+  //     title: 'Trạng thái',
+  //     render: (_, record) =>
+  //       record.status === 'success' ? (
+  //         <span className="status-online d-flex active-green">
+  //           <GoDotFill />
+  //           <p>Đã thực hiện</p>
+  //         </span>
+  //       ) : record.status === 'waiting' ? (
+  //         <span className="status-online d-flex active-blue">
+  //           <GoDotFill />
+  //           <p>Đang thực hiện</p>
+  //         </span>
+  //       ) : (
+  //         <span className="status-online d-flex active-red">
+  //           <GoDotFill />
+  //           <p>Vắng</p>
+  //         </span>
+  //       ),
+  //   },
+  // ];
   const [service, setService] = useState<ServiceInterface>();
-  const [serviceDetail, setServiceDetail] = useState<DataServiceDetailInterface[]>();
+  // const [serviceDetail, setServiceDetail] = useState<DataServiceDetailInterface[]>();
   const [serviceID, setServiceID] = useState<string>('');
   //find device
   useEffect(() => {
@@ -72,10 +68,10 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
       }
     }
   }, [ListServices, props.id]);
-  useEffect(() => {
-    const serviceDetail = ListServiceDetail.filter(service => service.serviceId === serviceID);
-    setServiceDetail(serviceDetail);
-  }, [ListServiceDetail, serviceID]);
+  // useEffect(() => {
+  //   const serviceDetail = ListServiceDetail.filter(service => service.serviceId === serviceID);
+  //   setServiceDetail(serviceDetail);
+  // }, [ListServiceDetail, serviceID]);
   //handle check list
   const CheckList = (event: string) => {
     if (service) {
@@ -99,7 +95,7 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3=" Chi tiết" />
+      <NavBar text="Phòng Khám" />
       <div className="content-description-service">
         <h3>Quản lí dịch vụ</h3>
         <div className="d-flex">
@@ -115,7 +111,7 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
             </div>
             <div className="d-flex">
               <label>Mô tả:</label>
-              <p>{service?.describe}</p>
+              <p></p>
             </div>
             <div className="quy-tac-cap-so">
               <h5>Quy tắc cấp số</h5>
@@ -170,7 +166,7 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
               </div>
             </div>
             <div className="list-DS-DichVu m-4 ">
-              <CustomTable data={serviceDetail} columns={columns} />
+              {/* <CustomTable data={serviceDetail} columns={columns} /> */}
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import type { DatePickerProps } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
-import { DataServiceDetailInterface } from '../../../../@types';
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
 import NavBar from '../../../../layout/navBar';
 import CustomTable from '../../../../shared/components/table';
@@ -15,28 +14,28 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'DD-MM-YYYY', 'DD-MM-YY'];
 
 export default function ViewNhatKi() {
   //colunms device
-  const columns: ColumnsType<DataServiceDetailInterface> = [
-    {
-      key: 'userName',
-      title: 'Tên đăng nhập',
-      dataIndex: 'userName',
-    },
-    {
-      key: 'dateTIme',
-      title: 'Thời gian tác động',
-      render: (_, record) => <p>{record.date + ' ' + record.time}</p>,
-    },
-    {
-      key: 'addressIP',
-      title: 'IP thực hiện',
-      dataIndex: 'addressIP',
-    },
-    {
-      key: 'operation',
-      title: 'Thao tác thực hiện',
-      dataIndex: 'operation',
-    },
-  ];
+  // const columns: ColumnsType<DataServiceDetailInterface> = [
+  //   {
+  //     key: 'userName',
+  //     title: 'Tên đăng nhập',
+  //     dataIndex: 'userName',
+  //   },
+  //   {
+  //     key: 'dateTIme',
+  //     title: 'Thời gian tác động',
+  //     render: (_, record) => <p>{record.date + ' ' + record.time}</p>,
+  //   },
+  //   {
+  //     key: 'addressIP',
+  //     title: 'IP thực hiện',
+  //     dataIndex: 'addressIP',
+  //   },
+  //   {
+  //     key: 'operation',
+  //     title: 'Thao tác thực hiện',
+  //     dataIndex: 'operation',
+  //   },
+  // ];
   const dispatch = useAppDispatch();
   const ListUserHistory = useAppSelector(state => state.UserHistory.UserHistory);
 
@@ -66,7 +65,7 @@ export default function ViewNhatKi() {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Cài đặt hệ thống >" textLv2="" textLv3=" Quản lí người dùng" />
+      <NavBar text="Phòng Khám" />
       <div className="content-DS-NhatKi">
         <div className="navbar-DS-NhatKi d-flex ms-4">
           <div className="mt-2">
@@ -89,7 +88,7 @@ export default function ViewNhatKi() {
           </div>
         </div>
         <div className="list-DS-NhatKi m-4 ">
-          <CustomTable data={ListUserHistory} columns={columns} />
+          {/* <CustomTable data={ListUserHistory} columns={columns} /> */}
         </div>
       </div>
     </div>

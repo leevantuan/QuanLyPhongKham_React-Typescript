@@ -36,7 +36,7 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
     if (services) {
       setServiceId(services.serviceId);
       setServiceName(services.serviceName);
-      setDescribe(services.describe);
+      // setDescribe(services.describe);
       setRule(services.rule);
     }
   }, [services]);
@@ -47,7 +47,7 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar textLv1="Dịch vụ >" textLv2="Danh sách dịch vụ >" textLv3=" Cập nhập" />
+      <NavBar text="Phòng Khám" />
       <div className="content-update-service">
         <h3>Quản lí dịch vụ</h3>
         <div className="form-update-service">
