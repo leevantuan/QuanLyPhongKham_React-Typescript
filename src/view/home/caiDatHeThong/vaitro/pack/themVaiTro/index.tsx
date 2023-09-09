@@ -34,9 +34,9 @@ export default function ThemVaiTro(props: AddModalRoleInterface) {
   };
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Phòng Khám" />
+      <NavBar text="Vai trò" />
       <div className="content-add-role">
-        <h3>Quản lí dịch vụ</h3>
+        <h3>Quản lí vai trò</h3>
         <div className="form-add-role">
           <h5>Thông tin vai trò</h5>
           <form className="d-flex justify-content-between">

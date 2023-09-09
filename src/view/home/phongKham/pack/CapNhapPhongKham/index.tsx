@@ -53,14 +53,14 @@ export default function CapNhapPhongKham(props: UpdateDeviceInterface) {
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Phòng Khám" />
-      <div className="content-add-device">
+      <div className="content-update-room">
         <h3>Quản lí thiết bị</h3>
-        <div className="form-add-device">
+        <div className="form-update-room">
           <h5>Thông tin thiết bị</h5>
           <form>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Mã thiết bị</label>
+                <label className="form-label">Mã phòng</label>
                 <input
                   type="text"
                   className="form-control"
@@ -69,7 +69,7 @@ export default function CapNhapPhongKham(props: UpdateDeviceInterface) {
                 />
               </div>
               <div className="col-6 mb-3">
-                <label className="form-label">Loại thiết bị</label>
+                <label className="form-label">Số phòng</label>
                 <br />
                 <select value={deviceType} onChange={e => setDeviceType(e.target.value)}>
                   <option value="Kiosk">Kiosk</option>
@@ -79,7 +79,7 @@ export default function CapNhapPhongKham(props: UpdateDeviceInterface) {
             </div>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Tên thiết bị</label>
+                <label className="form-label">Dịch vụ</label>
                 <input
                   type="text"
                   className="form-control"
@@ -88,7 +88,7 @@ export default function CapNhapPhongKham(props: UpdateDeviceInterface) {
                 />
               </div>
               <div className="col-6 mb-3">
-                <label className="form-label">Tên đăng nhập</label>
+                <label className="form-label">Bác sĩ trực</label>
                 <input
                   type="text"
                   className="form-control"
@@ -99,53 +99,13 @@ export default function CapNhapPhongKham(props: UpdateDeviceInterface) {
             </div>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Địa chỉ IP</label>
+                <label className="form-label">Trạng thái</label>
                 <input
                   type="text"
                   className="form-control"
                   value={addressIP}
                   onChange={e => setAddressIP(e.target.value)}
                 />
-              </div>
-              <div className="col-6 mb-3">
-                <label className="form-label">Mật khẩu</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="row col-12">
-              <div className="col-12 mb-3">
-                <label className="form-label">Dịch vụ sử dụng</label>
-                <div className="list-device-user">
-                  <ul className="d-flex flex-wrap">
-                    {listUserDevice.map((event, index) => {
-                      return (
-                        <li key={index}>
-                          {event}
-                          <i
-                            onClick={() => {
-                              setUserDeviceRemove(event);
-                            }}
-                          >
-                            {' '}
-                            <IoMdClose />
-                          </i>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={e => setUserDevice(e.target.value)}
-                    placeholder="Thêm dịch vụ"
-                  />
-                </div>
-                <p>Là trường hợp thông tin bắt buộc</p>
               </div>
             </div>
           </form>

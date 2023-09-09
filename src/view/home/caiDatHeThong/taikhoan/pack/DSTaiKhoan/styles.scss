@@ -3,17 +3,10 @@
   > h3 {
     margin-left: 24px;
     font-weight: bold;
-    color: #ff7506;
+    color: #000;
   }
   > .navbar-DS-TaiKhoan {
-    > div:nth-child(1) {
-      > p {
-        margin: 0 0 8px;
-        font-weight: 600;
-      }
-    }
-    > div:nth-child(2) {
-      margin-left: 700px;
+    > div {
       > p {
         margin: 0 0 8px;
         font-weight: 600;
@@ -51,6 +44,28 @@
   }
   > .list-DS-TaiKhoan {
     width: 1450px;
+  }
+}
+.button-add-account {
+  top: 165px;
+  right: 38px;
+  width: 140px;
+  height: 65px;
+  border-radius: 8px;
+  background-color: #03980031;
+  color: #039800;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
+  &:hover {
+    background-color: #03980017;
+  }
+  > svg {
+    font-size: 38px;
   }
 }
 .form-control:focus {

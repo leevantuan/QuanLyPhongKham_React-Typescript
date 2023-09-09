@@ -54,10 +54,10 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
   }, [ListRoles]);
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Phòng Khám" />
-      <div className="content-add-account">
+      <NavBar text="Tài khoản" />
+      <div className="content-update-account">
         <h3>Quản lí tài khoản</h3>
-        <div className="form-add-account">
+        <div className="form-update-account">
           <h5>Thông tin tài khoản</h5>
           <form className="d-flex justify-content-between">
             <div className="col-6">
@@ -115,7 +115,7 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
               <div className="col-12 mb-3">
                 <label className="form-label">Mật khẩu mới</label>
                 <InputPassword
-                  width={700}
+                  width={675}
                   height={46}
                   border=""
                   placeholder="Nhập mật khẩu mới"
@@ -125,7 +125,7 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
               <div className="col-12 mb-3">
                 <label className="form-label">Nhập lại mật khẩu</label>
                 <InputPassword
-                  width={700}
+                  width={675}
                   height={46}
                   border=""
                   placeholder="Nhập lại mật khẩu"

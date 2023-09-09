@@ -1,25 +1,25 @@
 import { MdAddBox } from 'react-icons/md';
-import NavBar from '../../../../../layout/navBar';
+import NavBar from '../../../../layout/navBar';
 import './styles.scss';
-import InputSearch from '../../../../../shared/components/inputSearch';
-import CustomSelect from '../../../../../shared/components/select';
+import InputSearch from '../../../../shared/components/inputSearch';
+import CustomSelect from '../../../../shared/components/select';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import type { DatePickerProps } from 'antd';
-import CustomTable from '../../../../../shared/components/table';
+import CustomTable from '../../../../shared/components/table';
 import { ColumnsType } from 'antd/es/table';
 import {
   AddCapSoInterface,
   CapSoInterface,
   ModalAddCapSoInterface,
   ServiceInterface,
-} from '../../../../../@types';
+} from '../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
+import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
 import { useEffect, useState } from 'react';
-import { GetDataCapSo, GetDataServices } from '../../../../../core/redux';
+import { GetDataCapSo, GetDataServices } from '../../../../core/redux';
 
-export default function DanhSachCapSo(props: ModalAddCapSoInterface) {
+export default function DSCapSo(props: ModalAddCapSoInterface) {
   //colunms cap so
   const columns: ColumnsType<CapSoInterface> = [
     {
@@ -108,7 +108,7 @@ export default function DanhSachCapSo(props: ModalAddCapSoInterface) {
     <div className="col-10 d-flex position-relative">
       <NavBar text="Cấp Số" />
       <div className="content-DS-CapSo">
-        <h3>Quản lí cấp số</h3>
+        <h3>Danh sách cấp số</h3>
         <div className="navbar-DS-CapSo d-flex ms-4">
           <div className="mt-2">
             <p>Từ khóa</p>

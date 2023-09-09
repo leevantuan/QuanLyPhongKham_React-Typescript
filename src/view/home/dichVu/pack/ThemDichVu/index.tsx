@@ -48,11 +48,21 @@ export default function ThemDichVu(props: AddServiceInterface) {
             </div>
             <div className="col-12">
               <div className="mb-3">
-                <label className="form-label">Mô tả</label>
-                <TextArea
-                  onChange={e => setDescribe(e.target.value)}
-                  placeholder="Nhập mô tả"
-                  autoSize={{ minRows: 3, maxRows: 5 }}
+                <label className="form-label">Số phòng</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập tên dịch vụ"
+                  onChange={e => setServiceName(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Giá dịch vụ</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập tên dịch vụ"
+                  onChange={e => setServiceName(e.target.value)}
                 />
               </div>
             </div>

@@ -37,7 +37,7 @@ export default function ThemTaiKhoan(props: AddTaiKhoanInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Phòng Khám" />
+      <NavBar text="Tài khoản" />
       <div className="content-add-account">
         <h3>Quản lí tài khoản</h3>
         <div className="form-add-account">
@@ -97,7 +97,7 @@ export default function ThemTaiKhoan(props: AddTaiKhoanInterface) {
               <div className="col-12 mb-3">
                 <label className="form-label">Mật khẩu</label>
                 <InputPassword
-                  width={700}
+                  width={675}
                   height={46}
                   border=""
                   placeholder="Nhập mật khẩu"
@@ -107,7 +107,7 @@ export default function ThemTaiKhoan(props: AddTaiKhoanInterface) {
               <div className="col-12 mb-3">
                 <label className="form-label">Nhập lại mật khẩu</label>
                 <InputPassword
-                  width={700}
+                  width={675}
                   height={46}
                   border=""
                   placeholder="Nhập lại mật khẩu"

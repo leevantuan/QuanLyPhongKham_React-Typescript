@@ -3,12 +3,12 @@
   > h3 {
     margin-left: 24px;
     font-weight: bold;
-    color: #ff7506;
+    color: #000;
   }
   > div {
     padding: 24px;
     margin: 24px;
-    width: 1450px;
+    width: 1370px;
     height: 700px;
     background-color: #fff;
     border-radius: 16px;
@@ -17,7 +17,7 @@
     -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
     > h5 {
       font-weight: bold;
-      color: #ff7506;
+      color: #000;
     }
     > div {
       margin-top: 40px;
@@ -40,8 +40,8 @@
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  background-color: #fcecde;
-  color: #ff7506;
+  background-color: #0398002a;
+  color: #039800;
   padding: 12px;
   text-align: center;
   font-weight: 500;
@@ -50,7 +50,7 @@
   -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
   &:hover {
-    background-color: #f8e3d1;
+    background-color: #0398005b;
   }
   > svg {
     font-size: 38px;

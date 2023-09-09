@@ -287,17 +287,6 @@ export interface AddProfileCustomerInterface {
   email: string;
   phoneNumber: string;
 }
-//history
-export interface HistoryInterface {
-  key: string;
-  userName: string;
-  date: string;
-  time: string;
-}
-export interface AddHistoryInterface {
-  userName: string;
-  dateTime: Date;
-}
 //modal in so
 export interface ModalInSoInterface {
   open: boolean;
@@ -382,21 +371,7 @@ export interface UpdateTaiKhoanInterface {
   ) => void;
   id: string;
 }
-//history users
-export interface UserHistoryInterface {
-  key: string;
-  userName: string;
-  addressIP: string;
-  operation: string;
-  date: string;
-  time: string;
-}
-export interface AddUserHistoryInterface {
-  userName: string;
-  addressIP: string;
-  operation: string;
-  dateTime: Date;
-}
+
 ///bell
 export interface BellInterface {
   open: boolean;

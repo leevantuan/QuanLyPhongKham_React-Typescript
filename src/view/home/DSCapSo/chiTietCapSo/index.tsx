@@ -1,9 +1,9 @@
-import NavBar from '../../../../../layout/navBar';
+import NavBar from '../../../../layout/navBar';
 import './styles.scss';
-import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
+import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
 import { useEffect, useState } from 'react';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { DetailCapSoInterface } from '../../../../../@types';
+import { DetailCapSoInterface } from '../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 
 export default function ChiTietCapSo(props: DetailCapSoInterface) {
@@ -26,11 +26,11 @@ export default function ChiTietCapSo(props: DetailCapSoInterface) {
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Phòng Khám" />
-      {/* <div className="content-chiTiet-CapSo">
+      <div className="content-chiTiet-CapSo">
         <h3>Quản lí cấp số</h3>
         <div>
           <h5>Thông tin cấp số</h5>
-          <div className="d-flex">
+          {/* <div className="d-flex">
             <div>
               <div className="d-flex">
                 <label>Họ tên:</label>
@@ -88,9 +88,9 @@ export default function ChiTietCapSo(props: DetailCapSoInterface) {
                 <p>{listData?.email}</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-      </div> */}
+      </div>
       <div
         className="button-goback-capSo position-absolute"
         onClick={() => props.HandleClickGoBack()}

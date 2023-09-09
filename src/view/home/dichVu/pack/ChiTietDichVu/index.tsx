@@ -110,7 +110,15 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
               <p>{service?.serviceName}</p>
             </div>
             <div className="d-flex">
-              <label>Mô tả:</label>
+              <label>Số phòng:</label>
+              <p></p>
+            </div>
+            <div className="d-flex">
+              <label>Giá dịch vụ:</label>
+              <p></p>
+            </div>
+            <div className="d-flex">
+              <label>Trạng thái:</label>
               <p></p>
             </div>
             <div className="quy-tac-cap-so">
@@ -137,29 +145,6 @@ export default function ChiTietDichVu(props: DetailServiceInterface) {
           </div>
           <div className="form-danh-sach-dich-vu">
             <div className="navbar-DS-DichVu d-flex ms-4">
-              <div className="mt-2">
-                <p>Trạng thái hoạt động</p>
-                <CustomSelect
-                  width={200}
-                  height={44}
-                  data={dataSelect1}
-                  HandleChooseSelect={() => {}}
-                />
-              </div>
-              <div className="mt-2">
-                <p>Chọn thời gian</p>
-                <DatePicker
-                  defaultValue={dayjs('01/01/2015', dateFormatList[0])}
-                  format={dateFormatList}
-                  onChange={onChangeFromDate}
-                />
-                {' > '}
-                <DatePicker
-                  defaultValue={dayjs('01/01/2015', dateFormatList[0])}
-                  format={dateFormatList}
-                  onChange={onChangeToDate}
-                />
-              </div>
               <div className="mt-2">
                 <p>Từ khóa</p>
                 <InputSearch HandleInputSearch={() => {}} width={220} placeholder="Nhập từ khóa" />

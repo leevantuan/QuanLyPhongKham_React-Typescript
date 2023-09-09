@@ -6,14 +6,12 @@ import CapNhapDichVu from '../pack/CapNhapDichVu';
 import {
   AccountInferface,
   AddDataServiceInterface,
-  AddUserHistoryInterface,
   UpdateDataServiceInterface,
 } from '../../../../@types';
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
 import {
   AccountLogin,
   AddDataServices,
-  AddDataUserHistory,
   GetDataRoles,
   UpdateDataServices,
 } from '../../../../core/redux';
@@ -91,13 +89,7 @@ export default function ViewDichVu() {
                   describe: describe,
                   rule: rule,
                 };
-                const newDataHistory: AddUserHistoryInterface = {
-                  userName: userName,
-                  addressIP: '192.168.1.1',
-                  operation: `Đã thêm dịch vụ ${serviceId}`,
-                  dateTime: dateTimeNow,
-                };
-                dispatch(AddDataUserHistory(newDataHistory));
+
                 dispatch(AddDataServices(newData));
                 alert('Add success');
                 setPage('0');
@@ -129,13 +121,7 @@ export default function ViewDichVu() {
                   describe: describe,
                   rule: rule,
                 };
-                const newDataHistory: AddUserHistoryInterface = {
-                  userName: userName,
-                  addressIP: '192.168.1.1',
-                  operation: `Đã cập nhập thông tin dịch vụ ${serviceId}`,
-                  dateTime: dateTimeNow,
-                };
-                dispatch(AddDataUserHistory(newDataHistory));
+
                 dispatch(UpdateDataServices(newData));
                 alert('Update success');
                 setPage('0');

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import DanhSachCapSo from '../pack/DSCapSo';
+import DanhSachCapSo from '../../DSCapSo/danhSach';
 import CapSo from '../pack/CapSo';
 import ProfileCustomer from '../pack/profileCustomer';
 import { ConvertToTimestamp, HandleDateIncrease } from '../../../../HandleLogic';
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
-import { AccountLogin, AddDataHistory, GetDataRoles } from '../../../../core/redux';
-import { AddHistoryInterface } from '../../../../@types';
+import { AccountLogin, GetDataRoles } from '../../../../core/redux';
 import InSo from '../pack/inSo';
-import ChiTietCapSo from '../pack/chiTietCapSo';
+import ChiTietCapSo from '../../DSCapSo/chiTietCapSo';
 
 export default function ViewCapSo() {
   const dispatch = useAppDispatch();
@@ -87,14 +86,6 @@ export default function ViewCapSo() {
         couter={couter}
       />
       {page === '0' ? (
-        <DanhSachCapSo
-          HandleClickAddCapSo={() => setPage('1')}
-          HandleClickChiTietCapSo={id => {
-            setId(id);
-            setPage('3');
-          }}
-        />
-      ) : page === '1' ? (
         <ProfileCustomer
           HandleClickCancel={() => setPage('0')}
           HandleClickContinue={(customerName: string, email: string, phoneNumber: string) => {
@@ -102,7 +93,7 @@ export default function ViewCapSo() {
               setCustomerName(customerName);
               setEmail(email);
               setPhoneNumber(phoneNumber);
-              setPage('2');
+              setPage('1');
             } else {
               alert('Vui lòng nhập đầy đủ thông tin');
             }
@@ -111,7 +102,7 @@ export default function ViewCapSo() {
           email={email}
           phoneNumber={phoneNumber}
         />
-      ) : page === '2' ? (
+      ) : page === '1' ? (
         <CapSo
           HandleClickAddCapSo={HandleClickCapSoMoi}
           HandleClickCancelCapSo={() => setPage('1')}

@@ -8,7 +8,6 @@ import { LuLayoutDashboard } from 'react-icons/lu';
 import { TbDeviceImac } from 'react-icons/tb';
 import { TbBrandWechat } from 'react-icons/tb';
 import { TbSettings2 } from 'react-icons/tb';
-import { HiOutlineDocumentReport } from 'react-icons/hi';
 import Dashboard from '../dashboard';
 import ViewPhongKham from '../phongKham/viewPhongKham';
 import ViewDichVu from '../dichVu/viewDichVu';
@@ -23,12 +22,11 @@ import { AccountInferface } from '../../../@types';
 import ViewCapSo from '../capSo/viewIndex';
 import ViewVaiTro from '../caiDatHeThong/vaitro/viewIndex';
 import ViewTaiKhoan from '../caiDatHeThong/taikhoan/viewIndex';
-import ViewNhatKi from '../caiDatHeThong/nhatki';
 import Bell from '../../../shared/components/bell';
-import ViewBaoCao from '../baoCao';
 import { GoStack } from 'react-icons/go';
 import ViewBacSi from '../bacSi/viewIndex';
 import ViewBHYT from '../BHYT/viewIndex';
+import DanhSachCapSo from '../DSCapSo';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -51,13 +49,14 @@ const items: MenuItem[] = [
   getItem('Phòng Khám', '1', <TbDeviceImac />),
   getItem('Dịch vụ', '2', <TbBrandWechat />),
   getItem('BHYT', '3', <TbBrandWechat />),
-  getItem('Cấp số', '4', <GoStack />),
-  getItem('Báo cáo', '5', <HiOutlineDocumentReport />),
-  getItem('Bác sĩ', '6', <TbBrandWechat />),
-  getItem('Cài đặt hệ thống', '7', <TbSettings2 />, [
-    getItem('Quản lý vai trò', '8'),
-    getItem('Quản lý tài khoản', '9'),
-    getItem('Quản lí người dùng', '10'),
+  getItem('Cấp số', '4', <GoStack />, [
+    getItem('Cấp số mới', '41'),
+    getItem('Danh sách cấp số', '42'),
+  ]),
+  getItem('Bác sĩ', '5', <TbBrandWechat />),
+  getItem('Cài đặt hệ thống', '6', <TbSettings2 />, [
+    getItem('Quản lý vai trò', '61'),
+    getItem('Quản lý tài khoản', '62'),
   ]),
 ];
 
@@ -134,22 +133,20 @@ export default function ViewIndex() {
           <ViewPhongKham />
         ) : handlePage === '2' ? (
           <ViewDichVu />
-        ) : handlePage === '20' ? (
-          <Profile />
-        ) : handlePage === '4' ? (
-          <ViewCapSo />
-        ) : handlePage === '7' ? (
-          <ViewVaiTro />
-        ) : handlePage === '8' ? (
-          <ViewTaiKhoan />
-        ) : handlePage === '9' ? (
-          <ViewNhatKi />
-        ) : handlePage === '6' ? (
-          <ViewBacSi />
         ) : handlePage === '3' ? (
           <ViewBHYT />
+        ) : handlePage === '42' ? (
+          <DanhSachCapSo />
+        ) : handlePage === '41' ? (
+          <ViewCapSo />
+        ) : handlePage === '5' ? (
+          <ViewBacSi />
+        ) : handlePage === '61' ? (
+          <ViewVaiTro />
+        ) : handlePage === '62' ? (
+          <ViewTaiKhoan />
         ) : (
-          <ViewBaoCao />
+          <Profile />
         )}
         {/* Router here */}
       </div>

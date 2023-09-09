@@ -6,31 +6,25 @@ import {
   AddDataAccountInferface,
   AddDataServiceInterface,
   AddRoomsInterface,
-  AddHistoryInterface,
   AddRoleInterface,
-  AddUserHistoryInterface,
   CapSoInterface,
   RoomsInterface,
-  HistoryInterface,
   ResetPasswordInterface,
   RoleInterface,
   ServiceInterface,
   UpdateDataAccountInferface,
   UpdateDataServiceInterface,
-  UserHistoryInterface,
   DoctorsInterface,
   BHYTInterface,
   AddBHYTInterface,
   AddCapSoInterface,
 } from '../../@types';
-import { HandleDates, HandleTimes } from '../../HandleLogic';
+import { HandleDates } from '../../HandleLogic';
 
 export const accounts = query(collection(db, 'accounts'));
 export const services = query(collection(db, 'services'));
 export const capso = query(collection(db, 'capso'));
-export const historys = query(collection(db, 'historys'));
 export const roles = query(collection(db, 'roles'));
-export const userHistory = query(collection(db, 'userHistory'));
 export const rooms = query(collection(db, 'rooms'));
 export const doctors = query(collection(db, 'doctors'));
 export const BHYT = query(collection(db, 'BHYT'));
@@ -178,29 +172,6 @@ export const GetDataServices = createAsyncThunk(
     return data;
   },
 );
-//get data historys
-export const GetDataHistorys = createAsyncThunk(
-  'GetDataHistorys',
-  async (): Promise<HistoryInterface[]> => {
-    const getDatas = await getDocs(historys);
-    const historysData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
-
-    const data = historysData.map((event: any) => {
-      //covert
-      const dateData = event.dateTime.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const newData: HistoryInterface = {
-        key: event.id,
-        userName: event.userName,
-        date: date,
-        time: time,
-      };
-      return newData;
-    });
-    return data;
-  },
-);
 //get data roles
 export const GetDataRoles = createAsyncThunk('GetDataRoles', async (): Promise<RoleInterface[]> => {
   const getDatas = await getDocs(roles);
@@ -218,31 +189,6 @@ export const GetDataRoles = createAsyncThunk('GetDataRoles', async (): Promise<R
   });
   return data;
 });
-//get data user history
-export const GetDataUserHistorys = createAsyncThunk(
-  'GetDataUserHistorys',
-  async (): Promise<UserHistoryInterface[]> => {
-    const getDatas = await getDocs(userHistory);
-    const userHistoryData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
-
-    const data = userHistoryData.map((event: any) => {
-      //covert
-      const dateData = event.dateTime.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const newData: UserHistoryInterface = {
-        key: event.id,
-        userName: event.userName,
-        addressIP: event.addressIP,
-        operation: event.operation,
-        date: date,
-        time: time,
-      };
-      return newData;
-    });
-    return data;
-  },
-);
 
 //reset password
 export const ResetPasswordData = createAsyncThunk(
@@ -544,35 +490,6 @@ export const AddDataBHYT = createAsyncThunk(
     return data;
   },
 );
-//add data distorys
-export const AddDataHistory = createAsyncThunk(
-  'AddDataHistory',
-  async (DataAdd: AddHistoryInterface): Promise<HistoryInterface[]> => {
-    //add data
-    await addDoc(collection(db, 'historys'), {
-      userName: DataAdd.userName,
-      dateTime: DataAdd.dateTime,
-    });
-    //get data after add
-    const getDatas = await getDocs(historys);
-    const historysData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
-
-    const data = historysData.map((event: any) => {
-      //covert
-      const dateData = event.dateTime.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const newData: HistoryInterface = {
-        key: event.id,
-        userName: event.userName,
-        date: date,
-        time: time,
-      };
-      return newData;
-    });
-    return data;
-  },
-);
 //add data service detail
 export const AddDataCapSo = createAsyncThunk(
   'AddDataCapSo',
@@ -681,39 +598,6 @@ export const AddDataAccount = createAsyncThunk(
     return data;
   },
 );
-//add data user history
-export const AddDataUserHistory = createAsyncThunk(
-  'AddDataUserHistory',
-  async (DataAdd: AddUserHistoryInterface): Promise<UserHistoryInterface[]> => {
-    //add data
-    await addDoc(collection(db, 'userHistory'), {
-      userName: DataAdd.userName,
-      addressIP: DataAdd.addressIP,
-      operation: DataAdd.operation,
-      dateTime: DataAdd.dateTime,
-    });
-    //get data after add
-    const getDatas = await getDocs(userHistory);
-    const userHistoryData = getDatas.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }));
-
-    const data = userHistoryData.map((event: any) => {
-      //covert
-      const dateData = event.dateTime.toDate();
-      const date = HandleDates(dateData);
-      const time = HandleTimes(dateData);
-      const newData: UserHistoryInterface = {
-        key: event.id,
-        userName: event.userName,
-        addressIP: event.addressIP,
-        operation: event.operation,
-        date: date,
-        time: time,
-      };
-      return newData;
-    });
-    return data;
-  },
-);
 
 interface AccountState {
   Account: AccountInferface[];
@@ -733,14 +617,8 @@ interface ServiceState {
 interface CapSoState {
   CapSo: CapSoInterface[];
 }
-interface HistoryState {
-  History: HistoryInterface[];
-}
 interface RoleState {
   Role: RoleInterface[];
-}
-interface UserHistoryState {
-  UserHistory: UserHistoryInterface[];
 }
 const initialAccountState: AccountState = {
   Account: [],
@@ -760,14 +638,8 @@ const initialServiceState: ServiceState = {
 const initialCapSoState: CapSoState = {
   CapSo: [],
 };
-const initialHistoryState: HistoryState = {
-  History: [],
-};
 const initialRoleState: RoleState = {
   Role: [],
-};
-const initialUserHistoryState: UserHistoryState = {
-  UserHistory: [],
 };
 export const AccountSlice = createSlice({
   name: 'Account',
@@ -867,21 +739,6 @@ export const CapSoSlice = createSlice({
     // });
   },
 });
-export const HistorySlice = createSlice({
-  name: 'History',
-  initialState: initialHistoryState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      //history
-      .addCase(GetDataHistorys.fulfilled, (state, action) => {
-        state.History = action.payload;
-      })
-      .addCase(AddDataHistory.fulfilled, (state, action) => {
-        state.History = action.payload;
-      });
-  },
-});
 export const RoleSlice = createSlice({
   name: 'Role',
   initialState: initialRoleState,
@@ -897,21 +754,6 @@ export const RoleSlice = createSlice({
       })
       .addCase(AddDataRole.fulfilled, (state, action) => {
         state.Role = action.payload;
-      });
-  },
-});
-export const UserHistorySlice = createSlice({
-  name: 'UserHistory',
-  initialState: initialUserHistoryState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      //role
-      .addCase(GetDataUserHistorys.fulfilled, (state, action) => {
-        state.UserHistory = action.payload;
-      })
-      .addCase(AddDataUserHistory.fulfilled, (state, action) => {
-        state.UserHistory = action.payload;
       });
   },
 });

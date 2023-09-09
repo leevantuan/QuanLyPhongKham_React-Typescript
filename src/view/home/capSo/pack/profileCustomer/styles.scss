@@ -3,10 +3,10 @@
   > h3 {
     margin-left: 24px;
     font-weight: bold;
-    color: #ff7506;
+    color: #000;
   }
   > .form-CapSo {
-    width: 1530px;
+    width: 1465px;
     height: 750px;
     background-color: #fff;
     margin: 24px;
@@ -16,62 +16,61 @@
     -webkit-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
     > h1 {
-      margin: 40px 0;
-      font-weight: bold;
-      color: #ff7506;
+      color: #039800;
+      text-align: center;
     }
-    > h5 {
-      margin: 24px 0;
-      font-weight: bold;
-    }
-    > .profile-customer {
-      margin: 16px 0 24px;
-      > label {
-        text-align: start;
-        width: 40%;
-        margin: auto;
-        font-size: 24px;
-        font-weight: bold;
-      }
-      > input {
-        margin: auto;
-        width: 40%;
-        font-size: 20px;
-        &::placeholder {
-          color: #c7c7c7;
+    > .no-BHYT {
+      > .profile-customer {
+        margin: 32px auto 24px;
+        width: 600px;
+        > label {
+          margin: auto;
+          font-size: 24px;
+          font-weight: bold;
+        }
+        > input {
+          margin: auto;
+          width: 100%;
+          font-size: 20px;
+          &::placeholder {
+            color: #c7c7c7;
+          }
         }
       }
     }
     > div {
-      margin-top: 80px;
+      margin-top: 75px;
+    }
+    > div {
+      margin-top: 75px;
       > button:nth-child(1) {
         width: 160px;
         margin: 16px 24px;
         gap: 8px;
         border-radius: 8px;
-        background-color: #fff2e7;
-        box-shadow: 0px 0px 6px 0px #fff2e7;
+        font-size: 20px;
+        font-weight: 600;
+        background-color: #ffffff3b;
         padding: 10px 32px;
-        color: #ff9138;
-        border: 1px solid #ff9138;
+        color: #039800;
+        border: 1.5px solid #039800;
         &:hover {
-          background-color: #ffecdd;
+          background-color: #0398007e;
         }
       }
-      > button:nth-child(2) {
-        width: 160px;
-        margin: 16px 24px;
-        gap: 8px;
-        border-radius: 8px;
-        background-color: #ff9138;
-        box-shadow: 0px 0px 6px 0px #e7e9f2;
-        padding: 10px 32px;
-        color: white;
-        border: 1px solid #ff9138;
-        &:hover {
-          background-color: #ffb070;
-        }
-      }
+    }
+  }
+}
+.check-BHYT {
+  width: 600px;
+  margin: -24px auto;
+  justify-content: space-between;
+  > div {
+    > p {
+      font-size: 24px;
+      font-weight: 600;
+      color: #039800;
+      margin-left: 12px;
     }
   }
 }

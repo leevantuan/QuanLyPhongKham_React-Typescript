@@ -55,7 +55,7 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Phòng Khám" />
+      <NavBar text="Vai trò" />
       <div className="content-DS-VaiTro">
         <h3>Quản lí Vai trò</h3>
         <div className="navbar-DS-VaiTro d-flex ms-4">
@@ -73,11 +73,11 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
         </div>
       </div>
       <div
-        className="button-add-device position-absolute"
+        className="button-add-role position-absolute d-flex"
         onClick={() => props.HandleClickAddRole()}
       >
         <MdAddBox />
-        <p> Thêm vài trò</p>
+        <p> Thêm vai trò</p>
       </div>
     </div>
   );

@@ -4,9 +4,7 @@ import {
   RoomSlice,
   ServiceSlice,
   CapSoSlice,
-  HistorySlice,
   RoleSlice,
-  UserHistorySlice,
   DoctorSlice,
   BHYTSlice,
 } from '../redux/index';
@@ -20,9 +18,7 @@ export const store = configureStore({
     BHYT: BHYTSlice.reducer,
     Service: ServiceSlice.reducer,
     CapSo: CapSoSlice.reducer,
-    History: HistorySlice.reducer,
     Role: RoleSlice.reducer,
-    UserHistory: UserHistorySlice.reducer,
   },
 });
 

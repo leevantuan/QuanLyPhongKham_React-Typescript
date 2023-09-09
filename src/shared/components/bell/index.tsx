@@ -3,14 +3,14 @@ import { Modal } from 'antd';
 import { BellInterface } from '../../../@types';
 import { useAppDispatch, useAppSelector } from '../../hooks/customRedux';
 import { useEffect } from 'react';
-import { GetDataHistorys } from '../../../core/redux';
+// import { GetDataHistorys } from '../../../core/redux';
 
 export default function Bell(props: BellInterface) {
   const dispatch = useAppDispatch();
-  const ListHistory = useAppSelector(state => state.History.History);
+  // const ListHistory = useAppSelector(state => state.History.History);
 
   useEffect(() => {
-    dispatch(GetDataHistorys());
+    // dispatch(GetDataHistorys());
   }, [dispatch]);
   return (
     <>
@@ -24,7 +24,7 @@ export default function Bell(props: BellInterface) {
             // border: '1px solid rgba(140, 140, 140, 0.35)',
           }}
         >
-          {ListHistory.map(history => {
+          {/* {ListHistory.map(history => {
             return (
               <div className="content-bell" key={history.key}>
                 <h6 className="fw-bold mb-3">Người dùng: {history.userName}</h6>
@@ -33,7 +33,7 @@ export default function Bell(props: BellInterface) {
                 </h6>
               </div>
             );
-          })}
+          })} */}
         </div>
       </Modal>
     </>

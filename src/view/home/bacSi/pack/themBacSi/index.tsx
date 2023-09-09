@@ -3,7 +3,7 @@ import { AddDeviceInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import './styles.scss';
 
-export default function ThemPhongKham(props: AddDeviceInterface) {
+export default function ThemBacSi(props: AddDeviceInterface) {
   const [deviceId, setDeviceId] = useState<string>('');
   const [deviceType, setDeviceType] = useState<string>('');
   const [deviceName, setDeviceName] = useState<string>('');
@@ -15,13 +15,13 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
     <div className="col-10 d-flex position-relative">
       <NavBar text="Phòng Khám" />
       <div className="content-add-room">
-        <h3>Quản lí phòng khám</h3>
+        <h3>Quản lí bác sĩ</h3>
         <div className="form-add-room">
-          <h5>Thông tin phòng khám</h5>
+          <h5>Thông tin bác sĩ</h5>
           <form>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Mã phòng</label>
+                <label className="form-label">Mã bác sĩ</label>
                 <input
                   type="text"
                   className="form-control"
@@ -30,7 +30,7 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
                 />
               </div>
               <div className="col-6 mb-3">
-                <label className="form-label">Số phòng</label>
+                <label className="form-label">Họ tên</label>
                 <input
                   type="text"
                   className="form-control"
@@ -41,7 +41,7 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
             </div>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Dịch vụ</label>
+                <label className="form-label">Ngày sinh</label>
                 <input
                   type="text"
                   className="form-control"
@@ -50,7 +50,7 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
                 />
               </div>
               <div className="col-6 mb-3">
-                <label className="form-label">Bác sĩ trực</label>
+                <label className="form-label">Số điện thoại</label>
                 <input
                   type="text"
                   className="form-control"
@@ -61,7 +61,27 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
             </div>
             <div className="row col-12">
               <div className="col-6 mb-3">
-                <label className="form-label">Trạng thái</label>
+                <label className="form-label">Ngày làm việc</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập địa chỉ IP"
+                  onChange={e => setAddressIP(e.target.value)}
+                />
+              </div>
+              <div className="col-6 mb-3">
+                <label className="form-label">Chuyên môn</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Nhập địa chỉ IP"
+                  onChange={e => setAddressIP(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="row col-12">
+              <div className="col-12 mb-3">
+                <label className="form-label">Địa chỉ</label>
                 <input
                   type="text"
                   className="form-control"
@@ -87,7 +107,7 @@ export default function ThemPhongKham(props: AddDeviceInterface) {
               )
             }
           >
-            Thêm thiết bị
+            Thêm bác sĩ
           </button>
         </div>
       </div>

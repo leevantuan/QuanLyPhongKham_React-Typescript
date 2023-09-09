@@ -16,7 +16,7 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
     const listData = data.filter(data => data.role === countName);
     return listData.length;
   };
-  //colunms device
+  //colunms daccount
   const columns: ColumnsType<AccountInferface> = [
     {
       key: 'userName',
@@ -95,19 +95,10 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
 
   return (
     <div className="col-10 d-flex position-relative">
-      <NavBar text="Phòng Khám" />
+      <NavBar text="Tài khoản" />
       <div className="content-DS-TaiKhoan">
         <h3>Danh sách tài khoản</h3>
         <div className="navbar-DS-TaiKhoan d-flex ms-4">
-          <div className="mt-2">
-            <p>Tên vai trò</p>
-            <CustomSelect
-              width={350}
-              height={44}
-              data={listRoleName}
-              HandleChooseSelect={select => console.log(select)}
-            />
-          </div>
           <div className="mt-2">
             <p>Từ khóa</p>
             <InputSearch
@@ -122,7 +113,7 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
         </div>
       </div>
       <div
-        className="button-add-device position-absolute"
+        className="button-add-account position-absolute d-flex"
         onClick={() => props.HandleClickAddAccount()}
       >
         <MdAddBox />

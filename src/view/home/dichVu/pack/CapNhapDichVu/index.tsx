@@ -53,7 +53,7 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
         <div className="form-update-service">
           <h5>Thông tin dịch vụ</h5>
           <form className="d-flex justify-content-between">
-            <div className="col-6">
+            <div className="col-12">
               <div className="col-12 mb-3">
                 <label className="form-label">Mã dịch vụ</label>
                 <input
@@ -72,14 +72,33 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
                   onChange={e => setServiceName(e.target.value)}
                 />
               </div>
+              <div className="col-12 mb-3">
+                <label className="form-label">Trạng thái</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={serviceName}
+                  onChange={e => setServiceName(e.target.value)}
+                />
+              </div>
             </div>
             <div className="col-12">
               <div className="mb-3">
-                <label className="form-label">Mô tả</label>
-                <TextArea
-                  onChange={e => setDescribe(e.target.value)}
-                  value={describe}
-                  autoSize={{ minRows: 3, maxRows: 5 }}
+                <label className="form-label">Số phòng</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={serviceName}
+                  onChange={e => setServiceName(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Giá dịch vụ</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={serviceName}
+                  onChange={e => setServiceName(e.target.value)}
                 />
               </div>
             </div>
@@ -113,7 +132,6 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
               </Row>
             </Checkbox.Group>
           </div>
-          <p>Là trường hợp bắt buộc</p>
         </div>
         <div className="d-flex justify-content-center">
           <button onClick={() => props.HandleClickCancelUpdateService()}>Hủy bỏ</button>

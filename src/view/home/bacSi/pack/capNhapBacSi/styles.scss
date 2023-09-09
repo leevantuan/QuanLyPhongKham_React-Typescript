@@ -1,11 +1,11 @@
-.content-update-service {
+.content-description-doctor {
   margin-top: 100px;
   > h3 {
     margin-left: 24px;
     font-weight: bold;
     color: #000;
   }
-  > .form-update-service {
+  > .form-description-doctor {
     width: 1465px;
     height: 650px;
     background-color: #fff;
@@ -17,24 +17,19 @@
     -moz-box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.4);
     > h5 {
       font-weight: bold;
-      color: #039800;
+      color: #000;
     }
-    > P {
-      margin: 24px 12px;
-      color: #a9a9b0;
-      &::before {
-        content: ' *';
-        color: #ff7506;
-        margin-right: 12px;
-      }
-    }
-    //form
     > form {
       padding-top: 12px;
-      > div {
-        margin-top: 16px;
-        width: 48%;
+      > .row {
         > div {
+          margin-top: 16px;
+          > select {
+            width: 709px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1.5px solid #d4d4d7;
+          }
           > label {
             font-weight: 600;
             &::after {
@@ -49,20 +44,25 @@
               color: #a9a9b0;
             }
             &:focus-visible {
-              outline: 1.5px solid #ff7506;
+              outline: 1.5px solid #039800;
               border: none;
             }
             &:focus {
               box-shadow: none;
             }
           }
-          > TextArea {
-            height: 135px !important;
+          > P {
+            margin: 24px 12px;
+            color: #a9a9b0;
+            &::before {
+              content: ' *';
+              color: #039800;
+              margin-right: 12px;
+            }
           }
         }
       }
     }
-    //form
   }
   > div {
     > button:nth-child(1) {
@@ -76,7 +76,7 @@
       color: #039800;
       border: 1px solid #039800;
       &:hover {
-        background-color: #0398002f;
+        background-color: #0398001f;
       }
     }
     > button:nth-child(2) {
@@ -89,40 +89,8 @@
       color: white;
       border: 1px solid #039800;
       &:hover {
-        background-color: #0398002f;
+        background-color: #03980056;
       }
-    }
-  }
-}
-//custom check box
-:where(.css-dev-only-do-not-override-txh9fw).ant-checkbox-group > .ant-row {
-  display: flow-root;
-}
-:where(.css-dev-only-do-not-override-txh9fw)[class^='ant-checkbox'] [class^='ant-checkbox'],
-:where(.css-dev-only-do-not-override-txh9fw)[class*=' ant-checkbox'] [class^='ant-checkbox'],
-:where(.css-dev-only-do-not-override-txh9fw)[class^='ant-checkbox'] [class*=' ant-checkbox'],
-:where(.css-dev-only-do-not-override-txh9fw)[class*=' ant-checkbox'] [class*=' ant-checkbox'] {
-  font-size: 20px;
-}
-:where(.css-dev-only-do-not-override-txh9fw).ant-checkbox + span {
-  padding-inline-start: 8px;
-  padding-inline-end: 8px;
-  margin: 12px;
-}
-:where(.css-dev-only-do-not-override-txh9fw).ant-checkbox + span {
-  display: flex;
-  > p {
-    width: 200px;
-  }
-  > input {
-    width: 70px;
-    padding: 0 8px;
-    border: 1.5px solid #d4d4d7;
-    border-radius: 8px;
-    margin: 0 4px;
-    &:focus-visible {
-      border: 1.5px solid #ff7506;
-      outline: none;
     }
   }
 }
