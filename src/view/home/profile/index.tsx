@@ -2,25 +2,26 @@ import { useEffect, useState } from 'react';
 import NavBar from '../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
 import './styles.scss';
-import { AccountLogin } from '../../../core/redux';
-import { AccountInferface } from '../../../@types';
+// import { AccountLogin } from '../../../core/redux';
+// import { AccountInferface } from '../../../@types';
 import avatarImg from '../../../shared/assets/avatar.png';
+import { AccountInferface } from '../../../@types/IUser';
 
 export default function Profile() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.Account.Account);
+  const InfoAccount = useAppSelector(state => state.User.User);
   useEffect(() => {
-    dispatch(AccountLogin());
+    // dispatch(AccountLogin());
   }, [dispatch]);
 
   const [account, setAccount] = useState<AccountInferface>();
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.key === token);
-    if (findAccount) {
-      setAccount(findAccount);
-    }
-  }, [InfoAccount]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('tokenUser');
+  //   const findAccount = InfoAccount.find(acc => acc.key === token);
+  //   if (findAccount) {
+  //     setAccount(findAccount);
+  //   }
+  // }, [InfoAccount]);
 
   return (
     <div className="col-10 d-flex position-relative">
@@ -28,12 +29,12 @@ export default function Profile() {
       <div className="my-profile-content d-flex">
         <div>
           <img src={avatarImg} alt="" />
-          <h1>{account?.myFullName}</h1>
+          {/* <h1>{account?.myFullName}</h1> */}
         </div>
         <div>
           <label>Tên người dùng:</label>
           <br />
-          <input value={account?.myFullName} disabled />
+          {/* <input value={account?.myFullName} disabled /> */}
           <br />
           <label>Số điện thoại:</label>
           <br />
@@ -54,7 +55,7 @@ export default function Profile() {
           <br />
           <label>Vai trò</label>
           <br />
-          <input value={account?.role} disabled />
+          {/* <input value={account?.role} disabled /> */}
         </div>
       </div>
     </div>

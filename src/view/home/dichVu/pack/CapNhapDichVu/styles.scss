@@ -35,6 +35,12 @@
         margin-top: 16px;
         width: 48%;
         > div {
+          > select {
+            width: 672px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1.5px solid #d4d4d7;
+          }
           > label {
             font-weight: 600;
             &::after {

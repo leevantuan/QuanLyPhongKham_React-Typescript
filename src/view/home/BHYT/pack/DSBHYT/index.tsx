@@ -5,18 +5,15 @@ import CustomTable from '../../../../../shared/components/table';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
 import { ColumnsType } from 'antd/es/table';
-import { ListRoomInterface, BHYTInterface } from '../../../../../@types';
+// import { ListRoomInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { GetDataBHYT } from '../../../../../core/redux';
+import { GetAllBHYT } from '../../../../../core/redux/BHYT';
+import { BHYTInterface } from '../../../../../@types/IBHYT';
+import { ListRoomModelInterface } from '../../../../../@types/IRoom';
 
-export default function DSBHYT(props: ListRoomInterface) {
+export default function DSBHYT(props: ListRoomModelInterface) {
   //colunms BHYT
   const columns: ColumnsType<BHYTInterface> = [
-    {
-      key: 'BHYTID',
-      title: 'Số thẻ',
-      dataIndex: 'BHYTID',
-    },
     {
       key: 'fullName',
       title: 'Họ tên',
@@ -74,19 +71,21 @@ export default function DSBHYT(props: ListRoomInterface) {
   ];
   //get data BHYT
   const dispatch = useAppDispatch();
-  const ListBHYT = useAppSelector(state => state.BHYT.BHYT);
+  const ListBHYT = useAppSelector(state => state.BHYT.BHYTS);
   useEffect(() => {
-    dispatch(GetDataBHYT());
+    dispatch(GetAllBHYT());
   }, [dispatch]);
 
   const [inputSearch, setInputSearch] = useState<string>('');
   const [newList, setNewList] = useState<BHYTInterface[]>([]);
   //filter data
   useEffect(() => {
-    if (ListBHYT.length > 0) {
-      const listSort = [...ListBHYT].sort((a, b) => (a.BHYTID > b.BHYTID ? 1 : -1));
-      const newSearchText = listSort.filter(room => room.BHYTID.includes(inputSearch));
-      setNewList(newSearchText);
+    if (ListBHYT) {
+      if (ListBHYT.length > 0) {
+        const listSort = [...ListBHYT].sort((a, b) => (a.key > b.key ? 1 : -1));
+        const newSearchText = listSort.filter(room => room.phoneNumber.includes(inputSearch));
+        setNewList(newSearchText);
+      }
     }
   }, [inputSearch, ListBHYT]);
 
@@ -97,11 +96,11 @@ export default function DSBHYT(props: ListRoomInterface) {
         <h3>Danh sách bảo hiểm y tế</h3>
         <div className="navbar-DS-BHYT d-flex ms-4">
           <div className="mt-2">
-            <p>Tìm kiếm mã BHYT</p>
+            <p>Tìm kiếm số điện thoại</p>
             <InputSearch
               HandleInputSearch={e => setInputSearch(e.target.value)}
               width={400}
-              placeholder="Nhập mã BHYT"
+              placeholder="Nhập số diện điện thoại"
             />
           </div>
         </div>

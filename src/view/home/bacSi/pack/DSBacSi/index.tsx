@@ -6,22 +6,18 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import './styles.scss';
 import { MdAddBox } from 'react-icons/md';
 import { ColumnsType } from 'antd/es/table';
-import { ListRoomInterface, DoctorsInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { GetDataDoctors } from '../../../../../core/redux';
+import { DoctorsInterface } from '../../../../../@types/IDoctor';
+import { GetAllDoctor } from '../../../../../core/redux/Doctor';
+import { ListRoomModelInterface } from '../../../../../@types/IRoom';
 
-export default function DSBacSi(props: ListRoomInterface) {
+export default function DSBacSi(props: ListRoomModelInterface) {
   //colunms doctors
   const columns: ColumnsType<DoctorsInterface> = [
     {
-      key: 'doctorID',
-      title: 'Số thẻ',
-      dataIndex: 'doctorID',
-    },
-    {
-      key: 'fullName',
+      key: 'doctorName',
       title: 'Họ tên',
-      dataIndex: 'fullName',
+      dataIndex: 'doctorName',
     },
     {
       key: 'phoneNumber',
@@ -34,16 +30,9 @@ export default function DSBacSi(props: ListRoomInterface) {
       dataIndex: 'address',
     },
     {
-      key: 'doctor',
+      key: 'professtional',
       title: 'Chuyên môn',
-      render: (_, record) =>
-        record.professional.map((professional, index) => {
-          return (
-            <p className="mt-1 mb-1" key={index}>
-              - {professional}
-            </p>
-          );
-        }),
+      dataIndex: 'professtional',
     },
     {
       key: 'status',
@@ -57,7 +46,7 @@ export default function DSBacSi(props: ListRoomInterface) {
         ) : (
           <span className="status-online d-flex active-red">
             <GoDotFill />
-            <p>Đã nghỉ việc</p>
+            <p>Nghỉ phép</p>
           </span>
         ),
     },
@@ -82,21 +71,21 @@ export default function DSBacSi(props: ListRoomInterface) {
   ];
   //get data doctor
   const dispatch = useAppDispatch();
-  const ListDoctors = useAppSelector(state => state.Doctor.Doctor);
+  const ListDoctors = useAppSelector(state => state.Doctor.Doctors);
   useEffect(() => {
-    dispatch(GetDataDoctors());
+    dispatch(GetAllDoctor());
   }, [dispatch]);
 
   const [inputSearch, setInputSearch] = useState<string>('');
   const [newList, setNewList] = useState<DoctorsInterface[]>([]);
   //filter data
-  //   useEffect(() => {
-  //     if (ListRooms.length > 0) {
-  //       const listSort = [...ListRooms].sort((a, b) => (a.roomID > b.roomID ? 1 : -1));
-  //       const newSearchText = listSort.filter(room => room.roomID.includes(inputSearch));
-  //       setNewList(newSearchText);
-  //     }
-  //   }, [inputSearch, ListRooms]);
+  useEffect(() => {
+    if (ListDoctors.length > 0) {
+      const listSort = [...ListDoctors].sort((a, b) => (a.key > b.key ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.doctorName.includes(inputSearch));
+      setNewList(newSearchText);
+    }
+  }, [inputSearch, ListDoctors]);
 
   return (
     <div className="col-10 d-flex position-relative">
@@ -105,16 +94,16 @@ export default function DSBacSi(props: ListRoomInterface) {
         <h3>Danh sách bác sĩ</h3>
         <div className="navbar-DS-bacSi d-flex ms-4">
           <div className="mt-2">
-            <p>Tìm kiếm mã bác sĩ</p>
+            <p>Tìm kiếm bác sĩ</p>
             <InputSearch
               HandleInputSearch={e => setInputSearch(e.target.value)}
               width={400}
-              placeholder="Nhập mã bác sĩ"
+              placeholder="Nhập tên bác sĩ"
             />
           </div>
         </div>
         <div className="list-DS-bacSi m-4 ">
-          <CustomTable data={ListDoctors} columns={columns} />
+          <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div

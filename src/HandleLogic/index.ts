@@ -1,5 +1,6 @@
-import { AccountInferface } from '../@types';
+// import { AccountInferface } from '../@types';
 import dayjs from 'dayjs';
+import { AccountInferface } from '../@types/IUser';
 
 export const HandleCheckLogin = (userName: string, password: string, data: AccountInferface[]) => {
   const checkUser = data.find(data => data.userName === userName);

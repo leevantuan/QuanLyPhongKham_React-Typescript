@@ -3,16 +3,16 @@ import ForgetImg from '../../../shared/assets/forgetImg.png';
 import CheckEmail from '../../../shared/components/forgetPassword/checkEmail';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
-import { AccountLogin } from '../../../core/redux';
+// import { AccountLogin } from '../../../core/redux';
 import ResetPassword from '../../../shared/components/forgetPassword/resetPassword';
 import { toast } from 'react-toastify';
 
 export default function ViewForgetPassword() {
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.Account.Account);
+  const InfoAccount = useAppSelector(state => state.User.User);
 
   useEffect(() => {
-    dispatch(AccountLogin());
+    // dispatch(AccountLogin());
   }, [dispatch]);
 
   const [findIdAccount, setFindIdAccount] = useState<string>('');
@@ -21,16 +21,16 @@ export default function ViewForgetPassword() {
   const [message, setMessage] = useState<string>('');
 
   const HandleClickContinue = (emailInput: string) => {
-    const checkEmail = InfoAccount.find(account => account.email === emailInput);
-    if (checkEmail) {
-      setFindIdAccount(checkEmail.key);
-      setOpenResetPassword(true);
-      setActiveBorder(false);
-    } else {
-      toast.error('Email không đúng');
-      setActiveBorder(true);
-      setMessage('Email không đúng vui lòng nhập lại');
-    }
+    // const checkEmail = InfoAccount.find(account => account.email === emailInput);
+    // if (checkEmail) {
+    //   setFindIdAccount(checkEmail.key);
+    //   setOpenResetPassword(true);
+    //   setActiveBorder(false);
+    // } else {
+    //   toast.error('Email không đúng');
+    //   setActiveBorder(true);
+    //   setMessage('Email không đúng vui lòng nhập lại');
+    // }
   };
 
   return (

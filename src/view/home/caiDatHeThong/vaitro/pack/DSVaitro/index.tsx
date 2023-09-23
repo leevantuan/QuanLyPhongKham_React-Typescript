@@ -2,16 +2,19 @@ import { MdAddBox } from 'react-icons/md';
 import './styles.scss';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../../shared/hooks/customRedux';
-import { AccountInferface, DSVaiTroInterface, RoleInterface } from '../../../../../../@types';
+import { DSVaiTroInterface } from '../../../../../../@types';
 import { ColumnsType } from 'antd/es/table';
 import NavBar from '../../../../../../layout/navBar';
 import InputSearch from '../../../../../../shared/components/inputSearch';
 import CustomTable from '../../../../../../shared/components/table';
-import { AccountLogin, GetDataRoles } from '../../../../../../core/redux';
+import { RoleInterface } from '../../../../../../@types/IRole';
+import { GetAllRole } from '../../../../../../core/redux/Role';
+import { AccountInferface } from '../../../../../../@types/IUser';
+import { GetAllAccount } from '../../../../../../core/redux/user';
 
 export default function DSVaiTro(props: DSVaiTroInterface) {
-  const Count = (countName: string, data: AccountInferface[]) => {
-    const listData = data.filter(data => data.role === countName);
+  const Count = (key: string, data: AccountInferface[]) => {
+    const listData = data.filter(data => data.roleId === key);
     return listData.length;
   };
   //colunms device
@@ -24,7 +27,7 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
     {
       key: 'count',
       title: 'Số người dùng',
-      render: (_, record) => <p onClick={() => {}}>{Count(record.roleName, ListAccounts)}</p>,
+      render: (_, record) => <p>{Count(record.key, ListAccounts)}</p>,
     },
     {
       key: 'describe',
@@ -43,15 +46,25 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
     },
   ];
   const dispatch = useAppDispatch();
-  const ListRoles = useAppSelector(state => state.Role.Role);
-  const ListAccounts = useAppSelector(state => state.Account.Account);
+  const ListRoles = useAppSelector(state => state.Role.Roles);
+  const ListAccounts = useAppSelector(state => state.Account.Accounts);
 
   const [inputSearch, setInputSearch] = useState<string>('');
+  const [newList, setNewList] = useState<RoleInterface[]>();
 
   useEffect(() => {
-    dispatch(GetDataRoles());
-    dispatch(AccountLogin());
+    dispatch(GetAllRole());
+    dispatch(GetAllAccount());
   }, [dispatch]);
+
+  //filter data
+  useEffect(() => {
+    if (ListRoles.length > 0) {
+      const listSort = [...ListRoles].sort((a, b) => (a.key > b.key ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.roleName.includes(inputSearch));
+      setNewList(newSearchText);
+    }
+  }, [inputSearch, ListRoles]);
 
   return (
     <div className="col-10 d-flex position-relative">
@@ -69,7 +82,7 @@ export default function DSVaiTro(props: DSVaiTroInterface) {
           </div>
         </div>
         <div className="list-DS-VaiTro m-4 ">
-          <CustomTable data={ListRoles} columns={columns} />
+          <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div

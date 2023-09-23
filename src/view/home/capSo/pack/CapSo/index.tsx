@@ -3,7 +3,7 @@ import NavBar from '../../../../../layout/navBar';
 import './styles.scss';
 import CustomSelect from '../../../../../shared/components/select';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
-import { GetDataServices } from '../../../../../core/redux';
+// import { GetDataServices } from '../../../../../core/redux';
 import { AddDataCapSoInterface } from '../../../../../@types';
 import moment from 'moment';
 // import { NewNumber } from '../../../../../HandleLogic';
@@ -12,7 +12,7 @@ export default function CapSo(props: AddDataCapSoInterface) {
   const dateNow = moment().format('DD/MM/YYYY');
   const datTimeNow = new Date();
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListServices = useAppSelector(state => state.Service.Services);
   // const ListDetailServices = useAppSelector(state => state.ServiceDetail.ServiceDetail);
 
   const [newListService, setNewListService] = useState<string[]>([]);
@@ -21,25 +21,25 @@ export default function CapSo(props: AddDataCapSoInterface) {
   const [serviceId, setServiceId] = useState<string>('');
   //get data Services
   useEffect(() => {
-    dispatch(GetDataServices());
+    // dispatch(GetDataServices());
   }, [dispatch]);
 
-  useEffect(() => {
-    const serviceName = ListServices.map(service => service.serviceName);
-    if (serviceName) {
-      setNewListService(serviceName);
-      setChooseService(serviceName[0]);
-    }
-  }, [ListServices]);
-  //check service ID
-  useEffect(() => {
-    if (chooseService && ListServices) {
-      const checkId = ListServices.find(service => service.serviceName === chooseService);
-      if (checkId) {
-        setServiceId(checkId.serviceId);
-      }
-    }
-  }, [ListServices, chooseService]);
+  // useEffect(() => {
+  //   const serviceName = ListServices.map(service => service.serviceName);
+  //   if (serviceName) {
+  //     setNewListService(serviceName);
+  //     setChooseService(serviceName[0]);
+  //   }
+  // }, [ListServices]);
+  // //check service ID
+  // useEffect(() => {
+  //   if (chooseService && ListServices) {
+  //     const checkId = ListServices.find(service => service.serviceName === chooseService);
+  //     if (checkId) {
+  //       setServiceId(checkId.serviceId);
+  //     }
+  //   }
+  // }, [ListServices, chooseService]);
   //check cap so STT
   // useEffect(() => {
   //   if (ListDetailServices) {

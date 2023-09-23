@@ -4,18 +4,19 @@ import { Input } from 'antd';
 import { Checkbox, Col, Row } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import NavBar from '../../../../../../layout/navBar';
-import { RoleInterface, UpdateModalRoleInterface } from '../../../../../../@types';
-import { GetDataRoles } from '../../../../../../core/redux';
+import { UpdateModalRoleInterface } from '../../../../../../@types';
+// import { GetDataRoles } from '../../../../../../core/redux';
 import { useAppDispatch, useAppSelector } from '../../../../../../shared/hooks/customRedux';
+import { RoleInterface } from '../../../../../../@types/IRole';
 
 const { TextArea } = Input;
 
 export default function CapNhapVaiTro(props: UpdateModalRoleInterface) {
   const dispatch = useAppDispatch();
-  const ListRoles = useAppSelector(state => state.Role.Role);
+  const ListRoles = useAppSelector(state => state.Role.Roles);
 
   useEffect(() => {
-    dispatch(GetDataRoles());
+    // dispatch(GetDataRoles());
   }, [dispatch]);
 
   const [roleName, setRoleName] = useState<string>('');
@@ -24,23 +25,23 @@ export default function CapNhapVaiTro(props: UpdateModalRoleInterface) {
   const [authorization2, setAuthorization2] = useState<string[]>([]);
   const [roles, setRoles] = useState<RoleInterface>();
 
-  useEffect(() => {
-    if (props.id) {
-      const data = ListRoles.find(role => role.key === props.id);
-      if (data) {
-        setRoles(data);
-      }
-    }
-  }, [props.id, ListRoles]);
+  // useEffect(() => {
+  //   if (props.id) {
+  //     const data = ListRoles.find(role => role.key === props.id);
+  //     if (data) {
+  //       setRoles(data);
+  //     }
+  //   }
+  // }, [props.id, ListRoles]);
 
-  useEffect(() => {
-    if (roles) {
-      setRoleName(roles.roleName);
-      setDescribe(roles.describe);
-      setAuthorization(roles.authorization);
-      setAuthorization2(roles.authorization2);
-    }
-  }, [roles]);
+  // useEffect(() => {
+  //   if (roles) {
+  //     setRoleName(roles.roleName);
+  //     setDescribe(roles.describe);
+  //     setAuthorization(roles.authorization);
+  //     setAuthorization2(roles.authorization2);
+  //   }
+  // }, [roles]);
 
   const onChange = (checkedValues: CheckboxValueType[]) => {
     if (checkedValues.find(value => value === '0') || checkedValues.length === 3) {

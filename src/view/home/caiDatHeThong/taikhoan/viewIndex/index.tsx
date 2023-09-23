@@ -3,43 +3,40 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import DSTaiKhoan from '../pack/DSTaiKhoan';
 import ThemTaiKhoan from '../pack/themTaiKhoan';
 import CapNhapTaiKhoan from '../pack/capNhapTaiKhoan';
-import {
-  AccountLogin,
-  AddDataAccount,
-  GetDataRoles,
-  UpdateDataAccounts,
-} from '../../../../../core/redux';
-import {
-  AccountInferface,
-  AddDataAccountInferface,
-  UpdateDataAccountInferface,
-} from '../../../../../@types';
-import { isAuthorization1 } from '../../../../../shared/isLogin';
+// import {
+//   AccountLogin,
+//   AddDataAccount,
+//   GetDataRoles,
+//   UpdateDataAccounts,
+// } from '../../../../../core/redux';
+import { AddDataAccountInferface, UpdateDataAccountInferface } from '../../../../../@types';
+// import { isAuthorization1 } from '../../../../../shared/isLogin';
+import { AccountInferface } from '../../../../../@types/IUser';
 
 export default function ViewTaiKhoan() {
   const dispatch = useAppDispatch();
   //check authorization
-  const InfoAccount = useAppSelector(state => state.Account.Account);
-  const DataRole = useAppSelector(state => state.Role.Role);
+  const InfoAccount = useAppSelector(state => state.User.User);
+  const DataRole = useAppSelector(state => state.Role.Roles);
   useEffect(() => {
-    dispatch(AccountLogin());
-    dispatch(GetDataRoles());
+    // dispatch(AccountLogin());
+    // dispatch(GetDataRoles());
   }, [dispatch]);
   const [account, setAccount] = useState<AccountInferface>();
-  const [checkAuth, setCheckAuth] = useState<boolean>();
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.key === token);
-    if (findAccount) {
-      setAccount(findAccount);
-    }
-  }, [InfoAccount]);
-  useEffect(() => {
-    if (account) {
-      const check = isAuthorization1('1', account, DataRole);
-      setCheckAuth(check);
-    }
-  }, [account, DataRole]);
+  const [checkAuth, setCheckAuth] = useState<boolean>(true);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('tokenUser');
+  //   const findAccount = InfoAccount.find(acc => acc.key === token);
+  //   if (findAccount) {
+  //     setAccount(findAccount);
+  //   }
+  // }, [InfoAccount]);
+  // useEffect(() => {
+  //   if (account) {
+  //     const check = isAuthorization1('1', account, DataRole);
+  //     setCheckAuth(check);
+  //   }
+  // }, [account, DataRole]);
   //end
 
   const [page, setPage] = useState<string>('0');
@@ -69,7 +66,8 @@ export default function ViewTaiKhoan() {
               role: string,
               status: string,
             ) => {
-              const checkLogin = InfoAccount.find(acc => acc.userName === userName);
+              // const checkLogin = InfoAccount.find(acc => acc.userName === userName);
+              const checkLogin = true;
               if (checkLogin) {
                 alert('Tên đăng nhập đã được sử dụng');
               } else {
@@ -92,7 +90,7 @@ export default function ViewTaiKhoan() {
                       img: '',
                       status: status === 'true' ? true : false,
                     };
-                    dispatch(AddDataAccount(newData));
+                    // dispatch(AddDataAccount(newData));
                     alert('Add success');
                     setPage('0');
                   } else {
@@ -138,7 +136,7 @@ export default function ViewTaiKhoan() {
                     img: '',
                     status: status === 'true' ? true : false,
                   };
-                  dispatch(UpdateDataAccounts(newData));
+                  // dispatch(UpdateDataAccounts(newData));
                   alert('Update success');
                   setPage('0');
                 } else {

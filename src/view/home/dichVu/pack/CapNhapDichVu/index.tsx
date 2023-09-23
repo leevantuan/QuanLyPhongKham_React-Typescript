@@ -1,50 +1,42 @@
 import { useEffect, useState } from 'react';
 import NavBar from '../../../../../layout/navBar';
 import './styles.scss';
-import { Input } from 'antd';
-import { Checkbox, Col, Row } from 'antd';
-import type { CheckboxValueType } from 'antd/es/checkbox/Group';
-import { ServiceInterface, UpdateServiceInterface } from '../../../../../@types';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
-import { GetDataServices } from '../../../../../core/redux';
+import { UpdateServiceModelInterface } from '../../../../../@types/IService';
+import { GetAllService } from '../../../../../core/redux/Service';
+import { GetAllRoom } from '../../../../../core/redux/room';
 
-const { TextArea } = Input;
-
-export default function CapNhapDichVu(props: UpdateServiceInterface) {
+export default function CapNhapDichVu(props: UpdateServiceModelInterface) {
   const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListServices = useAppSelector(state => state.Service.Services);
+  const ListRooms = useAppSelector(state => state.Room.Rooms);
   //get data Services
   useEffect(() => {
-    dispatch(GetDataServices());
+    dispatch(GetAllService());
+    dispatch(GetAllRoom());
   }, [dispatch]);
-  //find service
-  const [services, setServices] = useState<ServiceInterface>();
 
   const [serviceId, setServiceId] = useState<string>('');
   const [serviceName, setServiceName] = useState<string>('');
-  const [describe, setDescribe] = useState<string>('');
-  const [rule, setRule] = useState<string[]>([]);
+  const [price, setPrice] = useState<string>('');
+  const [status, setStatus] = useState<string>('');
+  const [roomId, setRoomId] = useState<string>('');
 
+  //set data
   useEffect(() => {
     if (props.id) {
-      const newList = ListServices.find(service => service.key === props.id);
-      setServices(newList);
+      const service = ListServices.find(ser => ser.key === props.id);
+      if (service) {
+        setServiceId(service.key);
+        setServiceName(service.serviceName);
+        setPrice(service.price);
+        setRoomId(service.roomId);
+        const serviceToString = service.status.toString();
+        setStatus(serviceToString);
+      }
     }
   }, [ListServices, props.id]);
-  //set value
-  useEffect(() => {
-    if (services) {
-      setServiceId(services.serviceId);
-      setServiceName(services.serviceName);
-      // setDescribe(services.describe);
-      setRule(services.rule);
-    }
-  }, [services]);
 
-  const onChange = (checkedValues: CheckboxValueType[]) => {
-    const newCheckList: string[] = checkedValues as string[];
-    setRule(newCheckList);
-  };
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Phòng Khám" />
@@ -56,12 +48,7 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
             <div className="col-12">
               <div className="col-12 mb-3">
                 <label className="form-label">Mã dịch vụ</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={serviceId}
-                  onChange={e => setServiceId(e.target.value)}
-                />
+                <input type="text" className="form-control" value={serviceId} disabled />
               </div>
               <div className="col-12 mb-3">
                 <label className="form-label">Tên dịch vụ</label>
@@ -74,69 +61,45 @@ export default function CapNhapDichVu(props: UpdateServiceInterface) {
               </div>
               <div className="col-12 mb-3">
                 <label className="form-label">Trạng thái</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={serviceName}
-                  onChange={e => setServiceName(e.target.value)}
-                />
+                <br />
+                <select value={status} onChange={e => setStatus(e.target.value)}>
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
               </div>
             </div>
             <div className="col-12">
               <div className="mb-3">
                 <label className="form-label">Số phòng</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={serviceName}
-                  onChange={e => setServiceName(e.target.value)}
-                />
+                <br />
+                <select value={roomId} onChange={e => setRoomId(e.target.value)}>
+                  {ListRooms.map(room => {
+                    return (
+                      <option value={room.key} key={room.key}>
+                        {room.roomName}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <div className="mb-3">
                 <label className="form-label">Giá dịch vụ</label>
                 <input
                   type="text"
                   className="form-control"
-                  value={serviceName}
-                  onChange={e => setServiceName(e.target.value)}
+                  value={price}
+                  onChange={e => setPrice(e.target.value)}
                 />
               </div>
             </div>
           </form>
-          <h5 className="mt-3">Quy tắc cấp số</h5>
-          <div className="choose-quy-tac">
-            <Checkbox.Group style={{ width: '100%' }} onChange={onChange} value={rule}>
-              <Row>
-                <Col>
-                  <Checkbox value="1">
-                    <p>Tăng tự động từ:</p>
-                    <input value={'0001'} type="text" disabled /> đến{' '}
-                    <input value={'9999'} type="text" disabled />
-                  </Checkbox>
-                </Col>
-                <Col>
-                  <Checkbox value="2">
-                    <p>Prefix</p>
-                    <input value={'0001'} type="text" disabled />
-                  </Checkbox>
-                </Col>
-                <Col>
-                  <Checkbox value="3">
-                    <p>Surfix</p>
-                    <input value={'0001'} type="text" disabled />
-                  </Checkbox>
-                </Col>
-                <Col>
-                  <Checkbox value="4">Reset mỗi ngày</Checkbox>
-                </Col>
-              </Row>
-            </Checkbox.Group>
-          </div>
         </div>
         <div className="d-flex justify-content-center">
           <button onClick={() => props.HandleClickCancelUpdateService()}>Hủy bỏ</button>
           <button
-            onClick={() => props.HandleClickOkUpdateService(serviceId, serviceName, describe, rule)}
+            onClick={() =>
+              props.HandleClickOkUpdateService(serviceId, serviceName, price, status, roomId)
+            }
           >
             Cập nhập dịch vụ
           </button>

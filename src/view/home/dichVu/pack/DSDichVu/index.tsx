@@ -6,39 +6,66 @@ import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/cust
 import './styles.scss';
 import { MdAddBox } from 'react-icons/md';
 import { ColumnsType } from 'antd/es/table';
-import { ListServiceInterface, RoomsInterface, ServiceInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { GetDataServices } from '../../../../../core/redux';
+import { ListServiceModelInterface, ServiceInterface } from '../../../../../@types/IService';
+import { GetAllService } from '../../../../../core/redux/Service';
+import { GetAllRoom } from '../../../../../core/redux/room';
 
-export default function DSDichVu(props: ListServiceInterface) {
+export default function DSDichVu(props: ListServiceModelInterface) {
+  //get data servies
+  const dispatch = useAppDispatch();
+  const ListServices = useAppSelector(state => state.Service.Services);
+  const AllRoom = useAppSelector(state => state.Room.Rooms);
+  useEffect(() => {
+    dispatch(GetAllService());
+    dispatch(GetAllRoom());
+  }, [dispatch, props.reset]);
+
+  const [inputSearch, setInputSearch] = useState<string>('');
+  const [newList, setNewList] = useState<ServiceInterface[]>([]);
+  //filter data
+  useEffect(() => {
+    if (ListServices.length > 0) {
+      const listSort = [...ListServices].sort((a, b) => (a.roomId > b.roomId ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.serviceName.includes(inputSearch));
+      setNewList(newSearchText);
+    }
+  }, [inputSearch, ListServices]);
+
   //colunms services
   const columns: ColumnsType<ServiceInterface> = [
-    {
-      key: 'serviceId',
-      title: 'Mã dịch vụ',
-      dataIndex: 'serviceId',
-    },
     {
       key: 'serviceName',
       title: 'Tên dịch vụ',
       dataIndex: 'serviceName',
     },
     {
+      title: 'Số phòng',
+      render: (_, record) =>
+        AllRoom.map((room, index) => {
+          if (room.key === record.roomId) {
+            if (room.status === true) {
+              return (
+                <p className="mt-1 mb-1" key={index}>
+                  - P.{room.roomName}
+                </p>
+              );
+            } else {
+              return (
+                <p className="mt-1 mb-1 text-danger fw-bold" key={index}>
+                  - P.{room.roomName} ( Phòng không sẵn sàng )
+                </p>
+              );
+            }
+          } else {
+            return null;
+          }
+        }),
+    },
+    {
       key: 'price',
       title: 'Giá dịch vụ',
       render: (_, record) => <p className="mt-1 mb-1">{record.price} vnd</p>,
-    },
-    {
-      key: 'rooms',
-      title: 'Số phòng',
-      render: (_, record) =>
-        record.rooms.map((room, index) => {
-          return (
-            <p className="mt-1 mb-1" key={index}>
-              - P.{room}
-            </p>
-          );
-        }),
     },
     {
       key: 'status',
@@ -57,15 +84,6 @@ export default function DSDichVu(props: ListServiceInterface) {
         ),
     },
     {
-      key: 'description',
-      title: '',
-      render: (_, record) => (
-        <p className="text-link" onClick={() => props.HandleClickDescriptionService(record.key)}>
-          Chi tiết
-        </p>
-      ),
-    },
-    {
       key: 'update',
       title: '',
       render: (_, record) => (
@@ -75,23 +93,6 @@ export default function DSDichVu(props: ListServiceInterface) {
       ),
     },
   ];
-  //get data servies
-  const dispatch = useAppDispatch();
-  const ListServices = useAppSelector(state => state.Service.Service);
-  useEffect(() => {
-    dispatch(GetDataServices());
-  }, [dispatch]);
-
-  const [inputSearch, setInputSearch] = useState<string>('');
-  const [newList, setNewList] = useState<ServiceInterface[]>([]);
-  //filter data
-  useEffect(() => {
-    if (ListServices.length > 0) {
-      const listSort = [...ListServices].sort((a, b) => (a.serviceId > b.serviceId ? 1 : -1));
-      const newSearchText = listSort.filter(room => room.serviceId.includes(inputSearch));
-      setNewList(newSearchText);
-    }
-  }, [inputSearch, ListServices]);
 
   return (
     <div className="col-10 d-flex position-relative">

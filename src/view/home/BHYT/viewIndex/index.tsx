@@ -9,6 +9,7 @@ export default function ViewBHYT() {
     <>
       {page === '0' ? (
         <DSBHYT
+          reset={true}
           HandleClickAddRoom={() => {}}
           HandleClickDescription={() => setPage('2')}
           HandleClickUpdate={() => setPage('1')}

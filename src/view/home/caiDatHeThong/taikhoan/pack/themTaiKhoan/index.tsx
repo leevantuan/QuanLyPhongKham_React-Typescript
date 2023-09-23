@@ -3,7 +3,7 @@ import './styles.scss';
 import NavBar from '../../../../../../layout/navBar';
 import { AddTaiKhoanInterface } from '../../../../../../@types';
 import InputPassword from '../../../../../../shared/components/input/inputPassword';
-import { GetDataRoles } from '../../../../../../core/redux';
+// import { GetDataRoles } from '../../../../../../core/redux';
 import { useAppDispatch, useAppSelector } from '../../../../../../shared/hooks/customRedux';
 
 export default function ThemTaiKhoan(props: AddTaiKhoanInterface) {
@@ -18,22 +18,22 @@ export default function ThemTaiKhoan(props: AddTaiKhoanInterface) {
   const [listRole, setListRole] = useState<string[]>([]);
 
   const dispatch = useAppDispatch();
-  const ListRoles = useAppSelector(state => state.Role.Role);
+  const ListRoles = useAppSelector(state => state.Role.Roles);
 
   useEffect(() => {
-    dispatch(GetDataRoles());
+    // dispatch(GetDataRoles());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (ListRoles) {
-      const data = ListRoles.map(role => role.roleName);
-      if (data) {
-        const defaultList = ['Chọn vai trò'];
-        const newList = defaultList.concat(data);
-        setListRole(newList);
-      }
-    }
-  }, [ListRoles]);
+  // useEffect(() => {
+  //   if (ListRoles) {
+  //     const data = ListRoles.map(role => role.roleName);
+  //     if (data) {
+  //       const defaultList = ['Chọn vai trò'];
+  //       const newList = defaultList.concat(data);
+  //       setListRole(newList);
+  //     }
+  //   }
+  // }, [ListRoles]);
 
   return (
     <div className="col-10 d-flex position-relative">

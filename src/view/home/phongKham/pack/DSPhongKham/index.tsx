@@ -4,47 +4,89 @@ import InputSearch from '../../../../../shared/components/inputSearch';
 import CustomTable from '../../../../../shared/components/table';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
-import { MdAddBox } from 'react-icons/md';
 import { ColumnsType } from 'antd/es/table';
-import { ListRoomInterface, RoomsInterface } from '../../../../../@types';
 import { GoDotFill } from 'react-icons/go';
-import { GetDataRooms } from '../../../../../core/redux';
+import { GetAllRoom } from '../../../../../core/redux/room';
+import { ListRoomModelInterface, RoomsInterface } from '../../../../../@types/IRoom';
+import { GetAllService } from '../../../../../core/redux/Service';
+import { GetAllDoctor } from '../../../../../core/redux/Doctor';
+import { DoctorsInterface } from '../../../../../@types/IDoctor';
+import { ServiceInterface } from '../../../../../@types/IService';
 
-export default function DSPhongKham(props: ListRoomInterface) {
+export default function DSPhongKham(props: ListRoomModelInterface) {
+  //get data room API
+  const dispatch = useAppDispatch();
+  const ListRooms = useAppSelector(state => state.Room.Rooms);
+  const AllDoctor = useAppSelector(state => state.Doctor.Doctors);
+  const AllService = useAppSelector(state => state.Service.Services);
+  useEffect(() => {
+    dispatch(GetAllRoom());
+    dispatch(GetAllService());
+    dispatch(GetAllDoctor());
+  }, [dispatch, props.reset]);
+
+  const [listDataDoctor, setListDataDoctor] = useState<DoctorsInterface[]>([]);
+  const [listDataService, setListDataService] = useState<ServiceInterface[]>([]);
+  const [inputSearch, setInputSearch] = useState<string>('');
+  const [newList, setNewList] = useState<RoomsInterface[]>([]);
+  //set data true
+  useEffect(() => {
+    if (AllDoctor) {
+      const filterData = AllDoctor.filter(doctor => doctor.status === true);
+      if (filterData) {
+        setListDataDoctor(filterData);
+      }
+    }
+  }, [AllDoctor]);
+  useEffect(() => {
+    if (AllService) {
+      const filterData = AllService.filter(service => service.status === true);
+      if (filterData) {
+        setListDataService(filterData);
+      }
+    }
+  }, [AllService]);
+
+  //filter data
+  useEffect(() => {
+    if (ListRooms.length > 0) {
+      const listSort = [...ListRooms].sort((a, b) => (a.roomName > b.roomName ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.roomName.includes(inputSearch));
+      setNewList(newSearchText);
+    }
+  }, [inputSearch, ListRooms]);
+
   //colunms rooms
   const columns: ColumnsType<RoomsInterface> = [
     {
-      key: 'roomID',
-      title: 'Mã phòng',
-      dataIndex: 'roomID',
-    },
-    {
-      key: 'roomID',
+      key: 'roomName',
       title: 'Số phòng',
-      dataIndex: 'roomID',
+      dataIndex: 'roomName',
     },
     {
-      key: 'service',
       title: 'Dịch vụ',
       render: (_, record) =>
-        record.service.map((service, index) => {
-          return (
-            <p className="mt-1 mb-1" key={index}>
-              - {service}
-            </p>
-          );
+        listDataService.map((service, index) => {
+          if (service.roomId === record.key) {
+            return (
+              <p className="mt-1 mb-1" key={index}>
+                DV. {service.serviceName}
+              </p>
+            );
+          } else return null;
         }),
     },
     {
-      key: 'doctor',
       title: 'Bác sĩ',
       render: (_, record) =>
-        record.doctor.map((doctor, index) => {
-          return (
-            <p className="mt-1 mb-1" key={index}>
-              BS. {doctor}
-            </p>
-          );
+        listDataDoctor.map((doctor, index) => {
+          if (doctor.roomId === record.key) {
+            return (
+              <p className="mt-1 mb-1" key={index}>
+                BS. {doctor.doctorName}
+              </p>
+            );
+          } else return null;
         }),
     },
     {
@@ -64,15 +106,6 @@ export default function DSPhongKham(props: ListRoomInterface) {
         ),
     },
     {
-      key: 'description',
-      title: '',
-      render: (_, record) => (
-        <p className="text-link" onClick={() => props.HandleClickDescription(record.key)}>
-          Chi tiết
-        </p>
-      ),
-    },
-    {
       key: 'update',
       title: '',
       render: (_, record) => (
@@ -82,23 +115,6 @@ export default function DSPhongKham(props: ListRoomInterface) {
       ),
     },
   ];
-  //get data device
-  const dispatch = useAppDispatch();
-  const ListRooms = useAppSelector(state => state.Room.Room);
-  useEffect(() => {
-    dispatch(GetDataRooms());
-  }, [dispatch]);
-
-  const [inputSearch, setInputSearch] = useState<string>('');
-  const [newList, setNewList] = useState<RoomsInterface[]>([]);
-  //filter data
-  useEffect(() => {
-    if (ListRooms.length > 0) {
-      const listSort = [...ListRooms].sort((a, b) => (a.roomID > b.roomID ? 1 : -1));
-      const newSearchText = listSort.filter(room => room.roomID.includes(inputSearch));
-      setNewList(newSearchText);
-    }
-  }, [inputSearch, ListRooms]);
 
   return (
     <div className="col-10 d-flex position-relative">
@@ -118,13 +134,6 @@ export default function DSPhongKham(props: ListRoomInterface) {
         <div className="list-DS-phongKham m-4 ">
           <CustomTable data={newList} columns={columns} />
         </div>
-      </div>
-      <div
-        className="button-add-room position-absolute d-flex"
-        onClick={() => props.HandleClickAddRoom()}
-      >
-        <MdAddBox />
-        <p> Thêm phòng khám</p>
       </div>
     </div>
   );

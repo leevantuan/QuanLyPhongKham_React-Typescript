@@ -1,75 +1,99 @@
 import { useEffect, useState } from 'react';
-import { DescriptionRoomInterface, RoomsInterface } from '../../../../../@types';
+import { DescriptionRoomInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
 import { MdEditSquare } from 'react-icons/md';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { GetDataRooms } from '../../../../../core/redux';
+import { GetAllDoctor } from '../../../../../core/redux/Doctor';
+import { DoctorsInterface } from '../../../../../@types/IDoctor';
+import { GetAllRoom } from '../../../../../core/redux/room';
 
 export default function ChiTietBacSi(props: DescriptionRoomInterface) {
   const dispatch = useAppDispatch();
-  const ListRooms = useAppSelector(state => state.Room.Room);
-  //get data room
+  const ListDoctor = useAppSelector(state => state.Doctor.Doctors);
+  const ListRoom = useAppSelector(state => state.Room.Rooms);
   useEffect(() => {
-    dispatch(GetDataRooms());
+    dispatch(GetAllDoctor());
+    dispatch(GetAllRoom());
   }, [dispatch]);
 
-  const [rooms, setRooms] = useState<RoomsInterface[]>([]);
-  //find room
+  const [doctor, setDoctor] = useState<DoctorsInterface[]>([]);
+  const [room, setRoom] = useState<string>('');
+  // find room
   useEffect(() => {
     if (props.id) {
-      const room = ListRooms.filter(room => room.key === props.id);
-      setRooms(room);
+      const doctor = ListDoctor.filter(doctor => doctor.key === props.id);
+      if (doctor) {
+        setDoctor(doctor);
+      }
     }
-  }, [props.id, ListRooms]);
+  }, [props.id, ListDoctor]);
+  useEffect(() => {
+    if (props.id) {
+      const doctor = ListDoctor.find(doctor => doctor.key === props.id);
+      if (doctor) {
+        const findRoom = ListRoom.find(room => room.key === doctor.roomId);
+        if (findRoom) {
+          setRoom(findRoom.roomName);
+        }
+      }
+    }
+  }, [props.id, ListDoctor, ListRoom]);
+
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Bác sĩ" />
       <div className="content-description-room">
         <h3>Chi tiết bác sĩ</h3>
         <div className="form-chi-tiet-room">
-          <h5>Thông tin bác sĩ</h5>
-          {/* {device.map(device => {
+          <h5 className="pb-4">Thông tin bác sĩ</h5>
+          {doctor.map(doctor => {
             return (
-              <div key={device.key}>
+              <div key={doctor.key}>
                 <div className="d-flex">
                   <div className="d-flex">
-                    <label>Mã thiết bị:</label>
-                    <p>{device?.deviceId}</p>
+                    <label>Tên bác sĩ:</label>
+                    <p>{doctor?.doctorName}</p>
                   </div>
                   <div className="d-flex">
-                    <label>Loại thiết bị:</label>
-                    <p>{device?.deviceType}</p>
+                    <label>Số điện thoại:</label>
+                    <p>{doctor?.phoneNumber}</p>
                   </div>
                 </div>
                 <div className="d-flex">
                   <div className="d-flex">
-                    <label>Tên thiết bị:</label>
-                    <p>{device?.deviceName}</p>
+                    <label>Ngày sinh:</label>
+                    <p>{doctor?.birthDay}</p>
                   </div>
                   <div className="d-flex">
-                    <label>Tên đăng nhập:</label>
-                    <p>{device?.userName}</p>
+                    <label>Địa chỉ:</label>
+                    <p>{doctor?.address}</p>
                   </div>
                 </div>
                 <div className="d-flex">
                   <div className="d-flex">
-                    <label>Địa chỉ IP:</label>
-                    <p>{device?.addressIP}</p>
+                    <label>Chuyên môn:</label>
+                    <p>{doctor?.professtional}</p>
                   </div>
                   <div className="d-flex">
-                    <label>Mật Khẩu:</label>
-                    <p>{device?.password}</p>
+                    <label>Ngày vào làm:</label>
+                    <p>{doctor?.dateWork}</p>
                   </div>
                 </div>
-                <div>
-                  <label>Dịch vụ sử dụng:</label>
-                  <p>{device?.userService}</p>
+                <div className="d-flex">
+                  <div className="d-flex">
+                    <label>Trạng thái:</label>
+                    <p>{doctor?.status === true ? 'Đang làm việc' : 'Đang nghỉ phép'}</p>
+                  </div>
+                  <div className="d-flex">
+                    <label>Phòng làm việc:</label>
+                    <p>{room}</p>
+                  </div>
                 </div>
               </div>
             );
-          })} */}
+          })}
         </div>
       </div>
       <div

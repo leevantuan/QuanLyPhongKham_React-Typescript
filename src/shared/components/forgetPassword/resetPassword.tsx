@@ -6,7 +6,7 @@ import { ResetPasswordInterface, ResetPasswordType } from '../../../@types';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/customRedux';
-import { ResetPasswordData } from '../../../core/redux';
+// import { ResetPasswordData } from '../../../core/redux';
 
 export default function ResetPassword(props: ResetPasswordType) {
   let navigate = useNavigate();
@@ -23,7 +23,7 @@ export default function ResetPassword(props: ResetPasswordType) {
           AccountId: props.AccountId,
           password: comfirmPassword,
         };
-        dispatch(ResetPasswordData(newData));
+        // dispatch(ResetPasswordData(newData));
         toast.success('Mật khẩu đã được thay đổi');
         navigate('/', { replace: true });
       } else {

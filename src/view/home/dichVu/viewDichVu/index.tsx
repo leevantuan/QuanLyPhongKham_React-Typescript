@@ -1,68 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DanhSachDichVu from '../pack/DSDichVu';
 import ThemDichVu from '../pack/ThemDichVu';
-import ChiTietDichVu from '../pack/ChiTietDichVu';
 import CapNhapDichVu from '../pack/CapNhapDichVu';
-import {
-  AccountInferface,
-  AddDataServiceInterface,
-  UpdateDataServiceInterface,
-} from '../../../../@types';
-import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
-import {
-  AccountLogin,
-  AddDataServices,
-  GetDataRoles,
-  UpdateDataServices,
-} from '../../../../core/redux';
-import { isAuthorization1 } from '../../../../shared/isLogin';
+import { useAppDispatch } from '../../../../shared/hooks/customRedux';
+import { AddServiceInterface, ServiceInterface } from '../../../../@types/IService';
+import { CreateDataService, UpdateDataService } from '../../../../core/redux/Service';
 
 export default function ViewDichVu() {
-  const dateTimeNow = new Date();
-
-  const [userName, setUserName] = useState<string>('');
   const dispatch = useAppDispatch();
-
-  //check authorization
-  const InfoAccount = useAppSelector(state => state.Account.Account);
-  const DataRole = useAppSelector(state => state.Role.Role);
-  useEffect(() => {
-    dispatch(AccountLogin());
-    dispatch(GetDataRoles());
-  }, [dispatch]);
-  const [account, setAccount] = useState<AccountInferface>();
-  const [checkAuth, setCheckAuth] = useState<boolean>();
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.key === token);
-    if (findAccount) {
-      setAccount(findAccount);
-    }
-  }, [InfoAccount]);
-  useEffect(() => {
-    if (account) {
-      const check = isAuthorization1('2', account, DataRole);
-      setCheckAuth(check);
-    }
-  }, [account, DataRole]);
-  //end
-
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.key === token);
-    if (findAccount) {
-      setUserName(findAccount.userName);
-    }
-  }, [InfoAccount]);
+  const [checkAuth, setCheckAuth] = useState<boolean>(true);
 
   const [page, setPage] = useState<string>('0');
   const [id, setId] = useState<string>('');
+  const [reset, setReset] = useState<boolean>(false);
 
   if (checkAuth) {
     return (
       <>
         {page === '0' ? (
           <DanhSachDichVu
+            reset={reset}
             HandleClickAddService={() => setPage('1')}
             HandleClickDescriptionService={(id: string) => {
               setId(id);
@@ -76,54 +33,40 @@ export default function ViewDichVu() {
         ) : page === '1' ? (
           <ThemDichVu
             HandleClickCancelAddService={() => setPage('0')}
-            HandleClickOkAddService={(
-              serviceId: string,
-              serviceName: string,
-              describe: string,
-              rule: string[],
-            ) => {
-              if (serviceId || serviceName || describe || rule) {
-                const newData: AddDataServiceInterface = {
-                  serviceId: serviceId,
+            HandleClickOkAddService={(serviceName, price, status, roomId) => {
+              if (serviceName || price || status || roomId) {
+                const Data: AddServiceInterface = {
                   serviceName: serviceName,
-                  describe: describe,
-                  rule: rule,
+                  price: price,
+                  status: status,
+                  roomId: roomId,
                 };
-
-                dispatch(AddDataServices(newData));
-                alert('Add success');
+                if (window.confirm('Bạn có chắc chắc muốn thêm không?')) {
+                  dispatch(CreateDataService(Data));
+                  setReset(!reset);
+                }
                 setPage('0');
               } else {
                 alert('Vui lòng nhập đầy đủ thông tin');
               }
             }}
           />
-        ) : page === '2' ? (
-          <ChiTietDichVu
-            id={id}
-            HandleClickGoBack={() => setPage('0')}
-            HandleClickUpdate={() => setPage('3')}
-          />
         ) : (
           <CapNhapDichVu
             HandleClickCancelUpdateService={() => setPage('0')}
-            HandleClickOkUpdateService={(
-              serviceId: string,
-              serviceName: string,
-              describe: string,
-              rule: string[],
-            ) => {
-              if (serviceId || serviceName || describe || rule) {
-                const newData: UpdateDataServiceInterface = {
-                  key: id,
-                  serviceId: serviceId,
+            HandleClickOkUpdateService={(serviceId, serviceName, price, status, roomId) => {
+              if (serviceId || serviceName || price || status || roomId) {
+                const Data: ServiceInterface = {
+                  key: serviceId,
                   serviceName: serviceName,
-                  describe: describe,
-                  rule: rule,
+                  price: price,
+                  status: status === 'true' ? true : false,
+                  roomId: roomId,
                 };
-
-                dispatch(UpdateDataServices(newData));
-                alert('Update success');
+                if (window.confirm('Bạn có chắc chắc muốn sửa không?')) {
+                  dispatch(UpdateDataService(Data));
+                  setReset(!reset);
+                }
                 setPage('0');
               } else {
                 alert('Vui lòng nhập đầy đủ thông tin');

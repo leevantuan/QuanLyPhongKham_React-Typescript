@@ -1,14 +1,14 @@
 import './styles.scss';
 import React, { useEffect, useState } from 'react';
-import { AccountInferface, BDCapSoType } from '../../../@types';
+import { BDCapSoType } from '../../../@types';
 import BDCapSo from '../../../shared/components/dashboard/bdCapSo';
 import LineChart from '../../../shared/components/dashboard/chart/lineChart';
 import { Select } from 'antd';
 import NavBar from '../../../layout/navBar';
 import DatePicketDashboard from '../../../shared/components/dashboard/datePicket';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
-import { AccountLogin, GetDataRoles, GetDataServices } from '../../../core/redux';
-import { isAuthorization2 } from '../../../shared/isLogin';
+// import { AccountLogin, GetDataRoles, GetDataServices } from '../../../core/redux';
+// import { isAuthorization2 } from '../../../shared/isLogin';
 import moment from 'moment';
 import { SoSanhMonth, SoSanhMonthBefore } from '../../../HandleLogic';
 import CustomDoughnut from '../../../shared/components/dashboard/doughnut';
@@ -18,38 +18,39 @@ import { GoStack } from 'react-icons/go';
 import { BsDot } from 'react-icons/bs';
 import dayjs from 'dayjs';
 import DashBoardDoughnut from '../../../shared/components/dashboard/dashboardDoughnut';
+import { AccountInferface } from '../../../@types/IUser';
 export default function Dashboard() {
   // const dateNow = moment().format('DD/MM/YYYY');
   const dispatch = useAppDispatch();
   // const DataDetailService = useAppSelector(state => state.ServiceDetail.ServiceDetail);
-  const DataService = useAppSelector(state => state.Service.Service);
+  const DataService = useAppSelector(state => state.Service.Services);
   // const DataDevice = useAppSelector(state => state.Device.Device);
   //check authorization
-  const InfoAccount = useAppSelector(state => state.Account.Account);
-  const DataRole = useAppSelector(state => state.Role.Role);
+  const InfoAccount = useAppSelector(state => state.User.User);
+  const DataRole = useAppSelector(state => state.Role.Roles);
   useEffect(() => {
-    dispatch(AccountLogin());
-    dispatch(GetDataRoles());
+    // dispatch(AccountLogin());
+    // dispatch(GetDataRoles());
     // dispatch(GetDataServicDetail());
-    dispatch(GetDataServices());
+    // dispatch(GetDataServices());
     // dispatch(GetDataDevices());
     // dispatch(GetDataServicDetail());
   }, [dispatch]);
   const [account, setAccount] = useState<AccountInferface>();
-  const [checkAuth, setCheckAuth] = useState<boolean>();
-  useEffect(() => {
-    const token = localStorage.getItem('tokenUser');
-    const findAccount = InfoAccount.find(acc => acc.key === token);
-    if (findAccount) {
-      setAccount(findAccount);
-    }
-  }, [InfoAccount]);
-  useEffect(() => {
-    if (account) {
-      const check = isAuthorization2('3', account, DataRole);
-      setCheckAuth(check);
-    }
-  }, [account, DataRole]);
+  const [checkAuth, setCheckAuth] = useState<boolean>(true);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('tokenUser');
+  //   const findAccount = InfoAccount.find(acc => acc.key === token);
+  //   if (findAccount) {
+  //     setAccount(findAccount);
+  //   }
+  // }, [InfoAccount]);
+  // useEffect(() => {
+  //   if (account) {
+  //     const check = isAuthorization2('3', account, DataRole);
+  //     setCheckAuth(check);
+  //   }
+  // }, [account, DataRole]);
   //end
   //date picket
   const dateNowView = moment().format('DD MMM YYYY');

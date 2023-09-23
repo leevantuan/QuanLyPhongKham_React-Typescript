@@ -11,17 +11,18 @@ export interface InputTypeInterface {
 export interface ButtonTypeInterface {
   HandleChangeButton(): void;
 }
-export interface AccountInferface {
-  key: string;
-  myFullName: string;
-  userName: string;
-  phoneNumber: string;
-  password: string;
+
+export interface LoginInterface {
   email: string;
-  role: string;
-  img: string;
-  status: boolean;
+  password: string;
 }
+
+export interface UserInterface {
+  email: string;
+  fullname: string;
+}
+
+//////////////////////////////////////////////////////
 export interface AddDataAccountInferface {
   myFullName: string;
   userName: string;
@@ -78,26 +79,8 @@ export interface CustomSelectType {
   HandleChooseSelect: (select: string) => void;
 }
 //rooms------------------------------------------
-export interface RoomsInterface {
-  key: string;
-  roomID: string;
-  status: boolean;
-  doctor: string[];
-  service: string[];
-}
-//add
-export interface AddRoomsInterface {
-  roomID: string;
-  status: boolean;
-  doctor: string[];
-  service: string[];
-}
 //Type DS phong khám
-export interface ListRoomInterface {
-  HandleClickAddRoom: () => void;
-  HandleClickDescription: (key: string) => void;
-  HandleClickUpdate: (key: string) => void;
-}
+
 export interface AddDeviceInterface {
   HandleClickCancelAddDevice: () => void;
   HandleClickOkAddDevice: (
@@ -116,58 +99,13 @@ export interface DescriptionRoomInterface {
   HandleClickUpdateRoom: (key: string) => void;
   HandleClickGoBackRoom: () => void;
 }
+
 //type cap nhap phong kham
-export interface UpdateDeviceInterface {
-  id: string;
-  HandleClickCancelUpdateDevice: () => void;
-  HandleClickOkUpdateDevice: (
-    deviceId: string,
-    deviceType: string,
-    deviceName: string,
-    userName: string,
-    addressIP: string,
-    password: string,
-    userDevice: string,
-    listUserDevice: string[],
-  ) => void;
-  // HandleClickUpdateDevice: (key: string) => void;
-}
+
 //doctors------------------------------------------
-export interface DoctorsInterface {
-  key: string;
-  doctorID: string;
-  professional: string[];
-  status: boolean;
-  fullName: string;
-  birthday: string;
-  dateWork: string;
-  phoneNumber: string;
-  address: string;
-}
 //add
-export interface AddDoctorsInterface {
-  doctorID: string;
-  professional: string[];
-  status: boolean;
-  fullName: string;
-  birthday: string;
-  dateWork: string;
-  phoneNumber: string;
-  address: string;
-}
 //BHYT
-export interface BHYTInterface {
-  key: string;
-  BHYTID: string;
-  fullName: string;
-  address: string;
-  birthday: string;
-  endDate: string;
-  phoneNumber: string;
-  profession: string;
-  startDate: string;
-  status: boolean;
-}
+
 //add BHYT
 export interface AddBHYTInterface {
   BHYTID: string;
@@ -182,45 +120,13 @@ export interface AddBHYTInterface {
 }
 
 //services
-export interface ServiceInterface {
-  key: string;
-  serviceId: string;
-  serviceName: string;
-  status: boolean;
-  price: string;
-  rooms: string[];
-  rule: string[];
-}
-export interface ListServiceInterface {
-  HandleClickAddService: () => void;
-  HandleClickDescriptionService: (id: string) => void;
-  HandleClickUpdateService: (id: string) => void;
-}
-export interface AddServiceInterface {
-  HandleClickCancelAddService: () => void;
-  HandleClickOkAddService: (
-    serviceId: string,
-    serviceName: string,
-    describe: string,
-    rule: string[],
-  ) => void;
-}
+
 export interface DetailServiceInterface {
   HandleClickUpdate: () => void;
   HandleClickGoBack: () => void;
   id: string;
 }
-//update service
-export interface UpdateServiceInterface {
-  HandleClickCancelUpdateService: () => void;
-  HandleClickOkUpdateService: (
-    serviceId: string,
-    serviceName: string,
-    describe: string,
-    rule: string[],
-  ) => void;
-  id: string;
-}
+
 //////////////////My profile & bell
 export interface MyProfileInterface {
   HandleClickMyProfile: () => void;
@@ -244,18 +150,6 @@ export interface AddDataServiceInterface {
   online?: boolean;
 }
 //cap so
-export interface CapSoInterface {
-  key: string;
-  BHYTID: string;
-  capsoID: string;
-  endDate: string;
-  fullName: string;
-  phoneNumber: string;
-  price: string;
-  serviceID: string;
-  startDate: string;
-  status: string;
-}
 export interface AddCapSoInterface {
   BHYTID: string;
   capsoID: string;
@@ -303,13 +197,6 @@ export interface DetailCapSoInterface {
 }
 
 ///role
-export interface RoleInterface {
-  key: string;
-  roleName: string;
-  describe: string;
-  authorization: string[];
-  authorization2: string[];
-}
 export interface AddRoleInterface {
   roleName: string;
   describe: string;

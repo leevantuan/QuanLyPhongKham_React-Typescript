@@ -2,31 +2,23 @@ import { MdAddBox } from 'react-icons/md';
 import './styles.scss';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../../shared/hooks/customRedux';
-import { AccountInferface, DSTaiKhoanInterface } from '../../../../../../@types';
+import { DSTaiKhoanInterface } from '../../../../../../@types';
 import { ColumnsType } from 'antd/es/table';
 import NavBar from '../../../../../../layout/navBar';
 import InputSearch from '../../../../../../shared/components/inputSearch';
 import CustomTable from '../../../../../../shared/components/table';
-import { AccountLogin, GetDataRoles } from '../../../../../../core/redux';
-import CustomSelect from '../../../../../../shared/components/select';
 import { GoDotFill } from 'react-icons/go';
+import { GetAllAccount } from '../../../../../../core/redux/user';
+import { GetAllRole } from '../../../../../../core/redux/Role';
+import { AccountInferface } from '../../../../../../@types/IUser';
 
 export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
-  const Count = (countName: string, data: AccountInferface[]) => {
-    const listData = data.filter(data => data.role === countName);
-    return listData.length;
-  };
   //colunms daccount
   const columns: ColumnsType<AccountInferface> = [
     {
-      key: 'userName',
-      title: 'Tên đăng nhập',
-      dataIndex: 'userName',
-    },
-    {
-      key: 'myFullName',
+      key: 'fullName',
       title: 'Họ tên',
-      dataIndex: 'myFullName',
+      dataIndex: 'fullName',
     },
     {
       key: 'phoneNumber',
@@ -41,7 +33,13 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
     {
       key: 'role',
       title: 'Vai trò',
-      dataIndex: 'role',
+      render: (_, record) =>
+        ListRoles.map((role, index) => {
+          if (role.key === record.roleId) {
+            return <p>{role.roleName}</p>;
+          }
+          return null;
+        }),
     },
     {
       key: 'state',
@@ -71,28 +69,25 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
     },
   ];
   const dispatch = useAppDispatch();
-  const ListRoles = useAppSelector(state => state.Role.Role);
-  const ListAccounts = useAppSelector(state => state.Account.Account);
+  const ListRoles = useAppSelector(state => state.Role.Roles);
+  const ListAccounts = useAppSelector(state => state.Account.Accounts);
 
   const [inputSearch, setInputSearch] = useState<string>('');
-  const [listRoleName, setListRoleName] = useState<string[]>([]);
+  const [newList, setNewList] = useState<AccountInferface[]>();
 
   useEffect(() => {
-    dispatch(GetDataRoles());
-    dispatch(AccountLogin());
+    dispatch(GetAllAccount());
+    dispatch(GetAllRole());
   }, [dispatch]);
 
+  //filter data
   useEffect(() => {
-    if (ListRoles) {
-      const data = ListRoles.map(role => role.roleName);
-      if (data) {
-        const defaultList = ['Tất cả'];
-        const newList = defaultList.concat(data);
-        setListRoleName(newList);
-      }
+    if (ListAccounts.length > 0) {
+      const listSort = [...ListAccounts].sort((a, b) => (a.key > b.key ? 1 : -1));
+      const newSearchText = listSort.filter(room => room.phoneNumber.includes(inputSearch));
+      setNewList(newSearchText);
     }
-  }, [ListRoles]);
-
+  }, [inputSearch, ListAccounts]);
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Tài khoản" />
@@ -104,12 +99,12 @@ export default function DSTaiKhoan(props: DSTaiKhoanInterface) {
             <InputSearch
               HandleInputSearch={e => setInputSearch(e.target.value)}
               width={400}
-              placeholder="Nhập từ khóa"
+              placeholder="Nhập số điện thoại"
             />
           </div>
         </div>
         <div className="list-DS-TaiKhoan m-4 ">
-          <CustomTable data={ListAccounts} columns={columns} />
+          <CustomTable data={newList} columns={columns} />
         </div>
       </div>
       <div

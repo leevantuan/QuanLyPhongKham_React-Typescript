@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react';
-import { DescriptionRoomInterface, RoomsInterface } from '../../../../../@types';
+import { DescriptionRoomInterface } from '../../../../../@types';
 import NavBar from '../../../../../layout/navBar';
 import { useAppDispatch, useAppSelector } from '../../../../../shared/hooks/customRedux';
 import './styles.scss';
 import { MdEditSquare } from 'react-icons/md';
 import { RiArrowGoBackFill } from 'react-icons/ri';
-import { GetDataRooms } from '../../../../../core/redux';
+import { RoomsInterface } from '../../../../../@types/IRoom';
+// import { GetDataRooms } from '../../../../../core/redux';
 
 export default function ChiTietBHYT(props: DescriptionRoomInterface) {
   const dispatch = useAppDispatch();
-  const ListRooms = useAppSelector(state => state.Room.Room);
+  const ListRooms = useAppSelector(state => state.Room.Rooms);
   //get data room
   useEffect(() => {
-    dispatch(GetDataRooms());
+    // dispatch(GetDataRooms());
   }, [dispatch]);
 
   const [rooms, setRooms] = useState<RoomsInterface[]>([]);
   //find room
-  useEffect(() => {
-    if (props.id) {
-      const room = ListRooms.filter(room => room.key === props.id);
-      setRooms(room);
-    }
-  }, [props.id, ListRooms]);
+  // useEffect(() => {
+  //   if (props.id) {
+  //     const room = ListRooms.filter(room => room.key === props.id);
+  //     setRooms(room);
+  //   }
+  // }, [props.id, ListRooms]);
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Bảo hiểm y tế" />

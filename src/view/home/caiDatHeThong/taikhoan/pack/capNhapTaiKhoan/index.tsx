@@ -4,7 +4,7 @@ import NavBar from '../../../../../../layout/navBar';
 import { UpdateTaiKhoanInterface } from '../../../../../../@types';
 import InputPassword from '../../../../../../shared/components/input/inputPassword';
 import { useAppDispatch, useAppSelector } from '../../../../../../shared/hooks/customRedux';
-import { AccountLogin, GetDataRoles } from '../../../../../../core/redux';
+// import { AccountLogin, GetDataRoles } from '../../../../../../core/redux';
 
 export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
   const [myFullName, setMyFullName] = useState<string>('');
@@ -17,41 +17,42 @@ export default function CapNhapTaiKhoan(props: UpdateTaiKhoanInterface) {
   const [status, setStatus] = useState<string>('true');
 
   const dispatch = useAppDispatch();
-  const ListRoles = useAppSelector(state => state.Role.Role);
-  const ListAccounts = useAppSelector(state => state.Account.Account);
+  const ListRoles = useAppSelector(state => state.Role.Roles);
+  const ListAccounts = useAppSelector(state => state.User.User);
 
   const [listRole, setListRole] = useState<string[]>([]);
 
   useEffect(() => {
-    dispatch(GetDataRoles());
-    dispatch(AccountLogin());
+    // dispatch(GetDataRoles());
+    // dispatch(AccountLogin());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (props.id) {
-      const account = ListAccounts.find(acc => acc.key === props.id);
-      if (account) {
-        setMyFullName(account.myFullName);
-        setUserName(account.userName);
-        setPhoneNumber(account.phoneNumber);
-        setEmail(account.email);
-        setRole(account.role);
-        setPassword(account.password);
-        if (account.status === true) {
-          setStatus('true');
-        } else {
-          setStatus('false');
-        }
-      }
-    }
-  }, [props.id, ListAccounts]);
+  // useEffect(() => {
+  //   if (props.id) {
+  //     // const account = ListAccounts.find(acc => acc.key === props.id);
+  //     const account = true;
+  //     if (account) {
+  //       setMyFullName(account.myFullName);
+  //       setUserName(account.userName);
+  //       setPhoneNumber(account.phoneNumber);
+  //       setEmail(account.email);
+  //       setRole(account.role);
+  //       setPassword(account.password);
+  //       if (account.status === true) {
+  //         setStatus('true');
+  //       } else {
+  //         setStatus('false');
+  //       }
+  //     }
+  //   }
+  // }, [props.id, ListAccounts]);
 
-  useEffect(() => {
-    if (ListRoles) {
-      const data = ListRoles.map(role => role.roleName);
-      setListRole(data);
-    }
-  }, [ListRoles]);
+  // useEffect(() => {
+  //   if (ListRoles) {
+  //     const data = ListRoles.map(role => role.roleName);
+  //     setListRole(data);
+  //   }
+  // }, [ListRoles]);
   return (
     <div className="col-10 d-flex position-relative">
       <NavBar text="Tài khoản" />

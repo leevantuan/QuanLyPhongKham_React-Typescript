@@ -1,24 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  AccountSlice,
-  RoomSlice,
-  ServiceSlice,
-  CapSoSlice,
-  RoleSlice,
-  DoctorSlice,
-  BHYTSlice,
-} from '../redux/index';
-
+import { UserSlice } from '../redux/user/index';
+import { RoomSlice } from '../redux/room/index';
+import { DoctorSlice } from '../redux/Doctor';
+import { ServiceSlice } from '../redux/Service';
+import { BHYTSlice } from '../redux/BHYT';
+import { ProvideNumberSlice } from '../redux/ProvideNumber';
+import { RoleSlice } from '../redux/Role';
+import { AccountSlice } from '../redux/user/index';
 export const store = configureStore({
   // reducer: rootReducer,
   reducer: {
-    Account: AccountSlice.reducer,
     Room: RoomSlice.reducer,
     Doctor: DoctorSlice.reducer,
     BHYT: BHYTSlice.reducer,
     Service: ServiceSlice.reducer,
-    CapSo: CapSoSlice.reducer,
+    ProvideNumber: ProvideNumberSlice.reducer,
     Role: RoleSlice.reducer,
+    User: UserSlice.reducer,
+    Account: AccountSlice.reducer,
   },
 });
 

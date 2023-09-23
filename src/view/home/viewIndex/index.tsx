@@ -15,10 +15,10 @@ import MyAvatar from '../../../layout/avatar';
 import Profile from '../profile';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { isLogin } from '../../../shared/isLogin';
+// import { isLogin } from '../../../shared/isLogin';
 import { useAppDispatch, useAppSelector } from '../../../shared/hooks/customRedux';
-import { AccountLogin } from '../../../core/redux';
-import { AccountInferface } from '../../../@types';
+// import { AccountLogin } from '../../../core/redux';
+// import { AccountInferface } from '../../../@types';
 import ViewCapSo from '../capSo/viewIndex';
 import ViewVaiTro from '../caiDatHeThong/vaitro/viewIndex';
 import ViewTaiKhoan from '../caiDatHeThong/taikhoan/viewIndex';
@@ -27,6 +27,7 @@ import { GoStack } from 'react-icons/go';
 import ViewBacSi from '../bacSi/viewIndex';
 import ViewBHYT from '../BHYT/viewIndex';
 import DanhSachCapSo from '../DSCapSo';
+import { AccountInferface } from '../../../@types/IUser';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -66,18 +67,19 @@ export default function ViewIndex() {
   const [openBell, setOpenBell] = useState<boolean>(false);
   const [handleActive, setHandleActive] = useState<string>('0');
   const [account, setAccount] = useState<AccountInferface>();
-  const checkIsLogin = isLogin();
+  // const checkIsLogin = isLogin();
+  const checkIsLogin = true;
   const dispatch = useAppDispatch();
-  const InfoAccount = useAppSelector(state => state.Account.Account);
+  const InfoAccount = useAppSelector(state => state.User.User);
   useEffect(() => {
-    dispatch(AccountLogin());
+    // dispatch(AccountLogin());
   }, [dispatch]);
-  useEffect(() => {
-    if (checkIsLogin) {
-      const findAccount = InfoAccount.find(acc => acc.key === checkIsLogin);
-      setAccount(findAccount);
-    }
-  }, [InfoAccount, checkIsLogin]);
+  // useEffect(() => {
+  //   if (checkIsLogin) {
+  //     const findAccount = InfoAccount.find(acc => acc.key === checkIsLogin);
+  //     setAccount(findAccount);
+  //   }
+  // }, [InfoAccount, checkIsLogin]);
   const HanldeClickMenu = ({ item, key, keyPath, selectedKeys, domEvent }: any) => {
     setHandlePage(key);
     setHandleActive(key);
@@ -100,14 +102,14 @@ export default function ViewIndex() {
       >
         <Bell open={openBell} HandleClickCancel={() => setOpenBell(false)} />
         <div className="my-avatar position-absolute">
-          <MyAvatar
+          {/* <MyAvatar
             HandleClickBell={() => setOpenBell(true)}
             HandleClickMyProfile={() => {
               setHandleActive('20');
               setHandlePage('20');
             }}
-            myFullName={account?.myFullName}
-          />
+            // myFullName={account?.myFullName}
+          /> */}
         </div>
         <div className="col-2 left-dashboard position-relative">
           <img className="logo-view-index" src={logoImg} alt="" onClick={HanldeClickLogo} />

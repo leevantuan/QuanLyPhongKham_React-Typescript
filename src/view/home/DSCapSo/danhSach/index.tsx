@@ -8,24 +8,21 @@ import dayjs from 'dayjs';
 import type { DatePickerProps } from 'antd';
 import CustomTable from '../../../../shared/components/table';
 import { ColumnsType } from 'antd/es/table';
-import {
-  AddCapSoInterface,
-  CapSoInterface,
-  ModalAddCapSoInterface,
-  ServiceInterface,
-} from '../../../../@types';
+import { ModalAddCapSoInterface } from '../../../../@types';
 import { GoDotFill } from 'react-icons/go';
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/customRedux';
 import { useEffect, useState } from 'react';
-import { GetDataCapSo, GetDataServices } from '../../../../core/redux';
+import { ProvideNumberInterface } from '../../../../@types/IProvideNumber';
+import { GetAllProvideNumber } from '../../../../core/redux/ProvideNumber';
+import { GetAllService } from '../../../../core/redux/Service';
 
 export default function DSCapSo(props: ModalAddCapSoInterface) {
   //colunms cap so
-  const columns: ColumnsType<CapSoInterface> = [
+  const columns: ColumnsType<ProvideNumberInterface> = [
     {
-      key: 'capsoID',
+      key: 'key',
       title: 'Mã Cấp Số',
-      dataIndex: 'capsoID',
+      dataIndex: 'key',
     },
     {
       key: 'fullName',
@@ -39,8 +36,19 @@ export default function DSCapSo(props: ModalAddCapSoInterface) {
     },
     {
       key: 'serviceID',
-      title: 'Mã dịch vụ',
-      dataIndex: 'serviceID',
+      title: 'Dịch vụ sử dụng',
+      render: (_, record) =>
+        ListServices.map((service, index) => {
+          if (service.key === record.serviceId) {
+            return <p>{service.serviceName}</p>;
+          }
+          return null;
+        }),
+    },
+    {
+      key: 'price',
+      title: 'Giá dịch vụ',
+      render: (_, record) => <p>{record.price} vnđ</p>,
     },
     {
       key: 'date',
@@ -50,7 +58,7 @@ export default function DSCapSo(props: ModalAddCapSoInterface) {
     {
       key: 'toDate',
       title: 'Hạn sử dụng',
-      render: (_, record) => <p>{record.endDate}</p>,
+      render: (_, record) => <p>{record.endtDate}</p>,
     },
     {
       key: 'status',
@@ -79,16 +87,16 @@ export default function DSCapSo(props: ModalAddCapSoInterface) {
     },
   ];
   const dispatch = useAppDispatch();
-  const ListCapSo = useAppSelector(state => state.CapSo.CapSo);
-  const ListServices = useAppSelector(state => state.Service.Service);
+  const ListCapSo = useAppSelector(state => state.ProvideNumber.ProvideNumbers);
+  const ListServices = useAppSelector(state => state.Service.Services);
 
   const [inputSearch, setInputSearch] = useState<string>('');
   const [onlineState, setOnlineState] = useState<string>('');
   const [newListService, setNewListService] = useState<string[]>([]);
   //get data Services
   useEffect(() => {
-    dispatch(GetDataCapSo());
-    dispatch(GetDataServices());
+    dispatch(GetAllProvideNumber());
+    dispatch(GetAllService());
   }, [dispatch]);
   //   useEffect(() => {
   //     const newSearchText = ListServices.filter(service => service.serviceId.includes(inputSearch));
@@ -111,11 +119,11 @@ export default function DSCapSo(props: ModalAddCapSoInterface) {
         <h3>Danh sách cấp số</h3>
         <div className="navbar-DS-CapSo d-flex ms-4">
           <div className="mt-2">
-            <p>Từ khóa</p>
+            <p>Tìm kiếm mã</p>
             <InputSearch
               HandleInputSearch={e => setInputSearch(e.target.value)}
               width={400}
-              placeholder="Nhập từ khóa"
+              placeholder="Nhập mã cần tìm"
             />
           </div>
         </div>
@@ -123,13 +131,6 @@ export default function DSCapSo(props: ModalAddCapSoInterface) {
           <CustomTable data={ListCapSo} columns={columns} />
         </div>
       </div>
-      {/* <div
-        className="button-add-device position-absolute"
-        onClick={() => props.HandleClickAddCapSo()}
-      >
-        <MdAddBox />
-        <p> Cấp số mới</p>
-      </div> */}
     </div>
   );
 }
